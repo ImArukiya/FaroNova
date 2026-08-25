@@ -1241,6 +1241,304 @@
             }
         }
 
+        /* ── Games grid ── */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px
+        }
+
+        .game-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            min-height: 170px;
+            padding: 16px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface);
+            text-decoration: none;
+            overflow: hidden;
+            position: relative;
+            transition: border-color .18s ease, transform .18s ease
+        }
+
+        .game-card:hover {
+            border-color: var(--line2);
+            transform: translateY(-2px)
+        }
+
+        .game-card-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: .22;
+            transition: opacity .3s ease
+        }
+
+        .game-card:hover .game-card-bg {
+            opacity: .38
+        }
+
+        .game-card-body {
+            position: relative;
+            z-index: 1
+        }
+
+        .game-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: var(--raised);
+            color: var(--accent);
+            font-size: .68rem;
+            font-weight: 800;
+            letter-spacing: .07em;
+            text-transform: uppercase
+        }
+
+        .game-card strong {
+            display: block;
+            color: var(--text);
+            font-size: .96rem;
+            font-weight: 800;
+            line-height: 1.2
+        }
+
+        .game-card span {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: .75rem
+        }
+
+        /* ── Setup / gear grid ── */
+        .setup-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px
+        }
+
+        .gear-card {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface)
+        }
+
+        .gear-icon {
+            display: grid;
+            width: 44px;
+            aspect-ratio: 1;
+            place-items: center;
+            border-radius: 8px;
+            background: var(--raised);
+            color: var(--accent);
+            font-size: 1.1rem
+        }
+
+        .gear-card h3 {
+            font-size: .9rem;
+            letter-spacing: 0
+        }
+
+        .gear-card p {
+            color: var(--muted);
+            font-size: .82rem;
+            line-height: 1.5
+        }
+
+        .gear-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            border: 1px solid var(--line2);
+            color: var(--subtle);
+            font-size: .7rem;
+            font-weight: 700;
+            width: fit-content
+        }
+
+        /* ── Moments / quotes wall ── */
+        .moments-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px
+        }
+
+        .moment-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 190px;
+            padding: 22px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface)
+        }
+
+        .moment-card.accent-card {
+            background: linear-gradient(135deg, rgba(217,102,255,.14), transparent 60%), var(--surface)
+        }
+
+        .moment-card.warm-card {
+            background: linear-gradient(135deg, rgba(255,110,180,.12), transparent 60%), var(--surface)
+        }
+
+        .moment-card.blue-card {
+            background: linear-gradient(135deg, rgba(192,132,252,.14), transparent 60%), var(--surface)
+        }
+
+        .moment-quote {
+            font-size: clamp(.9rem, 1.4vw, 1.05rem);
+            font-weight: 700;
+            line-height: 1.45;
+            color: var(--text)
+        }
+
+        .moment-quote::before {
+            content: "\201C";
+            color: var(--accent);
+            font-size: 1.4em;
+            line-height: 0;
+            vertical-align: -.3em;
+            margin-right: 3px
+        }
+
+        .moment-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            color: var(--subtle);
+            font-size: .74rem;
+            font-weight: 700
+        }
+
+        .moment-meta i {
+            color: var(--accent)
+        }
+
+        /* ── Perks / channel rewards ── */
+        .perks-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px
+        }
+
+        .perk-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface)
+        }
+
+        .perk-icon {
+            display: grid;
+            flex-shrink: 0;
+            width: 48px;
+            aspect-ratio: 1;
+            place-items: center;
+            border-radius: 10px;
+            background: var(--raised);
+            font-size: 1.3rem
+        }
+
+        .perk-body h3 {
+            margin-bottom: 6px;
+            font-size: .95rem;
+            letter-spacing: 0
+        }
+
+        .perk-body p {
+            color: var(--muted);
+            font-size: .82rem;
+            line-height: 1.5
+        }
+
+        .perk-cost {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+            padding: 3px 9px;
+            border-radius: 999px;
+            background: var(--raised);
+            color: var(--accent);
+            font-size: .72rem;
+            font-weight: 800
+        }
+
+        /* ── "What to expect" banner strip ── */
+        .expect-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px
+        }
+
+        .expect-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 22px 18px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface)
+        }
+
+        .expect-num {
+            color: var(--accent);
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -.05em;
+            line-height: 1
+        }
+
+        .expect-card h3 {
+            font-size: .95rem;
+            letter-spacing: 0
+        }
+
+        .expect-card p {
+            color: var(--muted);
+            font-size: .82rem;
+            line-height: 1.5
+        }
+
+        /* ── Responsive additions ── */
+        @media(max-width:980px) {
+            .games-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+
+            .expect-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+        }
+
+        @media(max-width:720px) {
+            .games-grid,
+            .setup-grid,
+            .moments-grid,
+            .perks-grid,
+            .expect-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
         @media(prefers-reduced-motion:reduce) {
 
             *,
@@ -1276,7 +1574,7 @@
                         aria-hidden="true"></i></a></div><a class="brand" href="#home" aria-label="FaroNova home"><img
                     style="height: 5rem;" src="/assets/img/FARNOVA_ICON.png" alt=""></a>
             <div class="nav-links"><a href="#content">Content</a><a href="#live">Live</a><a
-                    href="#schedule">Schedule</a><a href="#channels">Channels</a><a
+                    href="#schedule">Schedule</a><a href="#games">Games</a><a href="#channels">Channels</a><a
                     class="button button-primary button-compact nav-cta" href="https://twitch.tv/faronova"
                     target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-play"
                         aria-hidden="true"></i><span>Watch live</span></a></div>
@@ -1453,6 +1751,257 @@
             </div>
             <div class="featured-grid reveal" id="featuredClips"></div>
         </section>
+        <!-- ── Games played ── -->
+        <section id="games" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Games</span>
+                    <h2>What gets played on stream.</h2>
+                </div>
+                <p>A mix of story-driven games, community chaos, and whatever ends up being funny that week.</p>
+            </div>
+            <div class="games-grid reveal">
+                <article class="game-card">
+                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(99,60,180,.6),rgba(14,10,20,.9))"></div>
+                    <div class="game-card-body">
+                        <span class="game-tag"><i class="fa-solid fa-star" aria-hidden="true"></i> Regular</span>
+                        <strong>NTE: Neverness to Everness</strong>
+                        <span>Open-world exploration &amp; story</span>
+                    </div>
+                </article>
+                <article class="game-card">
+                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(180,60,60,.5),rgba(14,10,20,.9))"></div>
+                    <div class="game-card-body">
+                        <span class="game-tag"><i class="fa-solid fa-fire" aria-hidden="true"></i> Fan fav</span>
+                        <strong>Gacha &amp; live-service games</strong>
+                        <span>Pulls, builds, and salt</span>
+                    </div>
+                </article>
+                <article class="game-card">
+                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(60,120,180,.5),rgba(14,10,20,.9))"></div>
+                    <div class="game-card-body">
+                        <span class="game-tag"><i class="fa-solid fa-users" aria-hidden="true"></i> With chat</span>
+                        <strong>Viewer game nights</strong>
+                        <span>Chat joins, chaos follows</span>
+                    </div>
+                </article>
+                <article class="game-card">
+                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(180,100,60,.5),rgba(14,10,20,.9))"></div>
+                    <div class="game-card-body">
+                        <span class="game-tag"><i class="fa-solid fa-book" aria-hidden="true"></i> Story</span>
+                        <strong>Anime watchalongs</strong>
+                        <span>First watch or rewatch with chat</span>
+                    </div>
+                </article>
+                <article class="game-card">
+                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(60,180,120,.4),rgba(14,10,20,.9))"></div>
+                    <div class="game-card-body">
+                        <span class="game-tag"><i class="fa-solid fa-gamepad" aria-hidden="true"></i> Variety</span>
+                        <strong>Indie &amp; adventure games</strong>
+                        <span>Whatever looks interesting</span>
+                    </div>
+                </article>
+                <article class="game-card">
+                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(180,60,140,.5),rgba(14,10,20,.9))"></div>
+                    <div class="game-card-body">
+                        <span class="game-tag"><i class="fa-solid fa-face-laugh" aria-hidden="true"></i> Reaction</span>
+                        <strong>React &amp; commentary</strong>
+                        <span>Clips, trailers, and internet things</span>
+                    </div>
+                </article>
+                <article class="game-card">
+                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(120,60,180,.5),rgba(14,10,20,.9))"></div>
+                    <div class="game-card-body">
+                        <span class="game-tag"><i class="fa-solid fa-puzzle-piece" aria-hidden="true"></i> Chill</span>
+                        <strong>Cozy &amp; sim games</strong>
+                        <span>Low-stakes, high chat energy</span>
+                    </div>
+                </article>
+                <article class="game-card" style="background:linear-gradient(135deg,rgba(217,102,255,.1),var(--surface))">
+                    <div class="game-card-body">
+                        <span class="game-tag"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Live</span>
+                        <strong>Check Twitch for what's on now</strong>
+                        <span>Category updates in real time</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ── What to expect ── -->
+        <section id="expect" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Vibe check</span>
+                    <h2>What a stream actually looks like.</h2>
+                </div>
+                <p>Four things that are true every time the stream goes live.</p>
+            </div>
+            <div class="expect-grid reveal">
+                <div class="expect-card">
+                    <span class="expect-num">01</span>
+                    <h3>Chat is part of the stream</h3>
+                    <p>Decisions, dares, and suggestions come from chat. If you're in the room you're part of what happens.</p>
+                </div>
+                <div class="expect-card">
+                    <span class="expect-num">02</span>
+                    <h3>Reactions are unfiltered</h3>
+                    <p>Loud moments, bad takes, genuine hype. The energy is real whether the game is winning or not.</p>
+                </div>
+                <div class="expect-card">
+                    <span class="expect-num">03</span>
+                    <h3>Games get finished (mostly)</h3>
+                    <p>Story-driven games get played to the end. Side content and detours are part of the run.</p>
+                </div>
+                <div class="expect-card">
+                    <span class="expect-num">04</span>
+                    <h3>New people always welcome</h3>
+                    <p>No inside jokes required. Drop in, say hi, and catch up — VODs are saved for anything you missed.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Stream moments / chat quotes ── -->
+        <section id="moments" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Stream moments</span>
+                    <h2>Things that actually happened.</h2>
+                </div>
+                <p>A running record of the moments that made chat explode.</p>
+            </div>
+            <div class="moments-grid reveal">
+                <div class="moment-card accent-card">
+                    <p class="moment-quote">Chat convinced me to do the hardest boss fight with only the starting weapon. We did not win first try.</p>
+                    <div class="moment-meta"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Viewer game night · 2025</div>
+                </div>
+                <div class="moment-card warm-card">
+                    <p class="moment-quote">The gacha pull was so bad the stream went silent for a full 8 seconds. Then everyone started typing at the same time.</p>
+                    <div class="moment-meta"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Gacha stream · 2025</div>
+                </div>
+                <div class="moment-card blue-card">
+                    <p class="moment-quote">We were watching the anime finale and someone in chat predicted the ending from episode one. They just waited and said nothing.</p>
+                    <div class="moment-meta"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Watchalong · 2025</div>
+                </div>
+                <div class="moment-card">
+                    <p class="moment-quote">I rage-quit a boss, came back two minutes later, and one-shot it. Chat has not let me forget either half of that.</p>
+                    <div class="moment-meta"><i class="fa-brands fa-twitch" aria-hidden="true"></i> NTE stream · 2025</div>
+                </div>
+                <div class="moment-card accent-card">
+                    <p class="moment-quote">Chat voted to name an NPC after a subscriber. That NPC immediately got killed in the next cutscene.</p>
+                    <div class="moment-meta"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Story run · 2025</div>
+                </div>
+                <div class="moment-card warm-card">
+                    <p class="moment-quote">Someone raided mid-boss fight with 200 people. We failed the fight. The raid message was just a skull emoji.</p>
+                    <div class="moment-meta"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Raid moment · 2025</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Channel perks ── -->
+        <section id="perks" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Channel perks</span>
+                    <h2>What you can do in stream.</h2>
+                </div>
+                <p>Follow and stick around — chat earns channel points that unlock actual things during the stream.</p>
+            </div>
+            <div class="perks-grid reveal">
+                <div class="perk-card">
+                    <div class="perk-icon">🎯</div>
+                    <div class="perk-body">
+                        <h3>Choose the next game</h3>
+                        <p>Redeem points to nominate a game for the next session. Top voted suggestion wins the slot.</p>
+                        <span class="perk-cost"><i class="fa-solid fa-coins" aria-hidden="true"></i> Channel points</span>
+                    </div>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon">🎲</div>
+                    <div class="perk-body">
+                        <h3>Random challenge</h3>
+                        <p>Force a random in-game rule or setting for the next 10 minutes. Results may vary wildly.</p>
+                        <span class="perk-cost"><i class="fa-solid fa-coins" aria-hidden="true"></i> Channel points</span>
+                    </div>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon">🔊</div>
+                    <div class="perk-body">
+                        <h3>Sound alert</h3>
+                        <p>Trigger a sound clip on stream. Chat-approved sounds only — keep it entertaining.</p>
+                        <span class="perk-cost"><i class="fa-solid fa-coins" aria-hidden="true"></i> Channel points</span>
+                    </div>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon">📌</div>
+                    <div class="perk-body">
+                        <h3>Pin a message</h3>
+                        <p>Highlight your message in chat so it stays visible while the stream is busy.</p>
+                        <span class="perk-cost"><i class="fa-solid fa-coins" aria-hidden="true"></i> Channel points</span>
+                    </div>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon">🎭</div>
+                    <div class="perk-body">
+                        <h3>Name an NPC</h3>
+                        <p>When a game allows it, the top redeemer gets to name a character, NPC, or save file.</p>
+                        <span class="perk-cost"><i class="fa-solid fa-coins" aria-hidden="true"></i> Channel points</span>
+                    </div>
+                </div>
+                <div class="perk-card">
+                    <div class="perk-icon">⚡</div>
+                    <div class="perk-body">
+                        <h3>Hype train contributor</h3>
+                        <p>Bits, subs, and gifted subs all power the hype train. Hit level 5 and something special happens.</p>
+                        <span class="perk-cost"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Bits or subs</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Stream setup ── -->
+        <section id="setup" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Setup</span>
+                    <h2>What the stream runs on.</h2>
+                </div>
+                <p>The gear behind the stream. Nothing exotic — just what works.</p>
+            </div>
+            <div class="setup-grid reveal">
+                <div class="gear-card">
+                    <div class="gear-icon"><i class="fa-solid fa-desktop" aria-hidden="true"></i></div>
+                    <h3>Streaming PC</h3>
+                    <p>Custom build handling game, stream encode, and overlays simultaneously without dropping frames.</p>
+                    <span class="gear-badge"><i class="fa-solid fa-circle" style="color:var(--accent);font-size:.5rem" aria-hidden="true"></i> Primary rig</span>
+                </div>
+                <div class="gear-card">
+                    <div class="gear-icon"><i class="fa-solid fa-microphone" aria-hidden="true"></i></div>
+                    <h3>Condenser mic</h3>
+                    <p>Cardioid pattern, noise-gated through OBS. Clean audio without a soundproof room.</p>
+                    <span class="gear-badge"><i class="fa-solid fa-circle" style="color:var(--accent);font-size:.5rem" aria-hidden="true"></i> Audio</span>
+                </div>
+                <div class="gear-card">
+                    <div class="gear-icon"><i class="fa-solid fa-camera" aria-hidden="true"></i></div>
+                    <h3>Webcam</h3>
+                    <p>1080p camera for facecam overlay. Positioned so the game stays the main focus of the frame.</p>
+                    <span class="gear-badge"><i class="fa-solid fa-circle" style="color:var(--accent);font-size:.5rem" aria-hidden="true"></i> Video</span>
+                </div>
+                <div class="gear-card">
+                    <div class="gear-icon"><i class="fa-solid fa-sliders" aria-hidden="true"></i></div>
+                    <h3>OBS Studio</h3>
+                    <p>Scenes, transitions, alerts, and overlays all run through OBS. Alerts powered by Streamlabs.</p>
+                    <span class="gear-badge"><i class="fa-solid fa-circle" style="color:var(--accent);font-size:.5rem" aria-hidden="true"></i> Software</span>
+                </div>
+                <div class="gear-card">
+                    <div class="gear-icon"><i class="fa-solid fa-headphones" aria-hidden="true"></i></div>
+                    <h3>Headset / monitors</h3>
+                    <p>Closed-back headset for game audio during streams. Studio monitors for music and mixing.</p>
+                    <span class="gear-badge"><i class="fa-solid fa-circle" style="color:var(--accent);font-size:.5rem" aria-hidden="true"></i> Audio</span>
+                </div>
+                <div class="gear-card">
+                    <div class="gear-icon"><i class="fa-solid fa-wifi" aria-hidden="true"></i></div>
+                    <h3>Wired connection</h3>
+                    <p>Ethernet straight to the router. No Wi-Fi during streams — stable upload is non-negotiable.</p>
+                    <span class="gear-badge"><i class="fa-solid fa-circle" style="color:var(--accent);font-size:.5rem" aria-hidden="true"></i> Network</span>
+                </div>
+            </div>
+        </section>
+
         <section id="community" class="site-shell">
             <div class="section-heading reveal">
                 <div><span class="eyebrow">Community</span>
