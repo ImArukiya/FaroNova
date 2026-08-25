@@ -59,9 +59,6 @@ export async function onRequest(context) {
     const params = new URLSearchParams(url.search);
     if (!params.has("first")) params.set("first", "6");
     twitchUrl = `https://api.twitch.tv/helix/videos?${params.toString()}`;
-  } else if (path.startsWith("/followers")) {
-    // Channel follower count: /followers?broadcaster_id=<id>
-    twitchUrl = `https://api.twitch.tv/helix/channels/followers${query}`;
   } else if (path.startsWith("/channel")) {
     // Channel info (views, game, title, etc.): /channel?broadcaster_id=<id>
     twitchUrl = `https://api.twitch.tv/helix/channels${query}`;

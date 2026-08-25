@@ -1299,7 +1299,7 @@
                             alt="FaroNova profile portrait" /></div>
                 </div>
                 <div class="profile-meta">
-                    <div class="stat"><strong id="twitchFollowers">Syncing</strong><span>Twitch followers</span></div>
+                    <div class="stat"><strong id="twitchFollowers">faronova</strong><span>Twitch channel</span></div>
                     <div class="stat"><strong id="twitchTotalViews">Syncing</strong><span>Total views</span></div>
                     <div class="stat"><strong id="twitchHeroStatus">Checking</strong><span>Twitch status</span></div>
                 </div>
@@ -1608,7 +1608,6 @@
                 i.classList.remove("is-live");
                 i.innerHTML = '<span class="status-dot"></span><span>Status unavailable</span>';
                 $("twitchHeroStatus").textContent = "Visit channel";
-                $("twitchFollowers").textContent = "View channel";
                 $("twitchTotalViews").textContent = "–";
                 $("liveHeadline").textContent = "Open Twitch for the latest.";
                 $("liveDescription").textContent = "Live status could not connect, but the channel link is ready.";
@@ -1649,36 +1648,31 @@
 
             // --- Main Twitch fetch ---
             function fetchTwitch() {
+                var cachedUserId = null;
                 json("/api/twitch-api/user?username=" + encodeURIComponent(CONFIG.twitch.username))
                     .then(function (up) {
                         if (!up.data || !up.data.length) throw new Error("User not found");
                         var user = up.data[0];
+                        cachedUserId = user.id;
                         var av = safe(user.profile_image_url, ["jtvnw.net"]);
                         if (av) $("profileAvatar").src = av;
-                        // Fetch all Twitch data in parallel
+                        // Pull total views from the user object (always available with app token)
+                        if (user.view_count != null) {
+                            $("twitchTotalViews").textContent = num(user.view_count);
+                        }
+                        // Fetch stream, clips, channel info in parallel
+                        // Each wrapped in .catch so one failure doesn't abort the rest
                         return Promise.all([
-                            json("/api/twitch-api/stream?user_id=" + encodeURIComponent(user.id)),
-                            json("/api/twitch-api/clips?broadcaster_id=" + encodeURIComponent(user.id) + "&first=10"),
-                            json("/api/twitch-api/followers?broadcaster_id=" + encodeURIComponent(user.id)),
-                            json("/api/twitch-api/channel?broadcaster_id=" + encodeURIComponent(user.id)),
-                            Promise.resolve(user.id)
+                            json("/api/twitch-api/stream?user_id=" + encodeURIComponent(user.id)).catch(function () { return {}; }),
+                            json("/api/twitch-api/clips?broadcaster_id=" + encodeURIComponent(user.id) + "&first=10").catch(function () { return {}; }),
+                            json("/api/twitch-api/channel?broadcaster_id=" + encodeURIComponent(user.id)).catch(function () { return {}; }),
                         ]);
                     })
                     .then(function (res) {
-                        var sp = res[0], cp = res[1], fp = res[2], chp = res[3], userId = res[4];
+                        var sp = res[0], cp = res[1], chp = res[2];
                         var stream = sp.data && sp.data[0];
                         var channel = chp.data && chp.data[0];
                         var i = $("liveIndicator");
-
-                        // --- Follower count & total views ---
-                        var followerCount = fp.total != null ? num(fp.total) : (fp.data ? num(fp.data.length) : "–");
-                        $("twitchFollowers").textContent = followerCount;
-                        // total view count comes from user object (fetched before)
-                        // Re-fetch user to grab view_count (already in up.data[0] but user var is closed over)
-                        // We'll pull it from the channel info fallback
-                        if (channel && channel.view_count != null) {
-                            $("twitchTotalViews").textContent = num(channel.view_count);
-                        }
 
                         // --- Channel sidebar ---
                         if (channel) {
@@ -1725,7 +1719,8 @@
                             : '<div class="empty-state" style="min-height:260px"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i></span><h3>No recent clips yet.</h3><p>Visit the channel for broadcasts and the next live session.</p></div></div>';
 
                         featured(clips);
-                        fetchVods(userId);
+                        // Always fetch VODs — cachedUserId is guaranteed at this point
+                        fetchVods(cachedUserId);
                     })
                     .catch(function (e) {
                         console.error("Twitch API error:", e.message);
