@@ -892,10 +892,6 @@
             color: var(--text)
         }
 
-        .channel-card[data-platform=tiktok] .channel-icon {
-            background: #070707
-        }
-
         .channel-card[data-platform=twitch] .channel-icon {
             background: #6d28d9
         }
@@ -1267,8 +1263,7 @@
 <body>
     <header class="site-header">
         <nav class="navbar" aria-label="Primary navigation">
-            <div class="nav-socials"><a href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer"
-                    aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a><a
+            <div class="nav-socials"><a
                     href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer" aria-label="Twitch"><i
                         class="fa-brands fa-twitch" aria-hidden="true"></i></a><a href="https://instagram.com/faronova_"
                     target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"
@@ -1291,12 +1286,11 @@
         <section id="home" class="hero site-shell">
             <div class="hero-copy reveal"><span class="eyebrow">Content Creator | Streamer</span>
                 <h1>FaroNova</h1>
-                <p class="hero-lede">Short-form creator and Twitch streamer making clean edits, live reactions, game
-                    nights, and community-led moments across TikTok, Twitch, YouTube, Instagram, X, and Discord.</p>
+                <p class="hero-lede">Twitch streamer and content creator — live gaming sessions, community game nights, reactions, and watchalongs across Twitch, YouTube, Instagram, X, and Discord.</p>
                 <div class="hero-actions"><a class="button button-primary" href="#live"><i
                             class="fa-solid fa-circle-play" aria-hidden="true"></i> Watch live</a><a class="button"
-                        href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer"><i
-                            class="fa-brands fa-tiktok" aria-hidden="true"></i> Open TikTok</a><a class="button"
+                        href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"><i
+                            class="fa-brands fa-twitch" aria-hidden="true"></i> Open Twitch</a><a class="button"
                         href="#channels"><i class="fa-solid fa-link" aria-hidden="true"></i> All links</a></div>
             </div>
             <aside class="hero-panel reveal" aria-label="FaroNova profile snapshot">
@@ -1305,37 +1299,35 @@
                             alt="FaroNova profile portrait" /></div>
                 </div>
                 <div class="profile-meta">
-                    <div class="stat"><strong id="tiktokFollowers">Syncing</strong><span>TikTok followers</span></div>
-                    <div class="stat"><strong id="totalLikes">Syncing</strong><span>Profile likes</span></div>
+                    <div class="stat"><strong id="twitchFollowers">Syncing</strong><span>Twitch followers</span></div>
+                    <div class="stat"><strong id="twitchTotalViews">Syncing</strong><span>Total views</span></div>
                     <div class="stat"><strong id="twitchHeroStatus">Checking</strong><span>Twitch status</span></div>
                 </div>
             </aside>
         </section>
         <section id="content" class="site-shell">
             <div class="section-heading reveal">
-                <div><span class="eyebrow">Latest posts</span>
-                    <h2>Recent short-form work.</h2>
+                <div><span class="eyebrow">Past broadcasts</span>
+                    <h2>Recent streams.</h2>
                 </div>
-                <p>Fresh uploads from TikTok when the feed is available, with a direct path to the profile when it is
-                    not.</p>
+                <p>Latest VODs from the channel. Click any to watch the full broadcast on Twitch.</p>
             </div>
             <div class="content-layout reveal">
                 <div class="panel">
-                    <div class="panel-header"><span class="panel-label"><i class="fa-brands fa-tiktok"
-                                aria-hidden="true"></i> Recent posts</span><span class="status-pill"
-                            id="tiktokStatus"><span class="status-dot"></span><span>Syncing feed</span></span></div>
-                    <div id="tiktokLoading" class="loading-grid" aria-label="Loading TikTok posts">
+                    <div class="panel-header"><span class="panel-label"><i class="fa-brands fa-twitch"
+                                aria-hidden="true"></i> Recent VODs</span><span class="status-pill"
+                            id="vodsStatus"><span class="status-dot"></span><span>Loading</span></span></div>
+                    <div id="vodsLoading" class="loading-grid" aria-label="Loading VODs">
                         <div class="skeleton-card"></div>
                         <div class="skeleton-card"></div>
                         <div class="skeleton-card"></div>
                     </div>
-                    <div class="video-grid" id="tiktokContainer" aria-live="polite"></div>
+                    <div class="video-grid" id="vodsContainer" aria-live="polite"></div>
                 </div>
-                <aside class="panel profile-card"><i class="fa-brands fa-tiktok" aria-hidden="true"></i><strong>Short
-                        edits, quick reactions, easy to follow.</strong>
-                    <p>Open the TikTok profile for the newest posts, comments, and uploads that appear between site
-                        refreshes.</p><a class="button button-primary button-compact"
-                        href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer">Visit @FaroNova
+                <aside class="panel profile-card"><i class="fa-brands fa-twitch" aria-hidden="true"></i><strong id="channelGameLabel">Live on Twitch.</strong>
+                    <p id="channelDesc">Browse past streams, follow for notifications, and join the community around each session.</p>
+                    <a class="button button-primary button-compact"
+                        href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer">Watch on Twitch
                         <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                 </aside>
             </div>
@@ -1426,11 +1418,10 @@
                 </div>
                 <p>A clean link hub for watching, following, joining the community, or reaching out.</p>
             </div>
-            <div class="channels-grid reveal"><a class="channel-card" data-platform="tiktok"
-                    href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer"><span
-                        class="channel-icon"><i class="fa-brands fa-tiktok"
-                            aria-hidden="true"></i></span><span><strong>TikTok</strong><span>@FaroNova - short-form
-                            videos</span></span></a><a class="channel-card" data-platform="twitch"
+            <div class="channels-grid reveal"><a class="channel-card" data-platform="twitch"
+                    href="https://twitch.tv/faronova/clips" target="_blank" rel="noopener noreferrer"><span
+                        class="channel-icon"><i class="fa-solid fa-clapperboard"
+                            aria-hidden="true"></i></span><span><strong>Twitch Clips</strong><span>@FaroNova - stream highlights</span></span></a><a class="channel-card" data-platform="twitch"
                     href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"><span
                         class="channel-icon"><i class="fa-brands fa-twitch"
                             aria-hidden="true"></i></span><span><strong>Twitch</strong><span>@FaroNova - live
@@ -1500,8 +1491,11 @@
                 </details>
                 <details>
                     <summary>Where is the latest content?</summary>
-                    <p>TikTok is the fastest place for short-form uploads. Twitch is the place for live streams and
-                        clips.</p>
+                    <p>Twitch is the main platform — past VODs and clips are available right on the channel page after each stream ends.</p>
+                </details>
+                <details>
+                    <summary>How do I get notified when a stream starts?</summary>
+                    <p>Hit Follow on Twitch and enable notifications in the app. You can also follow on X for quick stream-start posts.</p>
                 </details>
                 <details>
                     <summary>How do I join the community?</summary>
@@ -1511,16 +1505,19 @@
                     <summary>How do I reach out for collaborations?</summary>
                     <p>Use the email link in the community section or send a direct message on X.</p>
                 </details>
+                <details>
+                    <summary>Are VODs saved after streams?</summary>
+                    <p>Yes — past broadcasts are saved on the Twitch channel. Highlights and clips are also available from standout moments.</p>
+                </details>
             </div>
         </section>
     </main>
     <footer class="site-shell">
         <div class="footer-card">
             <div><span class="eyebrow">FaroNova</span>
-                <h2>Follow the next upload, stream, or community moment.</h2>
+                <h2>Follow the next stream, clip, or community moment.</h2>
             </div>
-            <div class="social-links"><a href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer"
-                    aria-label="Open TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a><a
+            <div class="social-links"><a
                     href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"
                     aria-label="Open Twitch"><i class="fa-brands fa-twitch" aria-hidden="true"></i></a><a
                     href="https://instagram.com/faronova_" target="_blank" rel="noopener noreferrer"
@@ -1532,11 +1529,258 @@
                     href="https://discord.gg/whRyvAPuVQ" target="_blank" rel="noopener noreferrer"
                     aria-label="Open Discord"><i class="fa-brands fa-discord" aria-hidden="true"></i></a></div>
         </div>
-        <div class="footer-bottom"><span>© <span id="currentYear">2026</span> FaroNova</span><span>Creator hub for
-                official links, live status, and recent content.</span></div>
+        <div class="footer-bottom"><span>© <span id="currentYear">2026</span> FaroNova</span><span>Creator hub for live streams, clips, and community links.</span></div>
     </footer>
     <script>
-        (function () { var CONFIG = { tiktok: { username: "faronova_" }, twitch: { username: "faronova" } }; var $ = function (id) { return document.getElementById(id) }; function esc(v) { return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;") } function num(v) { var n = Number(v); return Number.isFinite(n) ? new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 }).format(n) : "0" } function safe(v, hosts) { try { var u = new URL(v); return hosts.some(function (h) { return u.hostname === h || u.hostname.endsWith("." + h) }) ? u.href : "" } catch (e) { return "" } } function json(url) { return fetch(url, { headers: { Accept: "application/json" } }).then(function (r) { if (!r.ok) throw new Error("Request failed: " + r.status); return r.json() }) } function liveWatch(show) { var g = $("liveWatchGrid"); if (g) g.hidden = !show } function tikTokFallback() { var l = $("tiktokLoading"); if (l) l.hidden = true; $("tiktokFollowers").textContent = "View profile"; $("totalLikes").textContent = "Latest posts"; $("tiktokStatus").innerHTML = '<span class="status-dot"></span><span>Profile linked</span>'; $("tiktokContainer").innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></span><h3>TikTok feed is not available here.</h3><p>The profile link still takes you straight to the newest uploads.</p><a class="button button-primary" href="https://tiktok.com/@' + CONFIG.tiktok.username + '" target="_blank" rel="noopener noreferrer">Open TikTok profile <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></div>' } function fetchTikTok() { var l = $("tiktokLoading"); json('/api/tiktok-api?uniqueId=' + encodeURIComponent(CONFIG.tiktok.username)).then(function (p) { var s = p.userInfo && p.userInfo.stats || {}; var videos = Array.isArray(p.userInfo && p.userInfo.items) ? p.userInfo.items : []; if (l) l.hidden = true; $("tiktokFollowers").textContent = num(s.followerCount || s.followers); $("totalLikes").textContent = num(s.heartCount || s.likes); $("tiktokStatus").innerHTML = '<span class="status-dot"></span><span>Feed connected</span>'; if (!videos.length) { tikTokFallback(); return } $("tiktokContainer").innerHTML = videos.slice(0, 6).map(function (v) { var cover = safe((v.video && v.video.cover) || (v.video && v.video.dynamicCover) || (v.video && v.video.originCover), ["tiktokcdn.com", "tiktokcdn-us.com", "byteoversea.com"]); var href = 'https://www.tiktok.com/@' + CONFIG.tiktok.username + '/video/' + encodeURIComponent(v.id || ""); return '<a class="video-card" href="' + href + '" target="_blank" rel="noopener noreferrer">' + (cover ? '<img class="video-thumb" src="' + esc(cover) + '" alt="' + esc(v.desc || "TikTok post") + '" loading="lazy">' : '<div class="video-thumb"></div>') + '<span class="video-copy"><strong>' + esc(v.desc || "TikTok post") + '</strong><span>' + num((v.stats && v.stats.playCount) || (v.statsV2 && v.statsV2.playCount)) + ' views</span></span></a>' }).join("") }).catch(function (e) { console.error("TikTok API error:", e.message); tikTokFallback() }) } function featured(clips) { var c = $("featuredClips"); if (!c) return; if (!Array.isArray(clips) || !clips.length) { var f = ["Open the latest Twitch clips", "Watch stream highlights", "Find community favorites"]; c.innerHTML = f.map(function (t, i) { var bg = i === 0 ? 'linear-gradient(135deg,rgba(217,102,255,.24),rgba(22,15,31,.92))' : i === 1 ? 'linear-gradient(135deg,rgba(192,132,252,.2),rgba(22,15,31,.92))' : 'linear-gradient(135deg,rgba(255,110,180,.2),rgba(22,15,31,.92))'; return '<a class="featured-clip" href="https://twitch.tv/' + CONFIG.twitch.username + '/clips" target="_blank" rel="noopener noreferrer" style="background:' + bg + '"><span class="featured-clip-copy"><strong>' + t + '</strong><span class="featured-clip-stats"><span>Twitch clips</span></span></span></a>' }).join(""); return } c.innerHTML = clips.slice(0, 3).map(function (clip) { var url = safe(clip.url, ["twitch.tv"]) || 'https://twitch.tv/' + CONFIG.twitch.username + '/clips'; var thumb = safe(clip.thumbnail_url, ["jtvnw.net"]); var bg = thumb ? 'linear-gradient(180deg,transparent 22%,rgba(0,0,0,.84)),url(\'' + esc(thumb) + '\') center/cover' : 'linear-gradient(135deg,rgba(217,102,255,.22),rgba(22,15,31,.94))'; return '<a class="featured-clip" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer" style="background:' + bg + '"><span class="featured-clip-copy"><strong>' + esc(clip.title || "Watch this clip") + '</strong><span class="featured-clip-stats"><span><i class="fa-regular fa-eye" aria-hidden="true"></i> ' + num(clip.view_count) + '</span><span><i class="fa-regular fa-clock" aria-hidden="true"></i> ' + new Date(clip.created_at).toLocaleDateString() + '</span></span></span></a>' }).join("") } function twitchFallback() { var i = $("liveIndicator"); i.classList.remove("is-live"); i.innerHTML = '<span class="status-dot"></span><span>Status unavailable</span>'; $("twitchHeroStatus").textContent = "Visit channel"; $("liveHeadline").textContent = "Open Twitch for the latest."; $("liveDescription").textContent = "Live status could not connect, but the channel link is ready."; liveWatch(false); $("twitchClips").innerHTML = '<div class="empty-state" style="min-height:260px"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-brands fa-twitch" aria-hidden="true"></i></span><h3>Twitch data is reconnecting.</h3><p>Open the channel directly for live video, chat, and clips.</p><a class="button button-primary button-compact" href="https://twitch.tv/' + CONFIG.twitch.username + '" target="_blank" rel="noopener noreferrer">Open Twitch</a></div></div>' } function fetchTwitch() { json('/api/twitch-api/user?username=' + encodeURIComponent(CONFIG.twitch.username)).then(function (up) { if (!up.data || !up.data.length) throw new Error("User not found"); var user = up.data[0]; var av = safe(user.profile_image_url, ["jtvnw.net"]); if (av) $("profileAvatar").src = av; return Promise.all([json('/api/twitch-api/stream?user_id=' + encodeURIComponent(user.id)), json('/api/twitch-api/clips?broadcaster_id=' + encodeURIComponent(user.id))]) }).then(function (res) { var sp = res[0], cp = res[1], stream = sp.data && sp.data[0], i = $("liveIndicator"); if (stream) { i.classList.add("is-live"); i.innerHTML = '<span class="status-dot"></span><span>Live now</span>'; $("twitchHeroStatus").textContent = "Live now"; $("liveHeadline").textContent = stream.game_name || "Live on Twitch"; $("liveDescription").textContent = num(stream.viewer_count) + " viewers are watching right now."; var parent = window.location.hostname || "localhost"; var vs = 'https://player.twitch.tv/?channel=' + encodeURIComponent(CONFIG.twitch.username) + '&parent=' + encodeURIComponent(parent) + '&muted=true'; var cs = 'https://www.twitch.tv/embed/' + encodeURIComponent(CONFIG.twitch.username) + '/chat?parent=' + encodeURIComponent(parent) + '&darkpopout'; if ($("liveVideoFrame").src !== vs) $("liveVideoFrame").src = vs; if ($("liveChatFrame").src !== cs) $("liveChatFrame").src = cs; liveWatch(true) } else { i.classList.remove("is-live"); i.innerHTML = '<span class="status-dot"></span><span>Offline</span>'; $("twitchHeroStatus").textContent = "Offline"; $("liveHeadline").textContent = "Offline, still easy to catch up."; $("liveDescription").textContent = "Browse recent clips or follow Twitch for the next live notification."; liveWatch(false) } var clips = Array.isArray(cp.data) ? cp.data : []; $("twitchClips").innerHTML = clips.length ? clips.slice(0, 5).map(function (clip) { var url = safe(clip.url, ["twitch.tv"]); return url ? '<a class="clip-item" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer"><span class="clip-icon"><i class="fa-solid fa-play" aria-hidden="true"></i></span><span class="clip-copy"><strong>' + esc(clip.title || "Twitch clip") + '</strong><span>Watch on Twitch</span></span><span class="clip-views">' + num(clip.view_count) + ' views</span></a>' : "" }).join("") : '<div class="empty-state" style="min-height:260px"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i></span><h3>No recent clips yet.</h3><p>Visit the channel for broadcasts and the next live session.</p></div></div>'; featured(clips) }).catch(function (e) { console.error("Twitch API error:", e.message); twitchFallback(); featured([]) }) } var ob = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-visible"); ob.unobserve(e.target) } }) }, { threshold: .12 }); document.querySelectorAll(".reveal").forEach(function (el) { ob.observe(el) }); var DAYS = [0, 4, 5, 6], HOUR = 21, WINDOW = 3; function nextStream(now) { for (var i = 0; i < 8; i++) { var c = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + i, HOUR, 0, 0)); if (DAYS.indexOf(c.getUTCDay()) < 0) continue; var end = new Date(c.getTime() + WINDOW * 36e5); if (now >= c && now <= end) return { live: true, start: c }; if (c > now) return { live: false, start: c } } return null } function countdown() { var n = nextStream(new Date()); if (!n) { $("countdownLabel").textContent = "Check Twitch for the latest"; return } if (n.live) { $("countdownLabel").textContent = "Scheduled window is live now"; $("countdownDays").textContent = "00"; $("countdownHours").textContent = "00"; $("countdownMinutes").textContent = "00"; return } var m = Math.floor((n.start.getTime() - Date.now()) / 6e4); $("countdownLabel").textContent = "Counting down to the next session"; $("countdownDays").textContent = String(Math.floor(m / 1440)).padStart(2, "0"); $("countdownHours").textContent = String(Math.floor(m % 1440 / 60)).padStart(2, "0"); $("countdownMinutes").textContent = String(m % 60).padStart(2, "0") } $("currentYear").textContent = new Date().getFullYear(); countdown(); fetchTikTok(); fetchTwitch(); featured([]); setInterval(countdown, 3e4); setInterval(fetchTwitch, 3e5); setInterval(fetchTikTok, 18e5) })();
+        (function () {
+            var CONFIG = { twitch: { username: "faronova" } };
+            var $ = function (id) { return document.getElementById(id); };
+
+            // --- Utilities ---
+            function esc(v) {
+                return String(v == null ? "" : v)
+                    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+            }
+            function num(v) {
+                var n = Number(v);
+                return Number.isFinite(n) ? new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 }).format(n) : "0";
+            }
+            function safe(v, hosts) {
+                try {
+                    var u = new URL(v);
+                    return hosts.some(function (h) { return u.hostname === h || u.hostname.endsWith("." + h); }) ? u.href : "";
+                } catch (e) { return ""; }
+            }
+            function json(url) {
+                return fetch(url, { headers: { Accept: "application/json" } }).then(function (r) {
+                    if (!r.ok) throw new Error("Request failed: " + r.status);
+                    return r.json();
+                });
+            }
+            function liveWatch(show) { var g = $("liveWatchGrid"); if (g) g.hidden = !show; }
+            function dur(s) {
+                // Convert ISO 8601 duration like PT1H32M10S to readable string
+                var m = String(s || "").match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+                if (!m) return "";
+                var h = m[1] ? m[1] + "h " : "";
+                var min = m[2] ? m[2] + "m" : "";
+                return (h + min).trim() || "–";
+            }
+            function relTime(iso) {
+                var d = new Date(iso);
+                if (isNaN(d)) return "";
+                var diff = Math.floor((Date.now() - d.getTime()) / 1000);
+                if (diff < 60) return "just now";
+                if (diff < 3600) return Math.floor(diff / 60) + "m ago";
+                if (diff < 86400) return Math.floor(diff / 3600) + "h ago";
+                if (diff < 2592000) return Math.floor(diff / 86400) + "d ago";
+                return d.toLocaleDateString();
+            }
+
+            // --- Featured clips section ---
+            function featured(clips) {
+                var c = $("featuredClips");
+                if (!c) return;
+                if (!Array.isArray(clips) || !clips.length) {
+                    var f = ["Open the latest Twitch clips", "Watch stream highlights", "Find community favorites"];
+                    c.innerHTML = f.map(function (t, i) {
+                        var bg = i === 0 ? "linear-gradient(135deg,rgba(217,102,255,.24),rgba(22,15,31,.92))"
+                            : i === 1 ? "linear-gradient(135deg,rgba(192,132,252,.2),rgba(22,15,31,.92))"
+                                : "linear-gradient(135deg,rgba(255,110,180,.2),rgba(22,15,31,.92))";
+                        return '<a class="featured-clip" href="https://twitch.tv/' + CONFIG.twitch.username + '/clips" target="_blank" rel="noopener noreferrer" style="background:' + bg + '"><span class="featured-clip-copy"><strong>' + t + '</strong><span class="featured-clip-stats"><span>Twitch clips</span></span></span></a>';
+                    }).join("");
+                    return;
+                }
+                c.innerHTML = clips.slice(0, 3).map(function (clip) {
+                    var url = safe(clip.url, ["twitch.tv"]) || "https://twitch.tv/" + CONFIG.twitch.username + "/clips";
+                    var thumb = safe(clip.thumbnail_url, ["jtvnw.net"]);
+                    var bg = thumb
+                        ? "linear-gradient(180deg,transparent 22%,rgba(0,0,0,.84)),url('" + esc(thumb) + "') center/cover"
+                        : "linear-gradient(135deg,rgba(217,102,255,.22),rgba(22,15,31,.94))";
+                    return '<a class="featured-clip" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer" style="background:' + bg + '"><span class="featured-clip-copy"><strong>' + esc(clip.title || "Watch this clip") + '</strong><span class="featured-clip-stats"><span><i class="fa-regular fa-eye" aria-hidden="true"></i> ' + num(clip.view_count) + '</span><span><i class="fa-regular fa-clock" aria-hidden="true"></i> ' + relTime(clip.created_at) + '</span>' + (clip.game_name ? '<span><i class="fa-solid fa-gamepad" aria-hidden="true"></i> ' + esc(clip.game_name) + '</span>' : '') + '</span></span></a>';
+                }).join("");
+            }
+
+            // --- Twitch fallback ---
+            function twitchFallback() {
+                var i = $("liveIndicator");
+                i.classList.remove("is-live");
+                i.innerHTML = '<span class="status-dot"></span><span>Status unavailable</span>';
+                $("twitchHeroStatus").textContent = "Visit channel";
+                $("twitchFollowers").textContent = "View channel";
+                $("twitchTotalViews").textContent = "–";
+                $("liveHeadline").textContent = "Open Twitch for the latest.";
+                $("liveDescription").textContent = "Live status could not connect, but the channel link is ready.";
+                liveWatch(false);
+                $("twitchClips").innerHTML = '<div class="empty-state" style="min-height:260px"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-brands fa-twitch" aria-hidden="true"></i></span><h3>Twitch data is reconnecting.</h3><p>Open the channel directly for live video, chat, and clips.</p><a class="button button-primary button-compact" href="https://twitch.tv/' + CONFIG.twitch.username + '" target="_blank" rel="noopener noreferrer">Open Twitch</a></div></div>';
+                vodsFallback();
+            }
+
+            // --- VODs fallback ---
+            function vodsFallback() {
+                var l = $("vodsLoading");
+                if (l) l.hidden = true;
+                $("vodsStatus").innerHTML = '<span class="status-dot"></span><span>Visit channel</span>';
+                $("vodsContainer").innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-brands fa-twitch" aria-hidden="true"></i></span><h3>No VODs loaded.</h3><p>Head to the Twitch channel to browse past broadcasts.</p><a class="button button-primary" href="https://twitch.tv/' + CONFIG.twitch.username + '/videos" target="_blank" rel="noopener noreferrer">Browse VODs <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></div>';
+            }
+
+            // --- Fetch VODs ---
+            function fetchVods(userId) {
+                var l = $("vodsLoading");
+                json("/api/twitch-api/videos?broadcaster_id=" + encodeURIComponent(userId) + "&type=archive&first=6")
+                    .then(function (vp) {
+                        if (l) l.hidden = true;
+                        var vods = Array.isArray(vp.data) ? vp.data : [];
+                        if (!vods.length) { vodsFallback(); return; }
+                        $("vodsStatus").innerHTML = '<span class="status-dot"></span><span>' + vods.length + ' VODs loaded</span>';
+                        $("vodsContainer").innerHTML = vods.map(function (v) {
+                            var url = safe(v.url, ["twitch.tv"]) || "https://twitch.tv/" + CONFIG.twitch.username + "/videos";
+                            // Twitch VOD thumbnails have %{width}x%{height} placeholders
+                            var rawThumb = (v.thumbnail_url || "").replace("%{width}", "480").replace("%{height}", "270");
+                            var thumb = safe(rawThumb, ["jtvnw.net", "static-cdn.jtvnw.net"]);
+                            return '<a class="video-card" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">'
+                                + (thumb ? '<img class="video-thumb" src="' + esc(thumb) + '" alt="' + esc(v.title || "Twitch VOD") + '" loading="lazy" style="aspect-ratio:16/9">' : '<div class="video-thumb" style="aspect-ratio:16/9;background:#0c0816"></div>')
+                                + '<span class="video-copy"><strong>' + esc(v.title || "Twitch VOD") + '</strong><span>' + relTime(v.published_at || v.created_at) + (v.duration ? " · " + dur(v.duration) : "") + (v.view_count ? " · " + num(v.view_count) + " views" : "") + '</span></span></a>';
+                        }).join("");
+                    })
+                    .catch(function (e) { console.error("VODs error:", e.message); vodsFallback(); });
+            }
+
+            // --- Main Twitch fetch ---
+            function fetchTwitch() {
+                json("/api/twitch-api/user?username=" + encodeURIComponent(CONFIG.twitch.username))
+                    .then(function (up) {
+                        if (!up.data || !up.data.length) throw new Error("User not found");
+                        var user = up.data[0];
+                        var av = safe(user.profile_image_url, ["jtvnw.net"]);
+                        if (av) $("profileAvatar").src = av;
+                        // Fetch all Twitch data in parallel
+                        return Promise.all([
+                            json("/api/twitch-api/stream?user_id=" + encodeURIComponent(user.id)),
+                            json("/api/twitch-api/clips?broadcaster_id=" + encodeURIComponent(user.id) + "&first=10"),
+                            json("/api/twitch-api/followers?broadcaster_id=" + encodeURIComponent(user.id)),
+                            json("/api/twitch-api/channel?broadcaster_id=" + encodeURIComponent(user.id)),
+                            Promise.resolve(user.id)
+                        ]);
+                    })
+                    .then(function (res) {
+                        var sp = res[0], cp = res[1], fp = res[2], chp = res[3], userId = res[4];
+                        var stream = sp.data && sp.data[0];
+                        var channel = chp.data && chp.data[0];
+                        var i = $("liveIndicator");
+
+                        // --- Follower count & total views ---
+                        var followerCount = fp.total != null ? num(fp.total) : (fp.data ? num(fp.data.length) : "–");
+                        $("twitchFollowers").textContent = followerCount;
+                        // total view count comes from user object (fetched before)
+                        // Re-fetch user to grab view_count (already in up.data[0] but user var is closed over)
+                        // We'll pull it from the channel info fallback
+                        if (channel && channel.view_count != null) {
+                            $("twitchTotalViews").textContent = num(channel.view_count);
+                        }
+
+                        // --- Channel sidebar ---
+                        if (channel) {
+                            var gameLabel = $("channelGameLabel");
+                            if (gameLabel) gameLabel.textContent = channel.game_name ? "Currently playing " + channel.game_name + "." : "Live on Twitch.";
+                            var descEl = $("channelDesc");
+                            if (descEl && channel.title) descEl.textContent = channel.title;
+                        }
+
+                        // --- Live status ---
+                        if (stream) {
+                            i.classList.add("is-live");
+                            i.innerHTML = '<span class="status-dot"></span><span>Live now</span>';
+                            $("twitchHeroStatus").textContent = "Live now";
+                            $("liveHeadline").textContent = stream.title || stream.game_name || "Live on Twitch";
+                            $("liveDescription").textContent = num(stream.viewer_count) + " viewers · " + (stream.game_name || "Twitch");
+                            var parent = window.location.hostname || "localhost";
+                            var vs = "https://player.twitch.tv/?channel=" + encodeURIComponent(CONFIG.twitch.username) + "&parent=" + encodeURIComponent(parent) + "&muted=true";
+                            var cs = "https://www.twitch.tv/embed/" + encodeURIComponent(CONFIG.twitch.username) + "/chat?parent=" + encodeURIComponent(parent) + "&darkpopout";
+                            if ($("liveVideoFrame").src !== vs) $("liveVideoFrame").src = vs;
+                            if ($("liveChatFrame").src !== cs) $("liveChatFrame").src = cs;
+                            liveWatch(true);
+                        } else {
+                            i.classList.remove("is-live");
+                            i.innerHTML = '<span class="status-dot"></span><span>Offline</span>';
+                            $("twitchHeroStatus").textContent = "Offline";
+                            $("liveHeadline").textContent = "Offline — easy to catch up.";
+                            $("liveDescription").textContent = "Browse recent clips or follow on Twitch for the next live notification.";
+                            liveWatch(false);
+                        }
+
+                        // --- Clips list ---
+                        var clips = Array.isArray(cp.data) ? cp.data : [];
+                        $("twitchClips").innerHTML = clips.length
+                            ? clips.slice(0, 6).map(function (clip) {
+                                var url = safe(clip.url, ["twitch.tv"]);
+                                if (!url) return "";
+                                var thumb = safe(clip.thumbnail_url, ["jtvnw.net"]);
+                                return '<a class="clip-item" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">'
+                                    + (thumb ? '<img class="clip-icon" src="' + esc(thumb) + '" alt="" style="width:42px;height:42px;object-fit:cover;border-radius:6px">' : '<span class="clip-icon"><i class="fa-solid fa-play" aria-hidden="true"></i></span>')
+                                    + '<span class="clip-copy"><strong>' + esc(clip.title || "Twitch clip") + '</strong><span>' + (clip.game_name ? esc(clip.game_name) + " · " : "") + relTime(clip.created_at) + '</span></span>'
+                                    + '<span class="clip-views">' + num(clip.view_count) + ' views</span></a>';
+                            }).join("")
+                            : '<div class="empty-state" style="min-height:260px"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i></span><h3>No recent clips yet.</h3><p>Visit the channel for broadcasts and the next live session.</p></div></div>';
+
+                        featured(clips);
+                        fetchVods(userId);
+                    })
+                    .catch(function (e) {
+                        console.error("Twitch API error:", e.message);
+                        twitchFallback();
+                        featured([]);
+                    });
+            }
+
+            // --- Intersection observer for reveal animations ---
+            var ob = new IntersectionObserver(function (es) {
+                es.forEach(function (e) {
+                    if (e.isIntersecting) { e.target.classList.add("is-visible"); ob.unobserve(e.target); }
+                });
+            }, { threshold: 0.12 });
+            document.querySelectorAll(".reveal").forEach(function (el) { ob.observe(el); });
+
+            // --- Countdown ---
+            var DAYS = [3, 4, 5], HOUR = 21, WINDOW = 3; // Wed, Thu, Fri at 21:00 UTC
+            function nextStream(now) {
+                for (var i = 0; i < 8; i++) {
+                    var c = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + i, HOUR, 0, 0));
+                    if (DAYS.indexOf(c.getUTCDay()) < 0) continue;
+                    var end = new Date(c.getTime() + WINDOW * 36e5);
+                    if (now >= c && now <= end) return { live: true, start: c };
+                    if (c > now) return { live: false, start: c };
+                }
+                return null;
+            }
+            function countdown() {
+                var n = nextStream(new Date());
+                if (!n) { $("countdownLabel").textContent = "Check Twitch for the latest"; return; }
+                if (n.live) {
+                    $("countdownLabel").textContent = "Scheduled window is live now";
+                    $("countdownDays").textContent = "00";
+                    $("countdownHours").textContent = "00";
+                    $("countdownMinutes").textContent = "00";
+                    return;
+                }
+                var m = Math.floor((n.start.getTime() - Date.now()) / 6e4);
+                $("countdownLabel").textContent = "Counting down to the next session";
+                $("countdownDays").textContent = String(Math.floor(m / 1440)).padStart(2, "0");
+                $("countdownHours").textContent = String(Math.floor(m % 1440 / 60)).padStart(2, "0");
+                $("countdownMinutes").textContent = String(m % 60).padStart(2, "0");
+            }
+
+            // --- Init ---
+            $("currentYear").textContent = new Date().getFullYear();
+            countdown();
+            fetchTwitch();
+            featured([]);
+
+            // Refresh live status every 5 min, countdown every 30 sec
+            setInterval(countdown, 3e4);
+            setInterval(fetchTwitch, 3e5);
+        })();
     </script>
 </body>
 
