@@ -1,0 +1,1543 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description"
+        content="FaroNova - content creator and streamer. Watch live, browse recent posts, see the schedule, and find official links in one clean place." />
+    <meta name="theme-color" content="#0e0a14" />
+    <title>FaroNova - Creator Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box
+        }
+
+        * {
+            margin: 0
+        }
+
+        :root {
+            --bg: #0e0a14;
+            --surface: #160f1f;
+            --soft: #1c1428;
+            --raised: #241a33;
+            --text: #f5f0ff;
+            --muted: #cfc4e8;
+            --subtle: #9b8db8;
+            --line: rgba(200, 150, 255, .12);
+            --line2: rgba(200, 150, 255, .22);
+            --accent: #d966ff;
+            --ink: #1a0030;
+            --warm: #ff6eb4;
+            --red: #ff4d8d;
+            --blue: #c084fc;
+            --max: 1180px;
+            --r: 8px;
+            --ease: cubic-bezier(.22, 1, .36, 1)
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 96px
+        }
+
+        body {
+            min-width: 320px;
+            overflow-x: hidden;
+            background: linear-gradient(180deg, rgba(217, 102, 255, .08), transparent 340px), linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px), var(--bg);
+            background-size: auto, 72px 72px, auto;
+            background-attachment: fixed, fixed, fixed;
+            background-position: center top, center top, center;
+            color: var(--text);
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(circle at 18% 0%, rgba(255, 110, 180, .12), transparent 34%), radial-gradient(circle at 82% 8%, rgba(192, 132, 252, .1), transparent 30%)
+        }
+
+        a {
+            color: inherit
+        }
+
+        img {
+            display: block;
+            max-width: 100%
+        }
+
+        [hidden] {
+            display: none !important
+        }
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent
+        }
+
+        button:focus-visible,
+        a:focus-visible,
+        summary:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px
+        }
+
+        .site-shell {
+            width: min(calc(100% - 40px), var(--max));
+            margin-inline: auto
+        }
+
+        .site-header {
+            position: fixed;
+            top: 14px;
+            left: 50%;
+            z-index: 20;
+            width: min(calc(100% - 28px), var(--max));
+            transform: translateX(-50%)
+        }
+
+        .navbar {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 12px;
+            min-height: 62px;
+            padding: 10px 14px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: rgba(13, 14, 18, .82);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, .22);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px)
+        }
+
+        .nav-socials {
+            display: flex;
+            align-items: center;
+            gap: 7px
+        }
+
+        .nav-socials a {
+            display: grid;
+            width: 32px;
+            aspect-ratio: 1;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: .8rem;
+            transition: color .18s ease, border-color .18s ease, transform .18s ease
+        }
+
+        .nav-socials a:hover {
+            color: var(--text);
+            border-color: var(--line2);
+            transform: translateY(-1px)
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-weight: 800;
+            letter-spacing: -.02em;
+            text-decoration: none
+        }
+
+        .brand-mark {
+            display: grid;
+            width: 34px;
+            aspect-ratio: 1;
+            place-items: center;
+            border-radius: 6px;
+            background: var(--text);
+            color: var(--bg);
+            font-size: .78rem;
+            font-weight: 800
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            justify-content: flex-end
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: .82rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color .18s ease;
+            white-space: nowrap
+        }
+
+        .nav-links a:hover {
+            color: var(--text)
+        }
+
+        .button {
+            display: inline-flex;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 0 16px;
+            border: 1px solid var(--line2);
+            border-radius: 6px;
+            background: var(--soft);
+            color: var(--text);
+            font-size: .9rem;
+            font-weight: 750;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background .18s ease, border-color .18s ease, transform .18s ease
+        }
+
+        .button:hover {
+            border-color: rgba(255, 255, 255, .28);
+            background: var(--raised);
+            transform: translateY(-1px)
+        }
+
+        .button-primary {
+            border-color: transparent;
+            background: var(--accent);
+            color: var(--ink)
+        }
+
+        .button-primary:hover {
+            background: #e580ff;
+            border-color: transparent
+        }
+
+        .button-compact {
+            min-height: 38px;
+            padding-inline: 13px;
+            font-size: .82rem
+        }
+
+        main {
+            overflow: clip
+        }
+
+        section {
+            padding-block: 84px
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.06fr) minmax(320px, .94fr);
+            gap: clamp(30px, 6vw, 76px);
+            min-height: 740px;
+            padding-top: 142px;
+            align-items: center
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+            color: var(--accent);
+            font-size: .76rem;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 18px;
+            height: 2px;
+            background: currentColor
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--text);
+            font-weight: 800;
+            letter-spacing: -.04em;
+            line-height: 1.02
+        }
+
+        h1 {
+            max-width: 820px;
+            font-size: clamp(3.3rem, 8vw, 7.4rem)
+        }
+
+        h2 {
+            max-width: 760px;
+            font-size: clamp(2.2rem, 5vw, 4.8rem)
+        }
+
+        h3 {
+            font-size: 1.15rem
+        }
+
+        .hero-lede {
+            max-width: 610px;
+            margin-top: 24px;
+            color: var(--muted);
+            font-size: clamp(1.04rem, 1.6vw, 1.22rem)
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 11px;
+            margin-top: 30px
+        }
+
+        .hero-panel {
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface);
+            box-shadow: 0 18px 60px rgba(0, 0, 0, .28)
+        }
+
+        .profile-media {
+            display: grid;
+            min-height: 460px;
+            place-items: center;
+            background: linear-gradient(145deg, rgba(217, 102, 255, .18), transparent 48%), linear-gradient(320deg, rgba(255, 110, 180, .14), transparent 42%), #160f1e
+        }
+
+        .profile-avatar-wrap {
+            display: grid;
+            width: min(460px, 92%);
+            aspect-ratio: 1;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        #profileAvatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        #profileAvatar:not([src]),
+        #profileAvatar[src=""] {
+            display: none
+        }
+
+        .profile-fallback {
+            font-size: clamp(3.4rem, 8vw, 5.8rem);
+            font-weight: 800;
+            letter-spacing: -.07em
+        }
+
+        .profile-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid var(--line)
+        }
+
+        .stat {
+            min-width: 0;
+            padding: 18px
+        }
+
+        .stat+.stat {
+            border-left: 1px solid var(--line)
+        }
+
+        .stat strong {
+            display: block;
+            overflow: hidden;
+            color: var(--text);
+            font-size: clamp(1.05rem, 2vw, 1.55rem);
+            font-weight: 800;
+            letter-spacing: -.03em;
+            text-overflow: ellipsis;
+            white-space: nowrap
+        }
+
+        .stat span {
+            display: block;
+            margin-top: 3px;
+            color: var(--subtle);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .07em;
+            text-transform: uppercase
+        }
+
+        .section-heading {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(260px, .42fr);
+            gap: 28px;
+            align-items: end;
+            margin-bottom: 28px
+        }
+
+        .section-heading p {
+            max-width: 420px;
+            color: var(--muted)
+        }
+
+        .panel,
+        .video-card,
+        .live-card,
+        .clip-item,
+        .channel-card,
+        .schedule-card,
+        .day-card,
+        .community-card,
+        details,
+        .footer-card {
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: rgba(20, 22, 27, .82);
+            box-shadow: 0 12px 42px rgba(0, 0, 0, .18)
+        }
+
+        .panel {
+            padding: 18px
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px
+        }
+
+        .panel-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--text);
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 30px;
+            padding: 0 10px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: .74rem;
+            font-weight: 800
+        }
+
+        .status-dot {
+            width: 7px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: var(--subtle)
+        }
+
+        .status-pill.is-live {
+            border-color: rgba(255, 93, 85, .5);
+            color: var(--text)
+        }
+
+        .status-pill.is-live .status-dot {
+            background: var(--red);
+            box-shadow: 0 0 0 4px rgba(255, 93, 85, .14)
+        }
+
+        .content-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 300px;
+            gap: 18px;
+            align-items: start
+        }
+
+        .video-grid,
+        .loading-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px
+        }
+
+        .video-card {
+            overflow: hidden;
+            min-height: 300px;
+            background: var(--soft);
+            text-decoration: none;
+            transition: border-color .18s ease, transform .18s ease
+        }
+
+        .video-card:hover {
+            border-color: var(--line2);
+            transform: translateY(-2px)
+        }
+
+        .video-thumb {
+            width: 100%;
+            aspect-ratio: 9/13;
+            object-fit: cover;
+            background: #0c0816
+        }
+
+        .video-copy {
+            padding: 13px
+        }
+
+        .video-copy strong {
+            display: -webkit-box;
+            overflow: hidden;
+            margin-bottom: 8px;
+            color: var(--text);
+            font-size: .88rem;
+            line-height: 1.35;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2
+        }
+
+        .video-copy span {
+            color: var(--muted);
+            font-size: .76rem;
+            font-weight: 750
+        }
+
+        .skeleton-card {
+            min-height: 330px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--soft)
+        }
+
+        .skeleton-card::before {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 75%;
+            background: linear-gradient(100deg, var(--soft) 30%, rgba(255, 255, 255, .06) 50%, var(--soft) 70%);
+            background-size: 220% 100%;
+            animation: shimmer 1.5s infinite
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position-x: -220%
+            }
+        }
+
+        .profile-card {
+            position: sticky;
+            top: 96px;
+            padding: 22px
+        }
+
+        .profile-card i {
+            color: var(--accent);
+            font-size: 1.65rem
+        }
+
+        .profile-card strong {
+            display: block;
+            margin-top: 54px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -.03em;
+            line-height: 1.08
+        }
+
+        .profile-card p {
+            margin: 12px 0 18px;
+            color: var(--muted)
+        }
+
+        .empty-state {
+            display: grid;
+            min-height: 320px;
+            padding: clamp(24px, 5vw, 56px);
+            place-items: center;
+            border: 1px dashed var(--line2);
+            border-radius: var(--r);
+            text-align: center
+        }
+
+        .empty-state-inner {
+            max-width: 470px
+        }
+
+        .empty-icon {
+            display: grid;
+            width: 48px;
+            aspect-ratio: 1;
+            margin: 0 auto 16px;
+            place-items: center;
+            border-radius: 6px;
+            background: var(--raised);
+            color: var(--accent)
+        }
+
+        .empty-state h3 {
+            margin-bottom: 8px
+        }
+
+        .empty-state p {
+            margin-bottom: 18px;
+            color: var(--muted)
+        }
+
+        .twitch-layout {
+            display: grid;
+            grid-template-columns: .72fr 1.28fr;
+            gap: 18px
+        }
+
+        .live-card {
+            display: flex;
+            min-height: 365px;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px;
+            background: linear-gradient(145deg, rgba(192, 132, 252, .15), transparent 60%), var(--surface)
+        }
+
+        .live-card-icon {
+            color: var(--blue);
+            font-size: 2rem
+        }
+
+        .live-card h3 {
+            max-width: 350px;
+            margin-top: auto;
+            font-size: clamp(1.8rem, 4vw, 3.4rem)
+        }
+
+        .live-card p {
+            margin-top: 12px;
+            color: var(--muted);
+            font-weight: 600
+        }
+
+        .live-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px
+        }
+
+        .clips-list {
+            display: grid;
+            gap: 10px
+        }
+
+        .clip-item {
+            display: grid;
+            grid-template-columns: 42px minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 12px;
+            min-height: 72px;
+            padding: 10px 12px;
+            background: var(--soft);
+            text-decoration: none;
+            transition: border-color .18s ease, transform .18s ease
+        }
+
+        .clip-item:hover {
+            border-color: var(--line2);
+            transform: translateX(2px)
+        }
+
+        .clip-icon {
+            display: grid;
+            width: 42px;
+            aspect-ratio: 1;
+            place-items: center;
+            border-radius: 6px;
+            background: var(--raised);
+            color: var(--accent)
+        }
+
+        .clip-copy {
+            min-width: 0
+        }
+
+        .clip-copy strong {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: .9rem
+        }
+
+        .clip-copy span,
+        .clip-views {
+            color: var(--muted);
+            font-size: .76rem;
+            font-weight: 700
+        }
+
+        .live-watch-grid {
+            display: grid;
+            grid-template-columns: 1.65fr 1fr;
+            gap: 18px;
+            margin-top: 18px
+        }
+
+        .video-frame,
+        .chat-frame {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: #09061a
+        }
+
+        .video-frame::before {
+            content: "";
+            display: block;
+            padding-top: 56.25%
+        }
+
+        .video-frame iframe,
+        .chat-frame iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0
+        }
+
+        .chat-frame {
+            min-height: 100%
+        }
+
+        .video-frame-tag,
+        .chat-frame-tag {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 1;
+            display: inline-flex;
+            min-height: 28px;
+            align-items: center;
+            gap: 7px;
+            padding: 0 10px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, .58);
+            color: var(--text);
+            font-size: .72rem;
+            font-weight: 800
+        }
+
+        .chat-frame-tag {
+            justify-content: space-between;
+            right: 12px
+        }
+
+        .chat-frame-tag .button {
+            min-height: 28px;
+            padding-inline: 9px;
+            font-size: .7rem
+        }
+
+        .schedule-card {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 18px;
+            padding: 22px
+        }
+
+        .countdown {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 220px;
+            padding: 22px;
+            border-radius: 6px;
+            background: var(--soft)
+        }
+
+        .countdown span {
+            color: var(--accent);
+            font-size: .74rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .countdown strong {
+            display: block;
+            margin-top: 7px;
+            font-size: clamp(1.3rem, 3vw, 2rem);
+            font-weight: 800;
+            letter-spacing: -.04em;
+            line-height: 1.08
+        }
+
+        .countdown-clock {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 24px
+        }
+
+        .countdown-unit {
+            padding: 11px 6px;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            text-align: center
+        }
+
+        .countdown-unit strong {
+            margin: 0;
+            font-size: 1.45rem
+        }
+
+        .countdown-unit span {
+            color: var(--subtle);
+            font-size: .64rem
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px
+        }
+
+        .day-card {
+            display: flex;
+            min-height: 88px;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 14px;
+            background: var(--soft)
+        }
+
+        .day-card.is-off {
+            opacity: .72;
+            background: transparent;
+            border-style: dashed
+        }
+
+        .day-name {
+            color: var(--accent);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .1em
+        }
+
+        .day-game {
+            color: var(--text);
+            font-size: .9rem;
+            font-weight: 800;
+            line-height: 1.25
+        }
+
+        .day-time {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: .74rem;
+            font-weight: 700
+        }
+
+        .channels-grid,
+        .community-grid,
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px
+        }
+
+        .channel-card,
+        .community-card {
+            display: flex;
+            min-height: 150px;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 18px;
+            text-decoration: none;
+            transition: border-color .18s ease, transform .18s ease
+        }
+
+        .channel-card:hover,
+        .community-card:hover {
+            border-color: var(--line2);
+            transform: translateY(-2px)
+        }
+
+        .channel-icon {
+            display: grid;
+            width: 40px;
+            aspect-ratio: 1;
+            place-items: center;
+            border-radius: 6px;
+            background: var(--raised);
+            color: var(--text)
+        }
+
+        .channel-card[data-platform=tiktok] .channel-icon {
+            background: #070707
+        }
+
+        .channel-card[data-platform=twitch] .channel-icon {
+            background: #6d28d9
+        }
+
+        .channel-card[data-platform=instagram] .channel-icon {
+            background: linear-gradient(135deg, #f9ce34, #ee2a7b 55%, #6228d7)
+        }
+
+        .channel-card[data-platform=youtube] .channel-icon {
+            background: #ff3b30
+        }
+
+        .channel-card[data-platform=x] .channel-icon {
+            background: #f5f0ff;
+            color: #0e0a14
+        }
+
+        .channel-card[data-platform=discord] .channel-icon {
+            background: #5865f2
+        }
+
+        .channel-card strong,
+        .community-card strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            font-weight: 800
+        }
+
+        .channel-card span,
+        .community-card span {
+            color: var(--muted);
+            font-size: .86rem
+        }
+
+        .featured-clip {
+            position: relative;
+            display: flex;
+            overflow: hidden;
+            min-height: 250px;
+            align-items: flex-end;
+            padding: 16px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--soft);
+            text-decoration: none
+        }
+
+        .featured-clip::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 20%, rgba(0, 0, 0, .76))
+        }
+
+        .featured-clip-copy {
+            position: relative;
+            z-index: 1
+        }
+
+        .featured-clip-copy strong {
+            display: block;
+            max-width: 360px;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+            font-weight: 800;
+            line-height: 1.2
+        }
+
+        .featured-clip-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: rgba(255, 255, 255, .78);
+            font-size: .76rem;
+            font-weight: 750
+        }
+
+        .community-card {
+            min-height: 180px;
+            background: var(--surface)
+        }
+
+        .community-card.feature {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(217, 102, 255, .14), transparent 55%), var(--surface)
+        }
+
+        .community-card .button {
+            align-self: flex-start;
+            margin-top: 18px
+        }
+
+        .faq-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px
+        }
+
+        details {
+            overflow: hidden
+        }
+
+        summary {
+            display: flex;
+            min-height: 74px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 17px 18px;
+            cursor: pointer;
+            font-weight: 800;
+            list-style: none
+        }
+
+        summary::-webkit-details-marker {
+            display: none
+        }
+
+        summary::after {
+            content: "+";
+            color: var(--accent);
+            font-size: 1.2rem
+        }
+
+        details[open] summary::after {
+            content: "-"
+        }
+
+        details p {
+            padding: 0 18px 18px;
+            color: var(--muted)
+        }
+
+        footer {
+            padding: 44px 0 26px
+        }
+
+        .footer-card {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: end;
+            padding: clamp(24px, 5vw, 46px);
+            background: var(--surface)
+        }
+
+        .footer-card h2 {
+            max-width: 700px;
+            font-size: clamp(2rem, 5vw, 4.2rem)
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px
+        }
+
+        .social-links a {
+            display: grid;
+            width: 46px;
+            aspect-ratio: 1;
+            place-items: center;
+            border: 1px solid var(--line2);
+            border-radius: 6px;
+            background: var(--soft);
+            text-decoration: none;
+            transition: border-color .18s ease, transform .18s ease
+        }
+
+        .social-links a:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px)
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 18px 4px 0;
+            color: var(--subtle);
+            font-size: .82rem
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .65s var(--ease), transform .65s var(--ease)
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        @media(max-width:980px) {
+            .nav-links a:not(.nav-cta) {
+                display: none
+            }
+
+            .nav-socials a:nth-child(n+4) {
+                display: none
+            }
+
+            .hero,
+            .content-layout,
+            .twitch-layout,
+            .live-watch-grid,
+            .schedule-card {
+                grid-template-columns: 1fr
+            }
+
+            .profile-card {
+                position: static
+            }
+
+            .channels-grid,
+            .community-grid,
+            .featured-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+
+            .community-card.feature {
+                grid-column: span 2
+            }
+
+            .chat-frame {
+                min-height: 380px
+            }
+        }
+
+        @media(max-width:720px) {
+            .site-shell {
+                width: min(calc(100% - 24px), var(--max))
+            }
+
+            .site-header {
+                top: 10px;
+                width: calc(100% - 20px)
+            }
+
+            .navbar {
+                padding: 8px 9px
+            }
+
+            .nav-socials a:nth-child(n+4) {
+                display: none
+            }
+
+            .nav-socials {
+                gap: 5px
+            }
+
+            .brand span:last-child {
+                font-size: .95rem
+            }
+
+            .nav-cta span {
+                display: none
+            }
+
+            section {
+                padding-block: 64px
+            }
+
+            .hero {
+                min-height: auto;
+                padding-top: 116px
+            }
+
+            h1 {
+                font-size: clamp(3rem, 16vw, 4.8rem)
+            }
+
+            h2 {
+                font-size: clamp(2.05rem, 11vw, 3.4rem)
+            }
+
+            .profile-media {
+                min-height: 320px
+            }
+
+            .profile-meta,
+            .section-heading,
+            .video-grid,
+            .loading-grid,
+            .channels-grid,
+            .community-grid,
+            .featured-grid,
+            .faq-list {
+                grid-template-columns: 1fr
+            }
+
+            .stat+.stat {
+                border-top: 1px solid var(--line);
+                border-left: 0
+            }
+
+            .panel {
+                padding: 14px
+            }
+
+            .video-card {
+                display: grid;
+                grid-template-columns: 110px minmax(0, 1fr);
+                min-height: 155px
+            }
+
+            .video-thumb {
+                height: 100%;
+                aspect-ratio: auto
+            }
+
+            .clip-item {
+                grid-template-columns: 40px minmax(0, 1fr)
+            }
+
+            .clip-views {
+                grid-column: 2
+            }
+
+            .schedule-grid {
+                grid-template-columns: 1fr
+            }
+
+            .day-card {
+                min-height: auto;
+                flex-direction: row;
+                align-items: center;
+                gap: 16px
+            }
+
+            .day-game {
+                text-align: right
+            }
+
+            .community-card.feature {
+                grid-column: auto
+            }
+
+            .footer-card {
+                grid-template-columns: 1fr
+            }
+
+            .footer-bottom {
+                flex-direction: column
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <nav class="navbar" aria-label="Primary navigation">
+            <div class="nav-socials"><a href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer"
+                    aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a><a
+                    href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer" aria-label="Twitch"><i
+                        class="fa-brands fa-twitch" aria-hidden="true"></i></a><a href="https://instagram.com/faronova_"
+                    target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"
+                        aria-hidden="true"></i></a><a href="https://youtube.com/@faronova" target="_blank"
+                    rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"
+                        aria-hidden="true"></i></a><a href="https://x.com/faronova_" target="_blank"
+                    rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"
+                        aria-hidden="true"></i></a><a href="https://discord.gg/whRyvAPuVQ" target="_blank"
+                    rel="noopener noreferrer" aria-label="Discord"><i class="fa-brands fa-discord"
+                        aria-hidden="true"></i></a></div><a class="brand" href="#home" aria-label="FaroNova home"><img
+                    style="height: 5rem;" src="/assets/img/FARNOVA_ICON.png" alt=""></a>
+            <div class="nav-links"><a href="#content">Content</a><a href="#live">Live</a><a
+                    href="#schedule">Schedule</a><a href="#channels">Channels</a><a
+                    class="button button-primary button-compact nav-cta" href="https://twitch.tv/faronova"
+                    target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-play"
+                        aria-hidden="true"></i><span>Watch live</span></a></div>
+        </nav>
+    </header>
+    <main>
+        <section id="home" class="hero site-shell">
+            <div class="hero-copy reveal"><span class="eyebrow">Content Creator | Streamer</span>
+                <h1>FaroNova</h1>
+                <p class="hero-lede">Short-form creator and Twitch streamer making clean edits, live reactions, game
+                    nights, and community-led moments across TikTok, Twitch, YouTube, Instagram, X, and Discord.</p>
+                <div class="hero-actions"><a class="button button-primary" href="#live"><i
+                            class="fa-solid fa-circle-play" aria-hidden="true"></i> Watch live</a><a class="button"
+                        href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer"><i
+                            class="fa-brands fa-tiktok" aria-hidden="true"></i> Open TikTok</a><a class="button"
+                        href="#channels"><i class="fa-solid fa-link" aria-hidden="true"></i> All links</a></div>
+            </div>
+            <aside class="hero-panel reveal" aria-label="FaroNova profile snapshot">
+                <div class="profile-media">
+                    <div class="profile-avatar-wrap"><img src="assets/img/FARNOVA.png" id="profileAvatar"
+                            alt="FaroNova profile portrait" /></div>
+                </div>
+                <div class="profile-meta">
+                    <div class="stat"><strong id="tiktokFollowers">Syncing</strong><span>TikTok followers</span></div>
+                    <div class="stat"><strong id="totalLikes">Syncing</strong><span>Profile likes</span></div>
+                    <div class="stat"><strong id="twitchHeroStatus">Checking</strong><span>Twitch status</span></div>
+                </div>
+            </aside>
+        </section>
+        <section id="content" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Latest posts</span>
+                    <h2>Recent short-form work.</h2>
+                </div>
+                <p>Fresh uploads from TikTok when the feed is available, with a direct path to the profile when it is
+                    not.</p>
+            </div>
+            <div class="content-layout reveal">
+                <div class="panel">
+                    <div class="panel-header"><span class="panel-label"><i class="fa-brands fa-tiktok"
+                                aria-hidden="true"></i> Recent posts</span><span class="status-pill"
+                            id="tiktokStatus"><span class="status-dot"></span><span>Syncing feed</span></span></div>
+                    <div id="tiktokLoading" class="loading-grid" aria-label="Loading TikTok posts">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
+                    <div class="video-grid" id="tiktokContainer" aria-live="polite"></div>
+                </div>
+                <aside class="panel profile-card"><i class="fa-brands fa-tiktok" aria-hidden="true"></i><strong>Short
+                        edits, quick reactions, easy to follow.</strong>
+                    <p>Open the TikTok profile for the newest posts, comments, and uploads that appear between site
+                        refreshes.</p><a class="button button-primary button-compact"
+                        href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer">Visit @FaroNova
+                        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                </aside>
+            </div>
+        </section>
+        <section id="live" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Twitch</span>
+                    <h2>Live when the room is active.</h2>
+                </div>
+                <p>Stream status updates automatically. When the channel is live, the embedded player and chat appear
+                    here.</p>
+            </div>
+            <div class="twitch-layout reveal" id="twitchLayout">
+                <article class="live-card"><i class="fa-brands fa-twitch live-card-icon" aria-hidden="true"></i>
+                    <div><span class="status-pill" id="liveIndicator"><span
+                                class="status-dot"></span><span>Checking</span></span>
+                        <h3 id="liveHeadline">Checking the stream.</h3>
+                        <p id="liveDescription">Looking for the current Twitch status.</p>
+                        <div class="live-actions"><a class="button button-primary button-compact"
+                                href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer">Open
+                                Twitch</a><a class="button button-compact" href="#schedule">See schedule</a></div>
+                    </div>
+                </article>
+                <div class="panel">
+                    <div class="panel-header"><span class="panel-label"><i class="fa-solid fa-clapperboard"
+                                aria-hidden="true"></i> Recent clips</span><a class="button button-compact"
+                            href="https://twitch.tv/FaroNova/clips" target="_blank" rel="noopener noreferrer">View
+                            all</a></div>
+                    <div class="clips-list" id="twitchClips" aria-live="polite"><a class="clip-item"
+                            href="https://twitch.tv/FaroNova/clips" target="_blank" rel="noopener noreferrer"><span
+                                class="clip-icon"><i class="fa-solid fa-play" aria-hidden="true"></i></span><span
+                                class="clip-copy"><strong>Loading recent clips</strong><span>Checking
+                                    Twitch</span></span><span class="clip-views">...</span></a></div>
+                </div>
+            </div>
+            <div class="live-watch-grid reveal" id="liveWatchGrid" hidden>
+                <div class="video-frame"><span class="video-frame-tag"><i class="fa-solid fa-circle"
+                            aria-hidden="true"></i> Live video</span><iframe id="liveVideoFrame"
+                        title="FaroNova live stream" allowfullscreen scrolling="no"></iframe></div>
+                <div class="chat-frame">
+                    <div class="chat-frame-tag"><span><i class="fa-solid fa-comments" aria-hidden="true"></i>
+                            Chat</span><a class="button button-compact" href="https://twitch.tv/FaroNova/chat"
+                            target="_blank" rel="noopener noreferrer">Pop out</a></div><iframe id="liveChatFrame"
+                        title="FaroNova stream chat" scrolling="no"></iframe>
+                </div>
+            </div>
+        </section>
+        <section id="schedule" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Schedule</span>
+                    <h2>Simple stream rhythm.</h2>
+                </div>
+                <p>Core stream days are listed below. Extra sessions can still happen, so Twitch and X are the fastest
+                    updates.</p>
+            </div>
+            <div class="schedule-card reveal">
+                <div class="countdown">
+                    <div><span>Next scheduled stream</span><strong id="countdownLabel">Calculating next session</strong>
+                    </div>
+                    <div class="countdown-clock" aria-label="Countdown to next stream">
+                        <div class="countdown-unit"><strong id="countdownDays">00</strong><span>Days</span></div>
+                        <div class="countdown-unit"><strong id="countdownHours">00</strong><span>Hours</span></div>
+                        <div class="countdown-unit"><strong id="countdownMinutes">00</strong><span>Min</span></div>
+                    </div>
+                </div>
+                <div class="schedule-grid">
+                    <article class="day-card is-off"><span class="day-name">MON</span><span
+                                class="day-game">Flexible<span class="day-time">Sometimes live</span></span></article>
+                    <article class="day-card is-off"><span class="day-name">TUE</span><span
+                                class="day-game">Flexible<span class="day-time">Sometimes live</span></span></article>
+                    <article class="day-card"><span class="day-name">WED</span><span
+                                class="day-game">Flexible - <span style="color: var(--accent);">Most likely</span><span class="day-time">Sometimes live</span></span></article>
+                    <article class="day-card"><span class="day-name">THU</span><span class="day-game">Flexible - <span style="color: var(--accent);">Most likely</span><span 
+                                class="day-time">Sometimes live</span></span></article>
+                    <article class="day-card"><span class="day-name">FRI</span><span class="day-game">Flexible - <span style="color: var(--accent);">Most likely</span><span
+                                class="day-time">Sometimes live</span></span></article>
+                    <article class="day-card is-off"><span class="day-name">SAT</span><span class="day-game">Flexible<span 
+                                class="day-time">Sometimes live</span></span></article>
+                    <article class="day-card is-off"><span class="day-name">SUN</span><span class="day-game">Flexible<span 
+                                class="day-time">Sometimes live</span></span></article>
+                </div>
+            </div>
+        </section>
+        <section id="channels" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Official links</span>
+                    <h2>Every channel in one place.</h2>
+                </div>
+                <p>A clean link hub for watching, following, joining the community, or reaching out.</p>
+            </div>
+            <div class="channels-grid reveal"><a class="channel-card" data-platform="tiktok"
+                    href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer"><span
+                        class="channel-icon"><i class="fa-brands fa-tiktok"
+                            aria-hidden="true"></i></span><span><strong>TikTok</strong><span>@FaroNova - short-form
+                            videos</span></span></a><a class="channel-card" data-platform="twitch"
+                    href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"><span
+                        class="channel-icon"><i class="fa-brands fa-twitch"
+                            aria-hidden="true"></i></span><span><strong>Twitch</strong><span>@FaroNova - live
+                            sessions</span></span></a><a class="channel-card" data-platform="instagram"
+                    href="https://instagram.com/faronova_" target="_blank" rel="noopener noreferrer"><span
+                        class="channel-icon"><i class="fa-brands fa-instagram"
+                            aria-hidden="true"></i></span><span><strong>Instagram</strong><span>@FaroNova - posts and
+                            stories</span></span></a><a class="channel-card" data-platform="youtube"
+                    href="https://youtube.com/@faronova" target="_blank" rel="noopener noreferrer"><span
+                        class="channel-icon"><i class="fa-brands fa-youtube"
+                            aria-hidden="true"></i></span><span><strong>YouTube</strong><span>@FaroNova - videos and
+                            shorts</span></span></a><a class="channel-card" data-platform="x"
+                    href="https://x.com/faronova_" target="_blank" rel="noopener noreferrer"><span
+                        class="channel-icon"><i class="fa-brands fa-x-twitter"
+                            aria-hidden="true"></i></span><span><strong>X</strong><span>@FaroNova -
+                            updates</span></span></a><a class="channel-card" data-platform="discord"
+                    href="https://discord.gg/whRyvAPuVQ" target="_blank" rel="noopener noreferrer"><span
+                        class="channel-icon"><i class="fa-brands fa-discord"
+                            aria-hidden="true"></i></span><span><strong>Discord</strong><span>Community
+                            server</span></span></a></div>
+        </section>
+        <section id="featured" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Featured</span>
+                    <h2>Stream moments worth replaying.</h2>
+                </div>
+                <p>Recent clips appear here when Twitch provides them. Otherwise the links still take viewers to the
+                    clip page.</p>
+            </div>
+            <div class="featured-grid reveal" id="featuredClips"></div>
+        </section>
+        <section id="community" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Community</span>
+                    <h2>Join, follow, or collaborate.</h2>
+                </div>
+                <p>Everything here points viewers toward the places where the channel actually moves.</p>
+            </div>
+            <div class="community-grid reveal">
+                <article class="community-card feature">
+                    <div><span class="eyebrow">Discord</span><strong>Streams are better when the community has a
+                            seat.</strong><span>Join the server for stream chat, clips, announcements, and watchalong
+                            planning.</span></div><a class="button button-primary" href="https://discord.gg/whRyvAPuVQ"
+                        target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"
+                            aria-hidden="true"></i> Join server</a>
+                </article>
+                <article class="community-card">
+                    <div><span class="eyebrow">Business</span><strong>Collabs and inquiries.</strong><span>For creator
+                            work, campaigns, partnerships, and brand messages.</span></div><a class="button"
+                        href="mailto:fransmediabusiness@gmail.com"><i class="fa-regular fa-envelope"
+                            aria-hidden="true"></i> Email</a>
+                </article>
+            </div>
+        </section>
+        <section id="faq" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Quick answers</span>
+                    <h2>FAQ.</h2>
+                </div>
+                <p>Short answers for viewers, collaborators, and anyone landing here from a bio link.</p>
+            </div>
+            <div class="faq-list reveal">
+                <details>
+                    <summary>What does FaroNova stream?</summary>
+                    <p>Gaming, reaction sessions, viewer playalongs, and anime watchalongs. Check Twitch for the active
+                        category.</p>
+                </details>
+                <details>
+                    <summary>Where is the latest content?</summary>
+                    <p>TikTok is the fastest place for short-form uploads. Twitch is the place for live streams and
+                        clips.</p>
+                </details>
+                <details>
+                    <summary>How do I join the community?</summary>
+                    <p>Use the Discord link above for the community server, stream updates, and shared clips.</p>
+                </details>
+                <details>
+                    <summary>How do I reach out for collaborations?</summary>
+                    <p>Use the email link in the community section or send a direct message on X.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+    <footer class="site-shell">
+        <div class="footer-card">
+            <div><span class="eyebrow">FaroNova</span>
+                <h2>Follow the next upload, stream, or community moment.</h2>
+            </div>
+            <div class="social-links"><a href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer"
+                    aria-label="Open TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a><a
+                    href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"
+                    aria-label="Open Twitch"><i class="fa-brands fa-twitch" aria-hidden="true"></i></a><a
+                    href="https://instagram.com/faronova_" target="_blank" rel="noopener noreferrer"
+                    aria-label="Open Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a><a
+                    href="https://youtube.com/@faronova" target="_blank" rel="noopener noreferrer"
+                    aria-label="Open YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a><a
+                    href="https://x.com/faronova_" target="_blank" rel="noopener noreferrer" aria-label="Open X"><i
+                        class="fa-brands fa-x-twitter" aria-hidden="true"></i></a><a
+                    href="https://discord.gg/whRyvAPuVQ" target="_blank" rel="noopener noreferrer"
+                    aria-label="Open Discord"><i class="fa-brands fa-discord" aria-hidden="true"></i></a></div>
+        </div>
+        <div class="footer-bottom"><span>© <span id="currentYear">2026</span> FaroNova</span><span>Creator hub for
+                official links, live status, and recent content.</span></div>
+    </footer>
+    <script>
+        (function () { var CONFIG = { tiktok: { username: "faronova_" }, twitch: { username: "faronova" } }; var $ = function (id) { return document.getElementById(id) }; function esc(v) { return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;") } function num(v) { var n = Number(v); return Number.isFinite(n) ? new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 }).format(n) : "0" } function safe(v, hosts) { try { var u = new URL(v); return hosts.some(function (h) { return u.hostname === h || u.hostname.endsWith("." + h) }) ? u.href : "" } catch (e) { return "" } } function json(url) { return fetch(url, { headers: { Accept: "application/json" } }).then(function (r) { if (!r.ok) throw new Error("Request failed: " + r.status); return r.json() }) } function liveWatch(show) { var g = $("liveWatchGrid"); if (g) g.hidden = !show } function tikTokFallback() { var l = $("tiktokLoading"); if (l) l.hidden = true; $("tiktokFollowers").textContent = "View profile"; $("totalLikes").textContent = "Latest posts"; $("tiktokStatus").innerHTML = '<span class="status-dot"></span><span>Profile linked</span>'; $("tiktokContainer").innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></span><h3>TikTok feed is not available here.</h3><p>The profile link still takes you straight to the newest uploads.</p><a class="button button-primary" href="https://tiktok.com/@' + CONFIG.tiktok.username + '" target="_blank" rel="noopener noreferrer">Open TikTok profile <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></div>' } function fetchTikTok() { var l = $("tiktokLoading"); json('/api/tiktok-api?uniqueId=' + encodeURIComponent(CONFIG.tiktok.username)).then(function (p) { var s = p.userInfo && p.userInfo.stats || {}; var videos = Array.isArray(p.userInfo && p.userInfo.items) ? p.userInfo.items : []; if (l) l.hidden = true; $("tiktokFollowers").textContent = num(s.followerCount || s.followers); $("totalLikes").textContent = num(s.heartCount || s.likes); $("tiktokStatus").innerHTML = '<span class="status-dot"></span><span>Feed connected</span>'; if (!videos.length) { tikTokFallback(); return } $("tiktokContainer").innerHTML = videos.slice(0, 6).map(function (v) { var cover = safe((v.video && v.video.cover) || (v.video && v.video.dynamicCover) || (v.video && v.video.originCover), ["tiktokcdn.com", "tiktokcdn-us.com", "byteoversea.com"]); var href = 'https://www.tiktok.com/@' + CONFIG.tiktok.username + '/video/' + encodeURIComponent(v.id || ""); return '<a class="video-card" href="' + href + '" target="_blank" rel="noopener noreferrer">' + (cover ? '<img class="video-thumb" src="' + esc(cover) + '" alt="' + esc(v.desc || "TikTok post") + '" loading="lazy">' : '<div class="video-thumb"></div>') + '<span class="video-copy"><strong>' + esc(v.desc || "TikTok post") + '</strong><span>' + num((v.stats && v.stats.playCount) || (v.statsV2 && v.statsV2.playCount)) + ' views</span></span></a>' }).join("") }).catch(function (e) { console.error("TikTok API error:", e.message); tikTokFallback() }) } function featured(clips) { var c = $("featuredClips"); if (!c) return; if (!Array.isArray(clips) || !clips.length) { var f = ["Open the latest Twitch clips", "Watch stream highlights", "Find community favorites"]; c.innerHTML = f.map(function (t, i) { var bg = i === 0 ? 'linear-gradient(135deg,rgba(217,102,255,.24),rgba(22,15,31,.92))' : i === 1 ? 'linear-gradient(135deg,rgba(192,132,252,.2),rgba(22,15,31,.92))' : 'linear-gradient(135deg,rgba(255,110,180,.2),rgba(22,15,31,.92))'; return '<a class="featured-clip" href="https://twitch.tv/' + CONFIG.twitch.username + '/clips" target="_blank" rel="noopener noreferrer" style="background:' + bg + '"><span class="featured-clip-copy"><strong>' + t + '</strong><span class="featured-clip-stats"><span>Twitch clips</span></span></span></a>' }).join(""); return } c.innerHTML = clips.slice(0, 3).map(function (clip) { var url = safe(clip.url, ["twitch.tv"]) || 'https://twitch.tv/' + CONFIG.twitch.username + '/clips'; var thumb = safe(clip.thumbnail_url, ["jtvnw.net"]); var bg = thumb ? 'linear-gradient(180deg,transparent 22%,rgba(0,0,0,.84)),url(\'' + esc(thumb) + '\') center/cover' : 'linear-gradient(135deg,rgba(217,102,255,.22),rgba(22,15,31,.94))'; return '<a class="featured-clip" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer" style="background:' + bg + '"><span class="featured-clip-copy"><strong>' + esc(clip.title || "Watch this clip") + '</strong><span class="featured-clip-stats"><span><i class="fa-regular fa-eye" aria-hidden="true"></i> ' + num(clip.view_count) + '</span><span><i class="fa-regular fa-clock" aria-hidden="true"></i> ' + new Date(clip.created_at).toLocaleDateString() + '</span></span></span></a>' }).join("") } function twitchFallback() { var i = $("liveIndicator"); i.classList.remove("is-live"); i.innerHTML = '<span class="status-dot"></span><span>Status unavailable</span>'; $("twitchHeroStatus").textContent = "Visit channel"; $("liveHeadline").textContent = "Open Twitch for the latest."; $("liveDescription").textContent = "Live status could not connect, but the channel link is ready."; liveWatch(false); $("twitchClips").innerHTML = '<div class="empty-state" style="min-height:260px"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-brands fa-twitch" aria-hidden="true"></i></span><h3>Twitch data is reconnecting.</h3><p>Open the channel directly for live video, chat, and clips.</p><a class="button button-primary button-compact" href="https://twitch.tv/' + CONFIG.twitch.username + '" target="_blank" rel="noopener noreferrer">Open Twitch</a></div></div>' } function fetchTwitch() { json('/api/twitch-api/user?username=' + encodeURIComponent(CONFIG.twitch.username)).then(function (up) { if (!up.data || !up.data.length) throw new Error("User not found"); var user = up.data[0]; var av = safe(user.profile_image_url, ["jtvnw.net"]); if (av) $("profileAvatar").src = av; return Promise.all([json('/api/twitch-api/stream?user_id=' + encodeURIComponent(user.id)), json('/api/twitch-api/clips?broadcaster_id=' + encodeURIComponent(user.id))]) }).then(function (res) { var sp = res[0], cp = res[1], stream = sp.data && sp.data[0], i = $("liveIndicator"); if (stream) { i.classList.add("is-live"); i.innerHTML = '<span class="status-dot"></span><span>Live now</span>'; $("twitchHeroStatus").textContent = "Live now"; $("liveHeadline").textContent = stream.game_name || "Live on Twitch"; $("liveDescription").textContent = num(stream.viewer_count) + " viewers are watching right now."; var parent = window.location.hostname || "localhost"; var vs = 'https://player.twitch.tv/?channel=' + encodeURIComponent(CONFIG.twitch.username) + '&parent=' + encodeURIComponent(parent) + '&muted=true'; var cs = 'https://www.twitch.tv/embed/' + encodeURIComponent(CONFIG.twitch.username) + '/chat?parent=' + encodeURIComponent(parent) + '&darkpopout'; if ($("liveVideoFrame").src !== vs) $("liveVideoFrame").src = vs; if ($("liveChatFrame").src !== cs) $("liveChatFrame").src = cs; liveWatch(true) } else { i.classList.remove("is-live"); i.innerHTML = '<span class="status-dot"></span><span>Offline</span>'; $("twitchHeroStatus").textContent = "Offline"; $("liveHeadline").textContent = "Offline, still easy to catch up."; $("liveDescription").textContent = "Browse recent clips or follow Twitch for the next live notification."; liveWatch(false) } var clips = Array.isArray(cp.data) ? cp.data : []; $("twitchClips").innerHTML = clips.length ? clips.slice(0, 5).map(function (clip) { var url = safe(clip.url, ["twitch.tv"]); return url ? '<a class="clip-item" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer"><span class="clip-icon"><i class="fa-solid fa-play" aria-hidden="true"></i></span><span class="clip-copy"><strong>' + esc(clip.title || "Twitch clip") + '</strong><span>Watch on Twitch</span></span><span class="clip-views">' + num(clip.view_count) + ' views</span></a>' : "" }).join("") : '<div class="empty-state" style="min-height:260px"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i></span><h3>No recent clips yet.</h3><p>Visit the channel for broadcasts and the next live session.</p></div></div>'; featured(clips) }).catch(function (e) { console.error("Twitch API error:", e.message); twitchFallback(); featured([]) }) } var ob = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-visible"); ob.unobserve(e.target) } }) }, { threshold: .12 }); document.querySelectorAll(".reveal").forEach(function (el) { ob.observe(el) }); var DAYS = [0, 4, 5, 6], HOUR = 21, WINDOW = 3; function nextStream(now) { for (var i = 0; i < 8; i++) { var c = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + i, HOUR, 0, 0)); if (DAYS.indexOf(c.getUTCDay()) < 0) continue; var end = new Date(c.getTime() + WINDOW * 36e5); if (now >= c && now <= end) return { live: true, start: c }; if (c > now) return { live: false, start: c } } return null } function countdown() { var n = nextStream(new Date()); if (!n) { $("countdownLabel").textContent = "Check Twitch for the latest"; return } if (n.live) { $("countdownLabel").textContent = "Scheduled window is live now"; $("countdownDays").textContent = "00"; $("countdownHours").textContent = "00"; $("countdownMinutes").textContent = "00"; return } var m = Math.floor((n.start.getTime() - Date.now()) / 6e4); $("countdownLabel").textContent = "Counting down to the next session"; $("countdownDays").textContent = String(Math.floor(m / 1440)).padStart(2, "0"); $("countdownHours").textContent = String(Math.floor(m % 1440 / 60)).padStart(2, "0"); $("countdownMinutes").textContent = String(m % 60).padStart(2, "0") } $("currentYear").textContent = new Date().getFullYear(); countdown(); fetchTikTok(); fetchTwitch(); featured([]); setInterval(countdown, 3e4); setInterval(fetchTwitch, 3e5); setInterval(fetchTikTok, 18e5) })();
+    </script>
+</body>
+
+</html>
