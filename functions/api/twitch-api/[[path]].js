@@ -38,7 +38,13 @@ export async function onRequest(context) {
 
   let twitchUrl;
   if (path.startsWith("/user")) {
-    twitchUrl = `https://api.twitch.tv/helix/users${query}`;
+    // Twitch uses "login" not "username"
+    const params = new URLSearchParams(url.search);
+    if (params.has("username")) {
+      params.set("login", params.get("username"));
+      params.delete("username");
+    }
+    twitchUrl = `https://api.twitch.tv/helix/users?${params.toString()}`;
   } else if (path.startsWith("/stream")) {
     twitchUrl = `https://api.twitch.tv/helix/streams${query}`;
   } else if (path.startsWith("/clips")) {
