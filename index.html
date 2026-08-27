@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description"
-        content="FaroNova - content creator and streamer. Watch live, browse recent posts, see the schedule, and find official links in one clean place." />
+        content="FaroNova - Gacha gamer and variety streamer from Malaysia. Building a chill, welcoming community across Twitch, TikTok, YouTube, and Discord. Official streamer for StreamerZone.gg." />
     <meta name="theme-color" content="#0e0a14" />
     <title>FaroNova - Creator Hub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -52,9 +52,9 @@
         body {
             min-width: 320px;
             overflow-x: hidden;
-            background: linear-gradient(180deg, rgba(217, 102, 255, .08), transparent 340px), linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px), var(--bg);
-            background-size: auto, 72px 72px, auto;
-            background-attachment: fixed, fixed, fixed;
+            background: linear-gradient(180deg, rgba(217, 102, 255, .08), transparent 340px), linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px), linear-gradient(rgba(14,10,20,.72), rgba(14,10,20,.72)), url('assets/img/bg.png') center/cover, var(--bg);
+            background-size: auto, 72px 72px, auto, cover, auto;
+            background-attachment: fixed, fixed, fixed, fixed, fixed;
             background-position: center top, center top, center;
             color: var(--text);
             font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -602,120 +602,336 @@
             color: var(--muted)
         }
 
+        /* ── Live / stream section ───────────────────────────────────── */
+        .live-section-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 16px
+        }
+
+        /* Top row: status card + clips */
         .twitch-layout {
             display: grid;
-            grid-template-columns: .72fr 1.28fr;
-            gap: 18px
+            grid-template-columns: .68fr 1.32fr;
+            gap: 16px;
+            align-items: stretch
         }
 
         .live-card {
             display: flex;
-            min-height: 365px;
             flex-direction: column;
             justify-content: space-between;
-            padding: 24px;
-            background: linear-gradient(145deg, rgba(192, 132, 252, .15), transparent 60%), var(--surface)
+            gap: 20px;
+            padding: 28px;
+            min-height: 380px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface);
+            box-shadow: 0 12px 42px rgba(0,0,0,.18)
+        }
+
+        .live-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(145deg, rgba(192,132,252,.18), transparent 55%),
+                        linear-gradient(315deg, rgba(217,102,255,.1), transparent 45%);
+            pointer-events: none
+        }
+
+        .live-card.is-live-active::before {
+            background: linear-gradient(145deg, rgba(255,77,141,.22), transparent 55%),
+                        linear-gradient(315deg, rgba(217,102,255,.15), transparent 45%);
+            animation: live-pulse-bg 3s ease-in-out infinite
+        }
+
+        @keyframes live-pulse-bg {
+            0%,100% { opacity: 1 }
+            50%      { opacity: .7 }
+        }
+
+        .live-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1
         }
 
         .live-card-icon {
+            display: grid;
+            width: 44px;
+            aspect-ratio: 1;
+            place-items: center;
+            border-radius: 10px;
+            background: rgba(192,132,252,.15);
             color: var(--blue);
-            font-size: 2rem
+            font-size: 1.3rem
+        }
+
+        .live-viewer-badge {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 11px;
+            border-radius: 999px;
+            background: rgba(255,77,141,.15);
+            border: 1px solid rgba(255,77,141,.3);
+            color: var(--warm);
+            font-size: .74rem;
+            font-weight: 800
+        }
+
+        .live-viewer-badge.visible { display: flex }
+
+        .live-viewer-dot {
+            width: 6px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: var(--red);
+            animation: vdot 1.4s ease-in-out infinite
+        }
+
+        @keyframes vdot {
+            0%,100% { transform: scale(1); opacity: 1 }
+            50%      { transform: scale(1.5); opacity: .6 }
+        }
+
+        .live-card-body {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            justify-content: flex-end
         }
 
         .live-card h3 {
-            max-width: 350px;
-            margin-top: auto;
-            font-size: clamp(1.8rem, 4vw, 3.4rem)
+            font-size: clamp(1.5rem, 3.5vw, 2.6rem);
+            max-width: 320px;
+            line-height: 1.08
         }
 
-        .live-card p {
-            margin-top: 12px;
+        .live-card-desc {
             color: var(--muted);
+            font-weight: 600;
+            font-size: .9rem
+        }
+
+        .live-stream-title-tag {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            font-size: .78rem;
+            color: var(--subtle);
+            font-style: italic;
             font-weight: 600
+        }
+
+        .live-stream-title-tag.visible { display: flex }
+
+        .live-game-chip {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 11px 5px 6px;
+            border: 1px solid var(--line2);
+            border-radius: 8px;
+            background: var(--soft);
+            font-size: .78rem;
+            font-weight: 700;
+            color: var(--muted);
+            width: fit-content
+        }
+
+        .live-game-chip.visible { display: flex }
+
+        .live-game-chip img {
+            width: 22px;
+            height: 29px;
+            border-radius: 3px;
+            object-fit: cover
         }
 
         .live-actions {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 20px
+            position: relative;
+            z-index: 1
+        }
+
+        /* Clips panel */
+        .clips-panel {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: rgba(20,22,27,.82);
+            box-shadow: 0 12px 42px rgba(0,0,0,.18);
+            overflow: hidden
+        }
+
+        .clips-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--line)
         }
 
         .clips-list {
-            display: grid;
-            gap: 10px
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            flex: 1
         }
 
         .clip-item {
             display: grid;
-            grid-template-columns: 42px minmax(0, 1fr) auto;
+            grid-template-columns: 52px minmax(0, 1fr) auto;
             align-items: center;
             gap: 12px;
-            min-height: 72px;
-            padding: 10px 12px;
-            background: var(--soft);
+            padding: 12px 16px;
+            background: transparent;
             text-decoration: none;
-            transition: border-color .18s ease, transform .18s ease
+            border-bottom: 1px solid var(--line);
+            transition: background .16s ease, transform .16s ease
         }
 
+        .clip-item:last-child { border-bottom: none }
+
         .clip-item:hover {
-            border-color: var(--line2);
-            transform: translateX(2px)
+            background: var(--soft);
+            transform: translateX(3px)
         }
 
         .clip-icon {
             display: grid;
-            width: 42px;
-            aspect-ratio: 1;
+            width: 52px;
+            aspect-ratio: 16/9;
             place-items: center;
             border-radius: 6px;
             background: var(--raised);
-            color: var(--accent)
+            color: var(--accent);
+            overflow: hidden;
+            flex-shrink: 0
         }
 
-        .clip-copy {
-            min-width: 0
+        .clip-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
         }
+
+        .clip-copy { min-width: 0 }
 
         .clip-copy strong {
             display: block;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            font-size: .9rem
+            font-size: .88rem
         }
 
         .clip-copy span,
         .clip-views {
             color: var(--muted);
-            font-size: .76rem;
+            font-size: .74rem;
             font-weight: 700
         }
 
-        .live-watch-grid {
-            display: grid;
-            grid-template-columns: 1.65fr 1fr;
-            gap: 18px;
-            margin-top: 18px
+        /* Full stream embed */
+        .live-embed-wrap {
+            display: none;
+            flex-direction: column;
+            gap: 0;
+            border: 1px solid var(--line2);
+            border-radius: calc(var(--r) * 1.5);
+            overflow: hidden;
+            background: #09061a;
+            box-shadow: 0 24px 80px rgba(0,0,0,.5);
+            position: relative
         }
 
-        .video-frame,
-        .chat-frame {
+        .live-embed-wrap.visible { display: flex }
+
+        .live-embed-glow {
+            position: absolute;
+            inset: -1px;
+            border-radius: calc(var(--r) * 1.5);
+            border: 1px solid rgba(217,102,255,.35);
+            pointer-events: none;
+            animation: embed-glow 2.5s ease-in-out infinite
+        }
+
+        @keyframes embed-glow {
+            0%,100% { box-shadow: 0 0 0 0 rgba(217,102,255,0), inset 0 0 0 0 rgba(217,102,255,0) }
+            50%      { box-shadow: 0 0 32px 4px rgba(217,102,255,.12), inset 0 0 20px rgba(217,102,255,.06) }
+        }
+
+        .live-embed-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 10px 16px;
+            background: rgba(14,10,20,.9);
+            border-bottom: 1px solid var(--line)
+        }
+
+        .live-embed-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .live-dot-big {
+            width: 8px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: var(--red);
+            box-shadow: 0 0 0 3px rgba(255,77,141,.2);
+            animation: vdot 1.4s ease-in-out infinite
+        }
+
+        .live-embed-label {
+            font-size: .74rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--text)
+        }
+
+        .live-embed-game {
+            font-size: .74rem;
+            color: var(--muted);
+            font-weight: 600
+        }
+
+        .live-embed-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .live-embed-frames {
+            display: grid;
+            grid-template-columns: 1.7fr 1fr;
+            min-height: 460px
+        }
+
+        .video-frame {
             position: relative;
             overflow: hidden;
-            border: 1px solid var(--line);
-            border-radius: var(--r);
             background: #09061a
         }
 
-        .video-frame::before {
-            content: "";
-            display: block;
-            padding-top: 56.25%
-        }
-
-        .video-frame iframe,
-        .chat-frame iframe {
+        .video-frame iframe {
             position: absolute;
             inset: 0;
             width: 100%;
@@ -724,37 +940,23 @@
         }
 
         .chat-frame {
-            min-height: 100%
+            position: relative;
+            overflow: hidden;
+            border-left: 1px solid var(--line);
+            background: #0c0816
         }
 
-        .video-frame-tag,
-        .chat-frame-tag {
+        .chat-frame iframe {
             position: absolute;
-            top: 12px;
-            left: 12px;
-            z-index: 1;
-            display: inline-flex;
-            min-height: 28px;
-            align-items: center;
-            gap: 7px;
-            padding: 0 10px;
-            border-radius: 999px;
-            background: rgba(0, 0, 0, .58);
-            color: var(--text);
-            font-size: .72rem;
-            font-weight: 800
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0
         }
 
-        .chat-frame-tag {
-            justify-content: space-between;
-            right: 12px
-        }
-
-        .chat-frame-tag .button {
-            min-height: 28px;
-            padding-inline: 9px;
-            font-size: .7rem
-        }
+        /* Keep old tag classes for fallback, hidden now */
+        .video-frame-tag,
+        .chat-frame-tag { display: none }
 
         .schedule-card {
             display: grid;
@@ -890,6 +1092,10 @@
             border-radius: 6px;
             background: var(--raised);
             color: var(--text)
+        }
+
+        .channel-card[data-platform=tiktok] .channel-icon {
+            background: #070707
         }
 
         .channel-card[data-platform=twitch] .channel-icon {
@@ -1076,6 +1282,703 @@
             font-size: .82rem
         }
 
+        /* ── Stats ticker ────────────────────────────────────────────── */
+        .stats-ticker {
+            padding-block: 28px;
+            border-block: 1px solid var(--line);
+            background: rgba(22,15,31,.6);
+            backdrop-filter: blur(8px);
+            overflow: hidden
+        }
+
+        .stats-ticker-inner {
+            display: flex;
+            gap: 0;
+            animation: ticker-scroll 30s linear infinite
+        }
+
+        .stats-ticker-inner:hover { animation-play-state: paused }
+
+        @keyframes ticker-scroll {
+            0%   { transform: translateX(0) }
+            100% { transform: translateX(-50%) }
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 40px;
+            white-space: nowrap;
+            flex-shrink: 0
+        }
+
+        .ticker-item i {
+            color: var(--accent);
+            font-size: .85rem
+        }
+
+        .ticker-item strong {
+            font-size: .9rem;
+            font-weight: 800;
+            color: var(--text)
+        }
+
+        .ticker-item span {
+            color: var(--muted);
+            font-size: .82rem
+        }
+
+        .ticker-sep {
+            color: var(--line2);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            padding: 0 4px
+        }
+
+        /* ── Games grid ──────────────────────────────────────────────── */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px
+        }
+
+        .game-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            aspect-ratio: 3/4;
+            background: var(--soft);
+            text-decoration: none;
+            transition: border-color .22s ease, transform .22s ease
+        }
+
+        .game-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px) scale(1.02)
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .game-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 45%, rgba(14,10,20,.92));
+            display: flex;
+            align-items: flex-end;
+            padding: 10px;
+            opacity: 0;
+            transition: opacity .22s ease
+        }
+
+        .game-card:hover .game-card-overlay { opacity: 1 }
+
+        .game-card-name {
+            color: var(--text);
+            font-size: .74rem;
+            font-weight: 800;
+            line-height: 1.2
+        }
+
+        .game-card-placeholder {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, rgba(217,102,255,.12), rgba(255,110,180,.08))
+        }
+
+        .game-card-placeholder i {
+            color: var(--accent);
+            font-size: 1.8rem;
+            opacity: .6
+        }
+
+        /* ── Milestones ──────────────────────────────────────────────── */
+        .milestones-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px
+        }
+
+        .milestone-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface)
+        }
+
+        .milestone-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        .milestone-icon {
+            display: grid;
+            width: 38px;
+            aspect-ratio: 1;
+            place-items: center;
+            border-radius: 8px;
+            font-size: .9rem
+        }
+
+        .milestone-pct {
+            font-size: .74rem;
+            font-weight: 800;
+            color: var(--accent)
+        }
+
+        .milestone-label {
+            font-size: .9rem;
+            font-weight: 800;
+            line-height: 1.2
+        }
+
+        .milestone-sub {
+            color: var(--muted);
+            font-size: .78rem
+        }
+
+        .milestone-bar-wrap {
+            height: 6px;
+            border-radius: 99px;
+            background: var(--soft);
+            overflow: hidden
+        }
+
+        .milestone-bar {
+            height: 100%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--accent), var(--warm));
+            transition: width 1.2s var(--ease)
+        }
+
+        /* ── YouTube embed ───────────────────────────────────────────── */
+        .yt-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 24px;
+            align-items: start
+        }
+
+        .yt-frame-wrap {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: #09061a
+        }
+
+        .yt-frame-wrap::before {
+            content: "";
+            display: block;
+            padding-top: 56.25%
+        }
+
+        .yt-frame-wrap iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0
+        }
+
+        .yt-info {
+            display: flex;
+            flex-direction: column;
+            gap: 16px
+        }
+
+        .yt-info p {
+            color: var(--muted);
+            font-size: .95rem;
+            line-height: 1.65
+        }
+
+        /* ── Donate banner ───────────────────────────────────────────── */
+        .donate-banner {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 32px;
+            padding: clamp(28px, 4vw, 52px);
+            border: 1px solid var(--line2);
+            border-radius: calc(var(--r) * 2);
+            background: linear-gradient(135deg, rgba(217,102,255,.12), rgba(255,110,180,.08) 50%, transparent), var(--surface);
+            position: relative;
+            overflow: hidden
+        }
+
+        .donate-banner::before {
+            content: "";
+            position: absolute;
+            top: -40px;
+            right: 80px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(217,102,255,.12), transparent 70%);
+            pointer-events: none
+        }
+
+        .donate-banner h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.8rem)
+        }
+
+        .donate-banner p {
+            margin-top: 10px;
+            color: var(--muted);
+            max-width: 520px;
+            font-size: .95rem;
+            line-height: 1.6
+        }
+
+        .donate-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            flex-shrink: 0
+        }
+
+        .donate-actions .button {
+            width: 100%;
+            justify-content: center
+        }
+
+        /* ── Music player ────────────────────────────────────────────── */
+        .music-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 100;
+            display: grid;
+            width: 48px;
+            aspect-ratio: 1;
+            place-items: center;
+            border: 1px solid var(--line2);
+            border-radius: 50%;
+            background: var(--raised);
+            color: var(--accent);
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0,0,0,.4);
+            transition: background .18s ease, border-color .18s ease, transform .18s ease;
+            font-size: 1rem
+        }
+
+        .music-btn:hover {
+            background: var(--soft);
+            border-color: var(--accent);
+            transform: translateY(-2px)
+        }
+
+        .music-btn.is-playing {
+            border-color: var(--accent);
+            background: rgba(217,102,255,.15)
+        }
+
+        .music-btn.is-playing i {
+            animation: pulse-icon 1.8s ease-in-out infinite
+        }
+
+        @keyframes pulse-icon {
+            0%,100% { opacity: 1 }
+            50% { opacity: .5 }
+        }
+
+        .music-player {
+            position: fixed;
+            bottom: 82px;
+            right: 24px;
+            z-index: 99;
+            width: 280px;
+            border: 1px solid var(--line2);
+            border-radius: 14px;
+            background: rgba(22,15,31,.94);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            box-shadow: 0 20px 60px rgba(0,0,0,.5);
+            overflow: hidden;
+            transform: translateY(12px) scale(.96);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform .28s var(--ease), opacity .28s var(--ease)
+        }
+
+        .music-player.is-open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            pointer-events: all
+        }
+
+        .music-player-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px 10px
+        }
+
+        .music-player-label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--accent);
+            font-size: .7rem;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase
+        }
+
+        .music-player-label i {
+            font-size: .75rem
+        }
+
+        .music-close {
+            display: grid;
+            width: 26px;
+            aspect-ratio: 1;
+            place-items: center;
+            border: none;
+            border-radius: 50%;
+            background: var(--soft);
+            color: var(--muted);
+            cursor: pointer;
+            font-size: .7rem;
+            transition: background .18s ease, color .18s ease
+        }
+
+        .music-close:hover {
+            background: var(--raised);
+            color: var(--text)
+        }
+
+        .music-art {
+            position: relative;
+            margin: 0 16px;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, rgba(217,102,255,.3), rgba(255,110,180,.2), rgba(192,132,252,.25));
+            display: grid;
+            place-items: center
+        }
+
+        .music-art-visual {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 36px
+        }
+
+        .music-bar {
+            width: 4px;
+            border-radius: 2px;
+            background: var(--accent);
+            transform-origin: bottom
+        }
+
+        .music-art.playing .music-bar:nth-child(1) { animation: bar 1.1s ease-in-out infinite }
+        .music-art.playing .music-bar:nth-child(2) { animation: bar .8s ease-in-out infinite .15s }
+        .music-art.playing .music-bar:nth-child(3) { animation: bar 1.3s ease-in-out infinite .3s }
+        .music-art.playing .music-bar:nth-child(4) { animation: bar .9s ease-in-out infinite .1s }
+        .music-art.playing .music-bar:nth-child(5) { animation: bar 1.2s ease-in-out infinite .25s }
+        .music-art.playing .music-bar:nth-child(6) { animation: bar .7s ease-in-out infinite .05s }
+        .music-art.playing .music-bar:nth-child(7) { animation: bar 1.0s ease-in-out infinite .2s }
+
+        .music-bar { height: 8px }
+
+        @keyframes bar {
+            0%,100% { height: 8px }
+            50% { height: 36px }
+        }
+
+        .music-info {
+            padding: 14px 16px 8px
+        }
+
+        .music-title {
+            font-size: .9rem;
+            font-weight: 800;
+            letter-spacing: -.02em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+
+        .music-artist {
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: .74rem;
+            font-weight: 600
+        }
+
+        .music-progress {
+            padding: 4px 16px 0
+        }
+
+        .music-bar-track {
+            position: relative;
+            height: 3px;
+            border-radius: 99px;
+            background: var(--soft);
+            cursor: pointer;
+            overflow: hidden
+        }
+
+        .music-bar-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--accent), var(--warm));
+            transition: width .5s linear;
+            pointer-events: none
+        }
+
+        .music-time {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            color: var(--subtle);
+            font-size: .66rem;
+            font-weight: 700
+        }
+
+        .music-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 10px 16px 18px
+        }
+
+        .music-controls button {
+            display: grid;
+            place-items: center;
+            border: none;
+            background: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: .9rem;
+            transition: color .18s ease, transform .18s ease
+        }
+
+        .music-controls button:hover {
+            color: var(--text);
+            transform: scale(1.1)
+        }
+
+        .music-play-btn {
+            width: 42px !important;
+            aspect-ratio: 1;
+            border-radius: 50% !important;
+            background: var(--accent) !important;
+            color: var(--ink) !important;
+            font-size: 1rem !important;
+            box-shadow: 0 4px 16px rgba(217,102,255,.35)
+        }
+
+        .music-play-btn:hover {
+            background: #e580ff !important;
+            transform: scale(1.06) !important
+        }
+
+        .music-vol {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px 14px
+        }
+
+        .music-vol i {
+            color: var(--subtle);
+            font-size: .78rem;
+            width: 14px
+        }
+
+        .music-vol input[type=range] {
+            flex: 1;
+            height: 3px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--soft);
+            border-radius: 99px;
+            outline: none;
+            cursor: pointer
+        }
+
+        .music-vol input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer
+        }
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(32px, 5vw, 72px);
+            align-items: center
+        }
+
+        .about-visual {
+            position: relative
+        }
+
+        .about-img-wrap {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: calc(var(--r) * 2);
+            background: var(--surface);
+            aspect-ratio: 4/5
+        }
+
+        .about-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .about-img-wrap::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 55%, rgba(14, 10, 20, .72));
+            pointer-events: none
+        }
+
+        .about-badge {
+            position: absolute;
+            bottom: -18px;
+            right: -18px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 16px 20px;
+            border: 1px solid var(--line2);
+            border-radius: var(--r);
+            background: var(--raised);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, .3)
+        }
+
+        .about-badge strong {
+            font-size: 1.6rem;
+            letter-spacing: -.04em;
+            line-height: 1
+        }
+
+        .about-badge span {
+            color: var(--muted);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            gap: 20px
+        }
+
+        .about-text p {
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.7
+        }
+
+        .about-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px
+        }
+
+        .about-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border: 1px solid var(--line2);
+            border-radius: 999px;
+            background: var(--soft);
+            color: var(--muted);
+            font-size: .78rem;
+            font-weight: 700
+        }
+
+        .about-tag i {
+            color: var(--accent);
+            font-size: .8rem
+        }
+
+        /* ── What to expect section ──────────────────────────────────── */
+        .expect-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        .expect-card {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 28px 24px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface);
+            transition: border-color .18s ease, transform .18s ease
+        }
+
+        .expect-card:hover {
+            border-color: var(--line2);
+            transform: translateY(-2px)
+        }
+
+        .expect-icon {
+            display: grid;
+            width: 46px;
+            aspect-ratio: 1;
+            place-items: center;
+            border-radius: 10px;
+            font-size: 1.1rem
+        }
+
+        .expect-card h3 {
+            font-size: 1.05rem;
+            line-height: 1.2
+        }
+
+        .expect-card p {
+            color: var(--muted);
+            font-size: .9rem;
+            line-height: 1.6;
+            flex: 1
+        }
+
+        /* ── Section divider ─────────────────────────────────────────── */
+        .section-divider {
+            width: min(calc(100% - 40px), var(--max));
+            margin: 0 auto;
+            height: 1px;
+            background: var(--line)
+        }
+
         .reveal {
             opacity: 0;
             transform: translateY(10px);
@@ -1100,7 +2003,40 @@
             .content-layout,
             .twitch-layout,
             .live-watch-grid,
-            .schedule-card {
+            .schedule-card,
+            .about-layout {
+                grid-template-columns: 1fr
+            }
+
+            .live-embed-frames {
+                grid-template-columns: 1fr;
+                min-height: auto
+            }
+
+            .chat-frame {
+                border-left: none;
+                border-top: 1px solid var(--line);
+                min-height: 360px
+            }
+
+            .about-badge {
+                bottom: 12px;
+                right: 12px
+            }
+
+            .expect-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(4, 1fr)
+            }
+
+            .milestones-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .donate-banner {
                 grid-template-columns: 1fr
             }
 
@@ -1181,7 +2117,10 @@
             .channels-grid,
             .community-grid,
             .featured-grid,
-            .faq-list {
+            .faq-list,
+            .expect-grid,
+            .games-grid,
+            .milestones-grid {
                 grid-template-columns: 1fr
             }
 
@@ -1232,310 +2171,15 @@
                 grid-column: auto
             }
 
+            .games-grid { grid-template-columns: repeat(3, 1fr) }
+            .donate-banner { grid-template-columns: 1fr }
+
             .footer-card {
                 grid-template-columns: 1fr
             }
 
             .footer-bottom {
                 flex-direction: column
-            }
-        }
-
-        /* ── Games grid ── */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 12px
-        }
-
-        .game-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            min-height: 170px;
-            padding: 16px;
-            border: 1px solid var(--line);
-            border-radius: var(--r);
-            background: var(--surface);
-            text-decoration: none;
-            overflow: hidden;
-            position: relative;
-            transition: border-color .18s ease, transform .18s ease
-        }
-
-        .game-card:hover {
-            border-color: var(--line2);
-            transform: translateY(-2px)
-        }
-
-        .game-card-bg {
-            position: absolute;
-            inset: 0;
-            background-size: cover;
-            background-position: center;
-            opacity: .22;
-            transition: opacity .3s ease
-        }
-
-        .game-card:hover .game-card-bg {
-            opacity: .38
-        }
-
-        .game-card-body {
-            position: relative;
-            z-index: 1
-        }
-
-        .game-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 8px;
-            padding: 3px 8px;
-            border-radius: 999px;
-            background: var(--raised);
-            color: var(--accent);
-            font-size: .68rem;
-            font-weight: 800;
-            letter-spacing: .07em;
-            text-transform: uppercase
-        }
-
-        .game-card strong {
-            display: block;
-            color: var(--text);
-            font-size: .96rem;
-            font-weight: 800;
-            line-height: 1.2
-        }
-
-        .game-card span {
-            display: block;
-            margin-top: 4px;
-            color: var(--muted);
-            font-size: .75rem
-        }
-
-        /* ── Setup / gear grid ── */
-        .setup-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 12px
-        }
-
-        .gear-card {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding: 20px;
-            border: 1px solid var(--line);
-            border-radius: var(--r);
-            background: var(--surface)
-        }
-
-        .gear-icon {
-            display: grid;
-            width: 44px;
-            aspect-ratio: 1;
-            place-items: center;
-            border-radius: 8px;
-            background: var(--raised);
-            color: var(--accent);
-            font-size: 1.1rem
-        }
-
-        .gear-card h3 {
-            font-size: .9rem;
-            letter-spacing: 0
-        }
-
-        .gear-card p {
-            color: var(--muted);
-            font-size: .82rem;
-            line-height: 1.5
-        }
-
-        .gear-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 3px 8px;
-            border-radius: 999px;
-            border: 1px solid var(--line2);
-            color: var(--subtle);
-            font-size: .7rem;
-            font-weight: 700;
-            width: fit-content
-        }
-
-        /* ── Moments / quotes wall ── */
-        .moments-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 12px
-        }
-
-        .moment-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 190px;
-            padding: 22px;
-            border: 1px solid var(--line);
-            border-radius: var(--r);
-            background: var(--surface)
-        }
-
-        .moment-card.accent-card {
-            background: linear-gradient(135deg, rgba(217,102,255,.14), transparent 60%), var(--surface)
-        }
-
-        .moment-card.warm-card {
-            background: linear-gradient(135deg, rgba(255,110,180,.12), transparent 60%), var(--surface)
-        }
-
-        .moment-card.blue-card {
-            background: linear-gradient(135deg, rgba(192,132,252,.14), transparent 60%), var(--surface)
-        }
-
-        .moment-quote {
-            font-size: clamp(.9rem, 1.4vw, 1.05rem);
-            font-weight: 700;
-            line-height: 1.45;
-            color: var(--text)
-        }
-
-        .moment-quote::before {
-            content: "\201C";
-            color: var(--accent);
-            font-size: 1.4em;
-            line-height: 0;
-            vertical-align: -.3em;
-            margin-right: 3px
-        }
-
-        .moment-meta {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 16px;
-            color: var(--subtle);
-            font-size: .74rem;
-            font-weight: 700
-        }
-
-        .moment-meta i {
-            color: var(--accent)
-        }
-
-        /* ── Perks / channel rewards ── */
-        .perks-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px
-        }
-
-        .perk-card {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 20px;
-            border: 1px solid var(--line);
-            border-radius: var(--r);
-            background: var(--surface)
-        }
-
-        .perk-icon {
-            display: grid;
-            flex-shrink: 0;
-            width: 48px;
-            aspect-ratio: 1;
-            place-items: center;
-            border-radius: 10px;
-            background: var(--raised);
-            font-size: 1.3rem
-        }
-
-        .perk-body h3 {
-            margin-bottom: 6px;
-            font-size: .95rem;
-            letter-spacing: 0
-        }
-
-        .perk-body p {
-            color: var(--muted);
-            font-size: .82rem;
-            line-height: 1.5
-        }
-
-        .perk-cost {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            margin-top: 10px;
-            padding: 3px 9px;
-            border-radius: 999px;
-            background: var(--raised);
-            color: var(--accent);
-            font-size: .72rem;
-            font-weight: 800
-        }
-
-        /* ── "What to expect" banner strip ── */
-        .expect-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 12px
-        }
-
-        .expect-card {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-            padding: 22px 18px;
-            border: 1px solid var(--line);
-            border-radius: var(--r);
-            background: var(--surface)
-        }
-
-        .expect-num {
-            color: var(--accent);
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -.05em;
-            line-height: 1
-        }
-
-        .expect-card h3 {
-            font-size: .95rem;
-            letter-spacing: 0
-        }
-
-        .expect-card p {
-            color: var(--muted);
-            font-size: .82rem;
-            line-height: 1.5
-        }
-
-        /* ── Responsive additions ── */
-        @media(max-width:980px) {
-            .games-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr))
-            }
-
-            .expect-grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr))
-            }
-        }
-
-        @media(max-width:720px) {
-            .games-grid,
-            .setup-grid,
-            .moments-grid,
-            .perks-grid,
-            .expect-grid {
-                grid-template-columns: 1fr
             }
         }
 
@@ -1561,7 +2205,8 @@
 <body>
     <header class="site-header">
         <nav class="navbar" aria-label="Primary navigation">
-            <div class="nav-socials"><a
+            <div class="nav-socials"><a href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer"
+                    aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a><a
                     href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer" aria-label="Twitch"><i
                         class="fa-brands fa-twitch" aria-hidden="true"></i></a><a href="https://instagram.com/faronova_"
                     target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"
@@ -1573,8 +2218,8 @@
                     rel="noopener noreferrer" aria-label="Discord"><i class="fa-brands fa-discord"
                         aria-hidden="true"></i></a></div><a class="brand" href="#home" aria-label="FaroNova home"><img
                     style="height: 5rem;" src="/assets/img/FARNOVA_ICON.png" alt=""></a>
-            <div class="nav-links"><a href="#content">Content</a><a href="#live">Live</a><a
-                    href="#schedule">Schedule</a><a href="#games">Games</a><a href="#channels">Channels</a><a
+            <div class="nav-links"><a href="#about">About</a><a href="#games">Games</a><a href="#live">Live</a><a
+                    href="#schedule">Schedule</a><a href="#donate">Support</a><a href="#channels">Channels</a><a
                     class="button button-primary button-compact nav-cta" href="https://twitch.tv/faronova"
                     target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-play"
                         aria-hidden="true"></i><span>Watch live</span></a></div>
@@ -1584,11 +2229,11 @@
         <section id="home" class="hero site-shell">
             <div class="hero-copy reveal"><span class="eyebrow">Content Creator | Streamer</span>
                 <h1>FaroNova</h1>
-                <p class="hero-lede">Twitch streamer and content creator — live gaming sessions, community game nights, reactions, and watchalongs across Twitch, YouTube, Instagram, X, and Discord.</p>
+                <p class="hero-lede">Gacha gamer, variety streamer, and community builder from Malaysia. Streaming to create a chill space where everyone can hang out, talk about their day, and have fun together.</p>
                 <div class="hero-actions"><a class="button button-primary" href="#live"><i
                             class="fa-solid fa-circle-play" aria-hidden="true"></i> Watch live</a><a class="button"
-                        href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"><i
-                            class="fa-brands fa-twitch" aria-hidden="true"></i> Open Twitch</a><a class="button"
+                        href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer"><i
+                            class="fa-brands fa-tiktok" aria-hidden="true"></i> Open TikTok</a><a class="button"
                         href="#channels"><i class="fa-solid fa-link" aria-hidden="true"></i> All links</a></div>
             </div>
             <aside class="hero-panel reveal" aria-label="FaroNova profile snapshot">
@@ -1597,82 +2242,243 @@
                             alt="FaroNova profile portrait" /></div>
                 </div>
                 <div class="profile-meta">
-                    <div class="stat"><strong id="twitchFollowers">faronova</strong><span>Twitch channel</span></div>
-                    <div class="stat"><strong id="twitchTotalViews">Syncing</strong><span>Total views</span></div>
+                    <div class="stat"><strong id="tiktokFollowers">Syncing</strong><span>TikTok followers</span></div>
+                    <div class="stat"><strong id="twitchFollowers">Syncing</strong><span>Twitch followers</span></div>
                     <div class="stat"><strong id="twitchHeroStatus">Checking</strong><span>Twitch status</span></div>
                 </div>
             </aside>
         </section>
+
+        <!-- Stats ticker -->
+        <div class="stats-ticker" aria-hidden="true">
+            <div class="stats-ticker-inner" id="statsTicker">
+                <span class="ticker-item"><i class="fa-brands fa-twitch"></i><strong>FaroNova</strong><span>Live on Twitch</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-solid fa-gamepad"></i><strong>Gacha &amp; Variety</strong><span>Games streamer</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-solid fa-earth-asia"></i><strong>Malaysia</strong><span>GMT+8</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-solid fa-star"></i><strong>StreamerZone.gg</strong><span>Official streamer</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-solid fa-heart"></i><strong>Safe space</strong><span>Everyone welcome</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-brands fa-tiktok"></i><strong id="tickerTikTok">TikTok</strong><span>Short-form creator</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-solid fa-users"></i><strong id="tickerFollowers">Twitch</strong><span>Followers</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-solid fa-fire"></i><strong>Genshin · ZZZ · WuWa</strong><span>Currently playing</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-brands fa-twitch"></i><strong>FaroNova</strong><span>Live on Twitch</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-solid fa-gamepad"></i><strong>Gacha &amp; Variety</strong><span>Games streamer</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-solid fa-earth-asia"></i><strong>Malaysia</strong><span>GMT+8</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-solid fa-star"></i><strong>StreamerZone.gg</strong><span>Official streamer</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-solid fa-heart"></i><strong>Safe space</strong><span>Everyone welcome</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-brands fa-tiktok"></i><strong>TikTok</strong><span>Short-form creator</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-solid fa-users"></i><strong>Twitch</strong><span>Followers</span></span>
+                <span class="ticker-sep">·</span>
+                <span class="ticker-item"><i class="fa-solid fa-fire"></i><strong>Genshin · ZZZ · WuWa</strong><span>Currently playing</span></span>
+                <span class="ticker-sep">·</span>
+            </div>
+        </div>
+
+        <section id="about" class="site-shell">
+            <div class="about-layout reveal">
+                <div class="about-visual">
+                    <div class="about-img-wrap">
+                        <img src="assets/img/FARNOVA.png" id="aboutAvatar" alt="FaroNova" />
+                    </div>
+                    <div class="about-badge">
+                        <strong id="aboutFollowers">—</strong>
+                        <span>Twitch followers</span>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <div>
+                        <span class="eyebrow">About FaroNova</span>
+                        <h2>Your average weeb, building something real.</h2>
+                    </div>
+                    <p>Hey! I'm Faro — 25, from Malaysia, and yes, full weeb energy. I mainly play gacha games but honestly I'll jump into anything. The goal has always been simple: build a space where people can chill, talk about their day, and feel welcome no matter what.</p>
+                    <p>It's not just about the games. It's about the community. Come in, say hi, and don't be shy — you'll fit right in.</p>
+                    <div class="about-tags">
+                        <span class="about-tag"><i class="fa-solid fa-gamepad"></i> Gacha games</span>
+                        <span class="about-tag"><i class="fa-solid fa-earth-asia"></i> Malaysia</span>
+                        <span class="about-tag"><i class="fa-solid fa-star"></i> StreamerZone.gg</span>
+                        <span class="about-tag"><i class="fa-solid fa-comments"></i> Community first</span>
+                        <span class="about-tag"><i class="fa-solid fa-heart"></i> Safe space</span>
+                        <span class="about-tag"><i class="fa-solid fa-tv"></i> Variety streamer</span>
+                    </div>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Follow on Twitch</a>
+                        <a class="button" href="https://discord.gg/whRyvAPuVQ" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord" aria-hidden="true"></i> Join Discord</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section id="expect" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">What to expect</span>
+                    <h2>The vibe, explained.</h2>
+                </div>
+                <p>Every stream has the same energy — chill, genuine, and open to everyone.</p>
+            </div>
+            <div class="expect-grid reveal">
+                <div class="expect-card">
+                    <div class="expect-icon" style="background:rgba(217,102,255,.15);color:var(--accent)"><i class="fa-solid fa-gamepad"></i></div>
+                    <h3>Gacha &amp; variety games</h3>
+                    <p>Neverness to Everness, Wuthering Waves, Genshin Impact, Zenless Zone Zero, Roblox — and whatever else looks fun. No single-game tunnel vision.</p>
+                </div>
+                <div class="expect-card">
+                    <div class="expect-icon" style="background:rgba(255,110,180,.15);color:var(--warm)"><i class="fa-solid fa-comments"></i></div>
+                    <h3>Chat-first energy</h3>
+                    <p>The community isn't background noise. Faro actively reads chat, answers questions, and makes conversation the centre of every session.</p>
+                </div>
+                <div class="expect-card">
+                    <div class="expect-icon" style="background:rgba(192,132,252,.15);color:var(--blue)"><i class="fa-solid fa-heart"></i></div>
+                    <h3>A chill, safe space</h3>
+                    <p>No pressure, no toxicity. A place to hang out after a long day, talk about anything, and just feel welcome being yourself.</p>
+                </div>
+                <div class="expect-card">
+                    <div class="expect-icon" style="background:rgba(217,102,255,.15);color:var(--accent)"><i class="fa-brands fa-tiktok"></i></div>
+                    <h3>Short-form content</h3>
+                    <p>Stream highlights, reactions, and clips cut for TikTok and YouTube — so you can catch the moments even when you miss the live.</p>
+                </div>
+                <div class="expect-card">
+                    <div class="expect-icon" style="background:rgba(255,110,180,.15);color:var(--warm)"><i class="fa-solid fa-star"></i></div>
+                    <h3>StreamerZone.gg partner</h3>
+                    <p>Official streamer for StreamerZone.gg — a network built to help creators grow. Part of something bigger than just one channel.</p>
+                </div>
+                <div class="expect-card">
+                    <div class="expect-icon" style="background:rgba(192,132,252,.15);color:var(--blue)"><i class="fa-solid fa-users"></i></div>
+                    <h3>Growing community</h3>
+                    <p>Discord server, regular streams, and a consistent presence across platforms. The community keeps growing — and there's always room for more.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
         <section id="content" class="site-shell">
             <div class="section-heading reveal">
-                <div><span class="eyebrow">Past broadcasts</span>
-                    <h2>Recent streams.</h2>
+                <div><span class="eyebrow">Latest posts</span>
+                    <h2>Recent short-form work.</h2>
                 </div>
-                <p>Latest VODs from the channel. Click any to watch the full broadcast on Twitch.</p>
+                <p>Fresh uploads from TikTok when the feed is available, with a direct path to the profile when it is
+                    not.</p>
             </div>
             <div class="content-layout reveal">
                 <div class="panel">
-                    <div class="panel-header"><span class="panel-label"><i class="fa-brands fa-twitch"
-                                aria-hidden="true"></i> Recent VODs</span><span class="status-pill"
-                            id="vodsStatus"><span class="status-dot"></span><span>Loading</span></span></div>
-                    <div id="vodsLoading" class="loading-grid" aria-label="Loading VODs">
+                    <div class="panel-header"><span class="panel-label"><i class="fa-brands fa-tiktok"
+                                aria-hidden="true"></i> Recent posts</span><span class="status-pill"
+                            id="tiktokStatus"><span class="status-dot"></span><span>Syncing feed</span></span></div>
+                    <div id="tiktokLoading" class="loading-grid" aria-label="Loading TikTok posts">
                         <div class="skeleton-card"></div>
                         <div class="skeleton-card"></div>
                         <div class="skeleton-card"></div>
                     </div>
-                    <div class="video-grid" id="vodsContainer" aria-live="polite"></div>
+                    <div class="video-grid" id="tiktokContainer" aria-live="polite"></div>
                 </div>
-                <aside class="panel profile-card"><i class="fa-brands fa-twitch" aria-hidden="true"></i><strong id="channelGameLabel">Live on Twitch.</strong>
-                    <p id="channelDesc">Browse past streams, follow for notifications, and join the community around each session.</p>
-                    <a class="button button-primary button-compact"
-                        href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer">Watch on Twitch
+                <aside class="panel profile-card"><i class="fa-brands fa-tiktok" aria-hidden="true"></i><strong>Short
+                        edits, quick reactions, easy to follow.</strong>
+                    <p>Open the TikTok profile for the newest posts, comments, and uploads that appear between site
+                        refreshes.</p><a class="button button-primary button-compact"
+                        href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer">Visit @FaroNova
                         <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                 </aside>
             </div>
         </section>
+
+        <div class="section-divider"></div>
+
         <section id="live" class="site-shell">
             <div class="section-heading reveal">
                 <div><span class="eyebrow">Twitch</span>
                     <h2>Live when the room is active.</h2>
                 </div>
-                <p>Stream status updates automatically. When the channel is live, the embedded player and chat appear
-                    here.</p>
+                <p>Stream status updates automatically. When live, the embed and chat appear below the status card.</p>
             </div>
-            <div class="twitch-layout reveal" id="twitchLayout">
-                <article class="live-card"><i class="fa-brands fa-twitch live-card-icon" aria-hidden="true"></i>
-                    <div><span class="status-pill" id="liveIndicator"><span
-                                class="status-dot"></span><span>Checking</span></span>
-                        <h3 id="liveHeadline">Checking the stream.</h3>
-                        <p id="liveDescription">Looking for the current Twitch status.</p>
-                        <div class="live-actions"><a class="button button-primary button-compact"
-                                href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer">Open
-                                Twitch</a><a class="button button-compact" href="#schedule">See schedule</a></div>
+
+            <div class="live-section-wrap">
+                <!-- Status row -->
+                <div class="twitch-layout reveal" id="twitchLayout">
+                    <article class="live-card" id="liveCard">
+                        <div class="live-card-top">
+                            <div class="live-card-icon"><i class="fa-brands fa-twitch" aria-hidden="true"></i></div>
+                            <div class="live-viewer-badge" id="liveViewerBadge">
+                                <span class="live-viewer-dot"></span>
+                                <span id="liveViewerCount">0</span> watching
+                            </div>
+                        </div>
+                        <div class="live-card-body">
+                            <span class="status-pill" id="liveIndicator"><span class="status-dot"></span><span>Checking</span></span>
+                            <div class="live-game-chip" id="liveGameTag">
+                                <img id="liveGameArt" alt="" />
+                                <span id="liveGameName"></span>
+                            </div>
+                            <h3 id="liveHeadline">Checking the stream.</h3>
+                            <p class="live-card-desc" id="liveDescription">Looking for the current Twitch status.</p>
+                            <div class="live-stream-title-tag" id="liveStreamTitle">
+                                <i class="fa-solid fa-quote-left" style="font-size:.6rem;opacity:.5"></i>
+                                <span id="liveStreamTitleText"></span>
+                            </div>
+                            <div class="live-actions">
+                                <a class="button button-primary button-compact" href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Open Twitch</a>
+                                <a class="button button-compact" href="#schedule"><i class="fa-solid fa-calendar" aria-hidden="true"></i> Schedule</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <div class="clips-panel">
+                        <div class="clips-panel-header">
+                            <span class="panel-label"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i> Recent clips</span>
+                            <a class="button button-compact" href="https://twitch.tv/FaroNova/clips" target="_blank" rel="noopener noreferrer">View all</a>
+                        </div>
+                        <div class="clips-list" id="twitchClips" aria-live="polite">
+                            <a class="clip-item" href="https://twitch.tv/FaroNova/clips" target="_blank" rel="noopener noreferrer">
+                                <span class="clip-icon"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
+                                <span class="clip-copy"><strong>Loading recent clips</strong><span>Checking Twitch</span></span>
+                                <span class="clip-views">...</span>
+                            </a>
+                        </div>
                     </div>
-                </article>
-                <div class="panel">
-                    <div class="panel-header"><span class="panel-label"><i class="fa-solid fa-clapperboard"
-                                aria-hidden="true"></i> Recent clips</span><a class="button button-compact"
-                            href="https://twitch.tv/FaroNova/clips" target="_blank" rel="noopener noreferrer">View
-                            all</a></div>
-                    <div class="clips-list" id="twitchClips" aria-live="polite"><a class="clip-item"
-                            href="https://twitch.tv/FaroNova/clips" target="_blank" rel="noopener noreferrer"><span
-                                class="clip-icon"><i class="fa-solid fa-play" aria-hidden="true"></i></span><span
-                                class="clip-copy"><strong>Loading recent clips</strong><span>Checking
-                                    Twitch</span></span><span class="clip-views">...</span></a></div>
                 </div>
-            </div>
-            <div class="live-watch-grid reveal" id="liveWatchGrid" hidden>
-                <div class="video-frame"><span class="video-frame-tag"><i class="fa-solid fa-circle"
-                            aria-hidden="true"></i> Live video</span><iframe id="liveVideoFrame"
-                        title="FaroNova live stream" allowfullscreen scrolling="no"></iframe></div>
-                <div class="chat-frame">
-                    <div class="chat-frame-tag"><span><i class="fa-solid fa-comments" aria-hidden="true"></i>
-                            Chat</span><a class="button button-compact" href="https://twitch.tv/FaroNova/chat"
-                            target="_blank" rel="noopener noreferrer">Pop out</a></div><iframe id="liveChatFrame"
-                        title="FaroNova stream chat" scrolling="no"></iframe>
+
+                <!-- Live embed — shown only when live -->
+                <div class="live-embed-wrap reveal" id="liveWatchGrid">
+                    <div class="live-embed-glow"></div>
+                    <div class="live-embed-bar">
+                        <div class="live-embed-bar-left">
+                            <span class="live-dot-big"></span>
+                            <span class="live-embed-label">Live now</span>
+                            <span class="live-embed-game" id="embedGameLabel"></span>
+                        </div>
+                        <div class="live-embed-actions">
+                            <a class="button button-compact" href="https://twitch.tv/FaroNova/chat" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Pop out chat</a>
+                            <a class="button button-primary button-compact" href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Full screen</a>
+                        </div>
+                    </div>
+                    <div class="live-embed-frames">
+                        <div class="video-frame">
+                            <iframe id="liveVideoFrame" title="FaroNova live stream" allowfullscreen scrolling="no"></iframe>
+                        </div>
+                        <div class="chat-frame">
+                            <iframe id="liveChatFrame" title="FaroNova stream chat" scrolling="no"></iframe>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <div class="section-divider"></div>
+
         <section id="schedule" class="site-shell">
             <div class="section-heading reveal">
                 <div><span class="eyebrow">Schedule</span>
@@ -1709,6 +2515,88 @@
                 </div>
             </div>
         </section>
+
+        <div class="section-divider"></div>
+
+        <section id="games" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Games played</span>
+                    <h2>What's on the screen.</h2>
+                </div>
+                <p>The regulars — from gacha pulls to open worlds. Box art pulled live from Twitch.</p>
+            </div>
+            <div class="games-grid reveal" id="gamesGrid">
+                <!-- filled by JS or static fallback below -->
+                <a class="game-card" href="https://twitch.tv/directory/game/Neverness%20to%20Everness" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Neverness to Everness</span></div></a>
+                <a class="game-card" href="https://twitch.tv/directory/game/Wuthering%20Waves" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Wuthering Waves</span></div></a>
+                <a class="game-card" href="https://twitch.tv/directory/game/Genshin%20Impact" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Genshin Impact</span></div></a>
+                <a class="game-card" href="https://twitch.tv/directory/game/Zenless%20Zone%20Zero" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Zenless Zone Zero</span></div></a>
+                <a class="game-card" href="https://twitch.tv/directory/game/Roblox" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Roblox</span></div></a>
+                <a class="game-card" href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-plus"></i></div><div class="game-card-overlay"><span class="game-card-name">Many more!</span></div></a>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section id="milestones" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Milestones</span>
+                    <h2>Goals worth chasing.</h2>
+                </div>
+                <p>Every follow, sub, and bit moves these forward. Live counts update from Twitch.</p>
+            </div>
+            <div class="milestones-grid reveal">
+                <div class="milestone-card">
+                    <div class="milestone-header">
+                        <div class="milestone-icon" style="background:rgba(217,102,255,.15);color:var(--accent)"><i class="fa-solid fa-users"></i></div>
+                        <span class="milestone-pct" id="mFollowerPct">—</span>
+                    </div>
+                    <div class="milestone-label">Reach 500 followers</div>
+                    <div class="milestone-sub" id="mFollowerSub">Loading…</div>
+                    <div class="milestone-bar-wrap"><div class="milestone-bar" id="mFollowerBar" style="width:0%"></div></div>
+                </div>
+                <div class="milestone-card">
+                    <div class="milestone-header">
+                        <div class="milestone-icon" style="background:rgba(255,110,180,.15);color:var(--warm)"><i class="fa-solid fa-star"></i></div>
+                        <span class="milestone-pct">Active</span>
+                    </div>
+                    <div class="milestone-label">Official StreamerZone.gg partner</div>
+                    <div class="milestone-sub">Achieved — part of the network</div>
+                    <div class="milestone-bar-wrap"><div class="milestone-bar" style="width:100%"></div></div>
+                </div>
+                <div class="milestone-card">
+                    <div class="milestone-header">
+                        <div class="milestone-icon" style="background:rgba(192,132,252,.15);color:var(--blue)"><i class="fa-solid fa-fire"></i></div>
+                        <span class="milestone-pct" id="mClipPct">—</span>
+                    </div>
+                    <div class="milestone-label">100 clip views</div>
+                    <div class="milestone-sub" id="mClipSub">Counting clip views…</div>
+                    <div class="milestone-bar-wrap"><div class="milestone-bar" id="mClipBar" style="width:0%"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section id="donate" class="site-shell">
+            <div class="reveal">
+                <div class="donate-banner">
+                    <div>
+                        <span class="eyebrow">Support FaroNova</span>
+                        <h2>Every cent counts. Thank you!</h2>
+                        <p>Supporting the stream helps keep the energy going — better streams, more content, and a growing community. No pressure, but it genuinely means everything.</p>
+                    </div>
+                    <div class="donate-actions">
+                        <a class="button button-primary" href="https://twitch.tv/faronova/subscribe" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Subscribe on Twitch</a>
+                        <a class="button" href="https://www.twitch.tv/bits?channel=faronova" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-gem" aria-hidden="true"></i> Send Bits</a>
+                        <a class="button" href="https://streamlabs.com/faronova/tip" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-heart" aria-hidden="true"></i> Donate</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
         <section id="channels" class="site-shell">
             <div class="section-heading reveal">
                 <div><span class="eyebrow">Official links</span>
@@ -1716,10 +2604,11 @@
                 </div>
                 <p>A clean link hub for watching, following, joining the community, or reaching out.</p>
             </div>
-            <div class="channels-grid reveal"><a class="channel-card" data-platform="twitch"
-                    href="https://twitch.tv/faronova/clips" target="_blank" rel="noopener noreferrer"><span
-                        class="channel-icon"><i class="fa-solid fa-clapperboard"
-                            aria-hidden="true"></i></span><span><strong>Twitch Clips</strong><span>@FaroNova - stream highlights</span></span></a><a class="channel-card" data-platform="twitch"
+            <div class="channels-grid reveal"><a class="channel-card" data-platform="tiktok"
+                    href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer"><span
+                        class="channel-icon"><i class="fa-brands fa-tiktok"
+                            aria-hidden="true"></i></span><span><strong>TikTok</strong><span>@FaroNova - short-form
+                            videos</span></span></a><a class="channel-card" data-platform="twitch"
                     href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"><span
                         class="channel-icon"><i class="fa-brands fa-twitch"
                             aria-hidden="true"></i></span><span><strong>Twitch</strong><span>@FaroNova - live
@@ -1741,6 +2630,9 @@
                             aria-hidden="true"></i></span><span><strong>Discord</strong><span>Community
                             server</span></span></a></div>
         </section>
+
+        <div class="section-divider"></div>
+
         <section id="featured" class="site-shell">
             <div class="section-heading reveal">
                 <div><span class="eyebrow">Featured</span>
@@ -1751,280 +2643,49 @@
             </div>
             <div class="featured-grid reveal" id="featuredClips"></div>
         </section>
-        <!-- ── Games played ── -->
-        <section id="games" class="site-shell">
+
+        <div class="section-divider"></div>
+
+        <section id="vods" class="site-shell">
             <div class="section-heading reveal">
-                <div><span class="eyebrow">Games</span>
-                    <h2>What gets played on stream.</h2>
+                <div><span class="eyebrow">Past broadcasts</span>
+                    <h2>Recent streams on demand.</h2>
                 </div>
-                <p>A mix of story-driven games, community chaos, and whatever ends up being funny that week.</p>
+                <p>Full VODs from recent Twitch sessions, pulled live from the channel.</p>
             </div>
-            <div class="games-grid reveal">
-                <article class="game-card">
-                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(99,60,180,.6),rgba(14,10,20,.9))"></div>
-                    <div class="game-card-body">
-                        <span class="game-tag"><i class="fa-solid fa-star" aria-hidden="true"></i> Regular</span>
-                        <strong>NTE: Neverness to Everness</strong>
-                        <span>Open-world exploration &amp; story</span>
-                    </div>
-                </article>
-                <article class="game-card">
-                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(180,60,60,.5),rgba(14,10,20,.9))"></div>
-                    <div class="game-card-body">
-                        <span class="game-tag"><i class="fa-solid fa-fire" aria-hidden="true"></i> Fan fav</span>
-                        <strong>Gacha &amp; live-service games</strong>
-                        <span>Pulls, builds, and salt</span>
-                    </div>
-                </article>
-                <article class="game-card">
-                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(60,120,180,.5),rgba(14,10,20,.9))"></div>
-                    <div class="game-card-body">
-                        <span class="game-tag"><i class="fa-solid fa-users" aria-hidden="true"></i> With chat</span>
-                        <strong>Viewer game nights</strong>
-                        <span>Chat joins, chaos follows</span>
-                    </div>
-                </article>
-                <article class="game-card">
-                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(180,100,60,.5),rgba(14,10,20,.9))"></div>
-                    <div class="game-card-body">
-                        <span class="game-tag"><i class="fa-solid fa-book" aria-hidden="true"></i> Story</span>
-                        <strong>Anime watchalongs</strong>
-                        <span>First watch or rewatch with chat</span>
-                    </div>
-                </article>
-                <article class="game-card">
-                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(60,180,120,.4),rgba(14,10,20,.9))"></div>
-                    <div class="game-card-body">
-                        <span class="game-tag"><i class="fa-solid fa-gamepad" aria-hidden="true"></i> Variety</span>
-                        <strong>Indie &amp; adventure games</strong>
-                        <span>Whatever looks interesting</span>
-                    </div>
-                </article>
-                <article class="game-card">
-                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(180,60,140,.5),rgba(14,10,20,.9))"></div>
-                    <div class="game-card-body">
-                        <span class="game-tag"><i class="fa-solid fa-face-laugh" aria-hidden="true"></i> Reaction</span>
-                        <strong>React &amp; commentary</strong>
-                        <span>Clips, trailers, and internet things</span>
-                    </div>
-                </article>
-                <article class="game-card">
-                    <div class="game-card-bg" style="background-image:linear-gradient(135deg,rgba(120,60,180,.5),rgba(14,10,20,.9))"></div>
-                    <div class="game-card-body">
-                        <span class="game-tag"><i class="fa-solid fa-puzzle-piece" aria-hidden="true"></i> Chill</span>
-                        <strong>Cozy &amp; sim games</strong>
-                        <span>Low-stakes, high chat energy</span>
-                    </div>
-                </article>
-                <article class="game-card" style="background:linear-gradient(135deg,rgba(217,102,255,.1),var(--surface))">
-                    <div class="game-card-body">
-                        <span class="game-tag"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Live</span>
-                        <strong>Check Twitch for what's on now</strong>
-                        <span>Category updates in real time</span>
-                    </div>
-                </article>
-            </div>
+            <div class="featured-grid reveal" id="vodsContainer"></div>
         </section>
 
-        <!-- ── What to expect ── -->
-        <section id="expect" class="site-shell">
-            <div class="section-heading reveal">
-                <div><span class="eyebrow">Vibe check</span>
-                    <h2>What a stream actually looks like.</h2>
-                </div>
-                <p>Four things that are true every time the stream goes live.</p>
-            </div>
-            <div class="expect-grid reveal">
-                <div class="expect-card">
-                    <span class="expect-num">01</span>
-                    <h3>Chat is part of the stream</h3>
-                    <p>Decisions, dares, and suggestions come from chat. If you're in the room you're part of what happens.</p>
-                </div>
-                <div class="expect-card">
-                    <span class="expect-num">02</span>
-                    <h3>Reactions are unfiltered</h3>
-                    <p>Loud moments, bad takes, genuine hype. The energy is real whether the game is winning or not.</p>
-                </div>
-                <div class="expect-card">
-                    <span class="expect-num">03</span>
-                    <h3>Games get finished (mostly)</h3>
-                    <p>Story-driven games get played to the end. Side content and detours are part of the run.</p>
-                </div>
-                <div class="expect-card">
-                    <span class="expect-num">04</span>
-                    <h3>New people always welcome</h3>
-                    <p>No inside jokes required. Drop in, say hi, and catch up — VODs are saved for anything you missed.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── Stream moments / chat quotes ── -->
-        <section id="moments" class="site-shell">
-            <div class="section-heading reveal">
-                <div><span class="eyebrow">Stream moments</span>
-                    <h2>Things that actually happened.</h2>
-                </div>
-                <p>A running record of the moments that made chat explode.</p>
-            </div>
-            <div class="moments-grid reveal">
-                <div class="moment-card accent-card">
-                    <p class="moment-quote">Chat convinced me to do the hardest boss fight with only the starting weapon. We did not win first try.</p>
-                    <div class="moment-meta"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Viewer game night · 2025</div>
-                </div>
-                <div class="moment-card warm-card">
-                    <p class="moment-quote">The gacha pull was so bad the stream went silent for a full 8 seconds. Then everyone started typing at the same time.</p>
-                    <div class="moment-meta"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Gacha stream · 2025</div>
-                </div>
-                <div class="moment-card blue-card">
-                    <p class="moment-quote">We were watching the anime finale and someone in chat predicted the ending from episode one. They just waited and said nothing.</p>
-                    <div class="moment-meta"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Watchalong · 2025</div>
-                </div>
-                <div class="moment-card">
-                    <p class="moment-quote">I rage-quit a boss, came back two minutes later, and one-shot it. Chat has not let me forget either half of that.</p>
-                    <div class="moment-meta"><i class="fa-brands fa-twitch" aria-hidden="true"></i> NTE stream · 2025</div>
-                </div>
-                <div class="moment-card accent-card">
-                    <p class="moment-quote">Chat voted to name an NPC after a subscriber. That NPC immediately got killed in the next cutscene.</p>
-                    <div class="moment-meta"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Story run · 2025</div>
-                </div>
-                <div class="moment-card warm-card">
-                    <p class="moment-quote">Someone raided mid-boss fight with 200 people. We failed the fight. The raid message was just a skull emoji.</p>
-                    <div class="moment-meta"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Raid moment · 2025</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── Channel perks ── -->
-        <section id="perks" class="site-shell">
-            <div class="section-heading reveal">
-                <div><span class="eyebrow">Channel perks</span>
-                    <h2>What you can do in stream.</h2>
-                </div>
-                <p>Follow and stick around — chat earns channel points that unlock actual things during the stream.</p>
-            </div>
-            <div class="perks-grid reveal">
-                <div class="perk-card">
-                    <div class="perk-icon">🎯</div>
-                    <div class="perk-body">
-                        <h3>Choose the next game</h3>
-                        <p>Redeem points to nominate a game for the next session. Top voted suggestion wins the slot.</p>
-                        <span class="perk-cost"><i class="fa-solid fa-coins" aria-hidden="true"></i> Channel points</span>
-                    </div>
-                </div>
-                <div class="perk-card">
-                    <div class="perk-icon">🎲</div>
-                    <div class="perk-body">
-                        <h3>Random challenge</h3>
-                        <p>Force a random in-game rule or setting for the next 10 minutes. Results may vary wildly.</p>
-                        <span class="perk-cost"><i class="fa-solid fa-coins" aria-hidden="true"></i> Channel points</span>
-                    </div>
-                </div>
-                <div class="perk-card">
-                    <div class="perk-icon">🔊</div>
-                    <div class="perk-body">
-                        <h3>Sound alert</h3>
-                        <p>Trigger a sound clip on stream. Chat-approved sounds only — keep it entertaining.</p>
-                        <span class="perk-cost"><i class="fa-solid fa-coins" aria-hidden="true"></i> Channel points</span>
-                    </div>
-                </div>
-                <div class="perk-card">
-                    <div class="perk-icon">📌</div>
-                    <div class="perk-body">
-                        <h3>Pin a message</h3>
-                        <p>Highlight your message in chat so it stays visible while the stream is busy.</p>
-                        <span class="perk-cost"><i class="fa-solid fa-coins" aria-hidden="true"></i> Channel points</span>
-                    </div>
-                </div>
-                <div class="perk-card">
-                    <div class="perk-icon">🎭</div>
-                    <div class="perk-body">
-                        <h3>Name an NPC</h3>
-                        <p>When a game allows it, the top redeemer gets to name a character, NPC, or save file.</p>
-                        <span class="perk-cost"><i class="fa-solid fa-coins" aria-hidden="true"></i> Channel points</span>
-                    </div>
-                </div>
-                <div class="perk-card">
-                    <div class="perk-icon">⚡</div>
-                    <div class="perk-body">
-                        <h3>Hype train contributor</h3>
-                        <p>Bits, subs, and gifted subs all power the hype train. Hit level 5 and something special happens.</p>
-                        <span class="perk-cost"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Bits or subs</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── Stream setup ── -->
-        <section id="setup" class="site-shell">
-            <div class="section-heading reveal">
-                <div><span class="eyebrow">Setup</span>
-                    <h2>What the stream runs on.</h2>
-                </div>
-                <p>The gear behind the stream. Nothing exotic — just what works.</p>
-            </div>
-            <div class="setup-grid reveal">
-                <div class="gear-card">
-                    <div class="gear-icon"><i class="fa-solid fa-desktop" aria-hidden="true"></i></div>
-                    <h3>Streaming PC</h3>
-                    <p>Custom build handling game, stream encode, and overlays simultaneously without dropping frames.</p>
-                    <span class="gear-badge"><i class="fa-solid fa-circle" style="color:var(--accent);font-size:.5rem" aria-hidden="true"></i> Primary rig</span>
-                </div>
-                <div class="gear-card">
-                    <div class="gear-icon"><i class="fa-solid fa-microphone" aria-hidden="true"></i></div>
-                    <h3>Condenser mic</h3>
-                    <p>Cardioid pattern, noise-gated through OBS. Clean audio without a soundproof room.</p>
-                    <span class="gear-badge"><i class="fa-solid fa-circle" style="color:var(--accent);font-size:.5rem" aria-hidden="true"></i> Audio</span>
-                </div>
-                <div class="gear-card">
-                    <div class="gear-icon"><i class="fa-solid fa-camera" aria-hidden="true"></i></div>
-                    <h3>Webcam</h3>
-                    <p>1080p camera for facecam overlay. Positioned so the game stays the main focus of the frame.</p>
-                    <span class="gear-badge"><i class="fa-solid fa-circle" style="color:var(--accent);font-size:.5rem" aria-hidden="true"></i> Video</span>
-                </div>
-                <div class="gear-card">
-                    <div class="gear-icon"><i class="fa-solid fa-sliders" aria-hidden="true"></i></div>
-                    <h3>OBS Studio</h3>
-                    <p>Scenes, transitions, alerts, and overlays all run through OBS. Alerts powered by Streamlabs.</p>
-                    <span class="gear-badge"><i class="fa-solid fa-circle" style="color:var(--accent);font-size:.5rem" aria-hidden="true"></i> Software</span>
-                </div>
-                <div class="gear-card">
-                    <div class="gear-icon"><i class="fa-solid fa-headphones" aria-hidden="true"></i></div>
-                    <h3>Headset / monitors</h3>
-                    <p>Closed-back headset for game audio during streams. Studio monitors for music and mixing.</p>
-                    <span class="gear-badge"><i class="fa-solid fa-circle" style="color:var(--accent);font-size:.5rem" aria-hidden="true"></i> Audio</span>
-                </div>
-                <div class="gear-card">
-                    <div class="gear-icon"><i class="fa-solid fa-wifi" aria-hidden="true"></i></div>
-                    <h3>Wired connection</h3>
-                    <p>Ethernet straight to the router. No Wi-Fi during streams — stable upload is non-negotiable.</p>
-                    <span class="gear-badge"><i class="fa-solid fa-circle" style="color:var(--accent);font-size:.5rem" aria-hidden="true"></i> Network</span>
-                </div>
-            </div>
-        </section>
+        <div class="section-divider"></div>
 
         <section id="community" class="site-shell">
             <div class="section-heading reveal">
                 <div><span class="eyebrow">Community</span>
                     <h2>Join, follow, or collaborate.</h2>
                 </div>
-                <p>Everything here points viewers toward the places where the channel actually moves.</p>
+                <p>A chill space built around the stream. Discord is the hub — join to stay in the loop, hang out between streams, and be part of something that keeps growing.</p>
             </div>
             <div class="community-grid reveal">
                 <article class="community-card feature">
-                    <div><span class="eyebrow">Discord</span><strong>Streams are better when the community has a
-                            seat.</strong><span>Join the server for stream chat, clips, announcements, and watchalong
-                            planning.</span></div><a class="button button-primary" href="https://discord.gg/whRyvAPuVQ"
+                    <div><span class="eyebrow">Discord</span><strong>The community lives here.</strong><span>Join the server for stream chat, announcements, clips, and just hanging out between streams.</span></div><a class="button button-primary" href="https://discord.gg/whRyvAPuVQ"
                         target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"
                             aria-hidden="true"></i> Join server</a>
                 </article>
                 <article class="community-card">
-                    <div><span class="eyebrow">Business</span><strong>Collabs and inquiries.</strong><span>For creator
-                            work, campaigns, partnerships, and brand messages.</span></div><a class="button"
+                    <div><span class="eyebrow">StreamerZone.gg</span><strong>Official streamer partner.</strong><span>FaroNova is part of StreamerZone.gg — a network built for growing creators.</span></div><a class="button"
+                        href="https://streamerzone.gg" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"
+                            aria-hidden="true"></i> Visit StreamerZone</a>
+                </article>
+                <article class="community-card">
+                    <div><span class="eyebrow">Business</span><strong>Collabs and inquiries.</strong><span>For creator work, campaigns, partnerships, and brand messages. Every cent counts — thank you!</span></div><a class="button"
                         href="mailto:fransmediabusiness@gmail.com"><i class="fa-regular fa-envelope"
                             aria-hidden="true"></i> Email</a>
                 </article>
             </div>
         </section>
+
+        <div class="section-divider"></div>
+
         <section id="faq" class="site-shell">
             <div class="section-heading reveal">
                 <div><span class="eyebrow">Quick answers</span>
@@ -2034,29 +2695,28 @@
             </div>
             <div class="faq-list reveal">
                 <details>
-                    <summary>What does FaroNova stream?</summary>
-                    <p>Gaming, reaction sessions, viewer playalongs, and anime watchalongs. Check Twitch for the active
-                        category.</p>
+                    <summary>What games does FaroNova play?</summary>
+                    <p>Mainly gacha games — Neverness to Everness, Wuthering Waves, Genshin Impact, and Zenless Zone Zero are regulars. Also plays Roblox and plenty of other games. Variety is the vibe.</p>
+                </details>
+                <details>
+                    <summary>Where is FaroNova from?</summary>
+                    <p>Malaysia. Streams are in English and the community welcomes everyone regardless of where you're from.</p>
+                </details>
+                <details>
+                    <summary>What is StreamerZone.gg?</summary>
+                    <p>FaroNova is an official streamer for StreamerZone.gg — a network and community built to help creators grow. Think of it as a home for up-and-coming streamers.</p>
+                </details>
+                <details>
+                    <summary>What's the stream vibe like?</summary>
+                    <p>Chill and welcoming. The goal is to create a safe space where you can hang out, talk about your day, and have fun. No pressure, no gatekeeping — just good company.</p>
                 </details>
                 <details>
                     <summary>Where is the latest content?</summary>
-                    <p>Twitch is the main platform — past VODs and clips are available right on the channel page after each stream ends.</p>
-                </details>
-                <details>
-                    <summary>How do I get notified when a stream starts?</summary>
-                    <p>Hit Follow on Twitch and enable notifications in the app. You can also follow on X for quick stream-start posts.</p>
-                </details>
-                <details>
-                    <summary>How do I join the community?</summary>
-                    <p>Use the Discord link above for the community server, stream updates, and shared clips.</p>
+                    <p>TikTok gets the short-form clips and highlights. Twitch is where the live streams happen. YouTube has VODs and longer content. Follow all three to catch everything.</p>
                 </details>
                 <details>
                     <summary>How do I reach out for collaborations?</summary>
-                    <p>Use the email link in the community section or send a direct message on X.</p>
-                </details>
-                <details>
-                    <summary>Are VODs saved after streams?</summary>
-                    <p>Yes — past broadcasts are saved on the Twitch channel. Highlights and clips are also available from standout moments.</p>
+                    <p>Use the email link in the community section for business inquiries, campaigns, and partnerships. For casual collabs, slide into the DMs on X or Discord.</p>
                 </details>
             </div>
         </section>
@@ -2064,9 +2724,10 @@
     <footer class="site-shell">
         <div class="footer-card">
             <div><span class="eyebrow">FaroNova</span>
-                <h2>Follow the next stream, clip, or community moment.</h2>
+                <h2>Come in, say hi, and don't be shy.</h2>
             </div>
-            <div class="social-links"><a
+            <div class="social-links"><a href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer"
+                    aria-label="Open TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a><a
                     href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"
                     aria-label="Open Twitch"><i class="fa-brands fa-twitch" aria-hidden="true"></i></a><a
                     href="https://instagram.com/faronova_" target="_blank" rel="noopener noreferrer"
@@ -2078,254 +2739,464 @@
                     href="https://discord.gg/whRyvAPuVQ" target="_blank" rel="noopener noreferrer"
                     aria-label="Open Discord"><i class="fa-brands fa-discord" aria-hidden="true"></i></a></div>
         </div>
-        <div class="footer-bottom"><span>© <span id="currentYear">2026</span> FaroNova</span><span>Creator hub for live streams, clips, and community links.</span></div>
+        <div class="footer-bottom"><span>© <span id="currentYear">2026</span> FaroNova</span><span>Official streamer for <a href="https://streamerzone.gg" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none">StreamerZone.gg</a> · Gacha gamer from Malaysia</span></div>
     </footer>
     <script>
         (function () {
-            var CONFIG = { twitch: { username: "faronova" } };
-            var $ = function (id) { return document.getElementById(id); };
+            var CONFIG = { tiktok: { username: "faronova_" }, twitch: { username: "faronova" } };
+            var $ = function (id) { return document.getElementById(id) };
 
-            // --- Utilities ---
-            function esc(v) {
-                return String(v == null ? "" : v)
-                    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-                    .replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-            }
-            function num(v) {
-                var n = Number(v);
-                return Number.isFinite(n) ? new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 }).format(n) : "0";
-            }
-            function safe(v, hosts) {
-                try {
-                    var u = new URL(v);
-                    return hosts.some(function (h) { return u.hostname === h || u.hostname.endsWith("." + h); }) ? u.href : "";
-                } catch (e) { return ""; }
-            }
-            function json(url) {
-                return fetch(url, { headers: { Accept: "application/json" } }).then(function (r) {
-                    if (!r.ok) throw new Error("Request failed: " + r.status);
-                    return r.json();
-                });
-            }
-            function liveWatch(show) { var g = $("liveWatchGrid"); if (g) g.hidden = !show; }
-            function dur(s) {
-                // Convert ISO 8601 duration like PT1H32M10S to readable string
-                var m = String(s || "").match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-                if (!m) return "";
-                var h = m[1] ? m[1] + "h " : "";
-                var min = m[2] ? m[2] + "m" : "";
-                return (h + min).trim() || "–";
-            }
-            function relTime(iso) {
-                var d = new Date(iso);
-                if (isNaN(d)) return "";
-                var diff = Math.floor((Date.now() - d.getTime()) / 1000);
-                if (diff < 60) return "just now";
-                if (diff < 3600) return Math.floor(diff / 60) + "m ago";
-                if (diff < 86400) return Math.floor(diff / 3600) + "h ago";
-                if (diff < 2592000) return Math.floor(diff / 86400) + "d ago";
-                return d.toLocaleDateString();
+            function esc(v) { return String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;") }
+            function num(v) { var n = Number(v); return Number.isFinite(n) ? new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 }).format(n) : "0" }
+            function safe(v, hosts) { try { var u = new URL(v); return hosts.some(function (h) { return u.hostname === h || u.hostname.endsWith("." + h) }) ? u.href : "" } catch (e) { return "" } }
+            function json(url) { return fetch(url, { headers: { Accept: "application/json" } }).then(function (r) { if (!r.ok) throw new Error("Request failed: " + r.status); return r.json() }) }
+            function liveWatch(show) {
+                var g = $("liveWatchGrid");
+                if (g) g.classList.toggle("visible", show);
             }
 
-            // --- Featured clips section ---
+            // ── TikTok ────────────────────────────────────────────────────────
+            function tikTokFallback() {
+                var l = $("tiktokLoading"); if (l) l.hidden = true;
+                $("tiktokFollowers").textContent = "View profile";
+                $("tiktokStatus").innerHTML = '<span class="status-dot"></span><span>Profile linked</span>';
+                $("tiktokContainer").innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></span><h3>TikTok feed is not available here.</h3><p>The profile link still takes you straight to the newest uploads.</p><a class="button button-primary" href="https://tiktok.com/@' + CONFIG.tiktok.username + '" target="_blank" rel="noopener noreferrer">Open TikTok profile <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></div>'
+            }
+            function fetchTikTok() {
+                var l = $("tiktokLoading");
+                json('/api/tiktok-api?uniqueId=' + encodeURIComponent(CONFIG.tiktok.username)).then(function (p) {
+                    var s = p.userInfo && p.userInfo.stats || {};
+                    var videos = Array.isArray(p.userInfo && p.userInfo.items) ? p.userInfo.items : [];
+                    if (l) l.hidden = true;
+                    var tikFc = num(s.followerCount || s.followers);
+                    $("tiktokFollowers").textContent = tikFc;
+                    var tt = $("tickerTikTok"); if (tt) tt.textContent = tikFc + " TikTok";
+                    $("tiktokStatus").innerHTML = '<span class="status-dot"></span><span>Feed connected</span>';
+                    if (!videos.length) { tikTokFallback(); return }
+                    $("tiktokContainer").innerHTML = videos.slice(0, 6).map(function (v) {
+                        var cover = safe((v.video && v.video.cover) || (v.video && v.video.dynamicCover) || (v.video && v.video.originCover), ["tiktokcdn.com", "tiktokcdn-us.com", "byteoversea.com"]);
+                        var href = 'https://www.tiktok.com/@' + CONFIG.tiktok.username + '/video/' + encodeURIComponent(v.id || "");
+                        return '<a class="video-card" href="' + href + '" target="_blank" rel="noopener noreferrer">' + (cover ? '<img class="video-thumb" src="' + esc(cover) + '" alt="' + esc(v.desc || "TikTok post") + '" loading="lazy">' : '<div class="video-thumb"></div>') + '<span class="video-copy"><strong>' + esc(v.desc || "TikTok post") + '</strong><span>' + num((v.stats && v.stats.playCount) || (v.statsV2 && v.statsV2.playCount)) + ' views</span></span></a>'
+                    }).join("")
+                }).catch(function (e) { console.error("TikTok API error:", e.message); tikTokFallback() })
+            }
+
+            // ── Featured clips ────────────────────────────────────────────────
             function featured(clips) {
-                var c = $("featuredClips");
-                if (!c) return;
+                var c = $("featuredClips"); if (!c) return;
                 if (!Array.isArray(clips) || !clips.length) {
                     var f = ["Open the latest Twitch clips", "Watch stream highlights", "Find community favorites"];
                     c.innerHTML = f.map(function (t, i) {
-                        var bg = i === 0 ? "linear-gradient(135deg,rgba(217,102,255,.24),rgba(22,15,31,.92))"
-                            : i === 1 ? "linear-gradient(135deg,rgba(192,132,252,.2),rgba(22,15,31,.92))"
-                                : "linear-gradient(135deg,rgba(255,110,180,.2),rgba(22,15,31,.92))";
-                        return '<a class="featured-clip" href="https://twitch.tv/' + CONFIG.twitch.username + '/clips" target="_blank" rel="noopener noreferrer" style="background:' + bg + '"><span class="featured-clip-copy"><strong>' + t + '</strong><span class="featured-clip-stats"><span>Twitch clips</span></span></span></a>';
-                    }).join("");
-                    return;
+                        var bg = i === 0 ? 'linear-gradient(135deg,rgba(217,102,255,.24),rgba(22,15,31,.92))' : i === 1 ? 'linear-gradient(135deg,rgba(192,132,252,.2),rgba(22,15,31,.92))' : 'linear-gradient(135deg,rgba(255,110,180,.2),rgba(22,15,31,.92))';
+                        return '<a class="featured-clip" href="https://twitch.tv/' + CONFIG.twitch.username + '/clips" target="_blank" rel="noopener noreferrer" style="background:' + bg + '"><span class="featured-clip-copy"><strong>' + t + '</strong><span class="featured-clip-stats"><span>Twitch clips</span></span></span></a>'
+                    }).join(""); return
                 }
                 c.innerHTML = clips.slice(0, 3).map(function (clip) {
-                    var url = safe(clip.url, ["twitch.tv"]) || "https://twitch.tv/" + CONFIG.twitch.username + "/clips";
+                    var url = safe(clip.url, ["twitch.tv"]) || 'https://twitch.tv/' + CONFIG.twitch.username + '/clips';
                     var thumb = safe(clip.thumbnail_url, ["jtvnw.net"]);
-                    var bg = thumb
-                        ? "linear-gradient(180deg,transparent 22%,rgba(0,0,0,.84)),url('" + esc(thumb) + "') center/cover"
-                        : "linear-gradient(135deg,rgba(217,102,255,.22),rgba(22,15,31,.94))";
-                    return '<a class="featured-clip" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer" style="background:' + bg + '"><span class="featured-clip-copy"><strong>' + esc(clip.title || "Watch this clip") + '</strong><span class="featured-clip-stats"><span><i class="fa-regular fa-eye" aria-hidden="true"></i> ' + num(clip.view_count) + '</span><span><i class="fa-regular fa-clock" aria-hidden="true"></i> ' + relTime(clip.created_at) + '</span>' + (clip.game_name ? '<span><i class="fa-solid fa-gamepad" aria-hidden="true"></i> ' + esc(clip.game_name) + '</span>' : '') + '</span></span></a>';
-                }).join("");
+                    var bg = thumb ? 'linear-gradient(180deg,transparent 22%,rgba(0,0,0,.84)),url(\'' + esc(thumb) + '\') center/cover' : 'linear-gradient(135deg,rgba(217,102,255,.22),rgba(22,15,31,.94))';
+                    return '<a class="featured-clip" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer" style="background:' + bg + '"><span class="featured-clip-copy"><strong>' + esc(clip.title || "Watch this clip") + '</strong><span class="featured-clip-stats"><span><i class="fa-regular fa-eye" aria-hidden="true"></i> ' + num(clip.view_count) + '</span><span><i class="fa-regular fa-clock" aria-hidden="true"></i> ' + new Date(clip.created_at).toLocaleDateString() + '</span></span></span></a>'
+                }).join("")
             }
 
-            // --- Twitch fallback ---
+            // ── VODs ──────────────────────────────────────────────────────────
+            function renderVods(vods) {
+                var c = $("vodsContainer"); if (!c) return;
+                if (!Array.isArray(vods) || !vods.length) {
+                    c.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-brands fa-twitch" aria-hidden="true"></i></span><h3>No VODs available yet.</h3><p>Past broadcasts will appear here once they are published.</p><a class="button button-compact" href="https://twitch.tv/' + CONFIG.twitch.username + '/videos" target="_blank" rel="noopener noreferrer">Check Twitch videos</a></div></div>';
+                    return
+                }
+                c.innerHTML = vods.slice(0, 3).map(function (v) {
+                    var url = safe(v.url, ["twitch.tv"]) || 'https://twitch.tv/' + CONFIG.twitch.username + '/videos';
+                    var thumb = v.thumbnail_url ? v.thumbnail_url.replace('%{width}', '640').replace('%{height}', '360') : '';
+                    var safethumb = thumb ? safe(thumb, ["jtvnw.net"]) : '';
+                    var bg = safethumb ? 'linear-gradient(180deg,transparent 22%,rgba(0,0,0,.88)),url(\'' + esc(safethumb) + '\') center/cover' : 'linear-gradient(135deg,rgba(217,102,255,.22),rgba(22,15,31,.94))';
+                    var dur = v.duration || '';
+                    return '<a class="featured-clip" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer" style="background:' + bg + '"><span class="featured-clip-copy"><strong>' + esc(v.title || "Past broadcast") + '</strong><span class="featured-clip-stats">' + (dur ? '<span><i class="fa-regular fa-clock" aria-hidden="true"></i> ' + esc(dur) + '</span>' : '') + '<span><i class="fa-regular fa-eye" aria-hidden="true"></i> ' + num(v.view_count) + '</span><span>' + new Date(v.created_at).toLocaleDateString() + '</span></span></span></a>'
+                }).join("")
+            }
+
+            // ── Twitch fallback ───────────────────────────────────────────────
             function twitchFallback() {
-                var i = $("liveIndicator");
-                i.classList.remove("is-live");
+                var i = $("liveIndicator"); i.classList.remove("is-live");
                 i.innerHTML = '<span class="status-dot"></span><span>Status unavailable</span>';
                 $("twitchHeroStatus").textContent = "Visit channel";
-                $("twitchTotalViews").textContent = "–";
+                $("twitchFollowers").textContent = "—";
                 $("liveHeadline").textContent = "Open Twitch for the latest.";
                 $("liveDescription").textContent = "Live status could not connect, but the channel link is ready.";
                 liveWatch(false);
-                $("twitchClips").innerHTML = '<div class="empty-state" style="min-height:260px"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-brands fa-twitch" aria-hidden="true"></i></span><h3>Twitch data is reconnecting.</h3><p>Open the channel directly for live video, chat, and clips.</p><a class="button button-primary button-compact" href="https://twitch.tv/' + CONFIG.twitch.username + '" target="_blank" rel="noopener noreferrer">Open Twitch</a></div></div>';
-                vodsFallback();
+                var mcs = $("mClipSub"); if (mcs) mcs.textContent = "—";
+                $("twitchClips").innerHTML = '<div class="empty-state" style="min-height:200px"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-brands fa-twitch" aria-hidden="true"></i></span><h3>Twitch data is reconnecting.</h3><p>Open the channel directly for live video, chat, and clips.</p><a class="button button-primary button-compact" href="https://twitch.tv/' + CONFIG.twitch.username + '" target="_blank" rel="noopener noreferrer">Open Twitch</a></div></div>'
             }
 
-            // --- VODs fallback ---
-            function vodsFallback() {
-                var l = $("vodsLoading");
-                if (l) l.hidden = true;
-                $("vodsStatus").innerHTML = '<span class="status-dot"></span><span>Visit channel</span>';
-                $("vodsContainer").innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-brands fa-twitch" aria-hidden="true"></i></span><h3>No VODs loaded.</h3><p>Head to the Twitch channel to browse past broadcasts.</p><a class="button button-primary" href="https://twitch.tv/' + CONFIG.twitch.username + '/videos" target="_blank" rel="noopener noreferrer">Browse VODs <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></div>';
-            }
-
-            // --- Fetch VODs ---
-            function fetchVods(userId) {
-                var l = $("vodsLoading");
-                json("/api/twitch-api/videos?broadcaster_id=" + encodeURIComponent(userId) + "&type=archive&first=6")
-                    .then(function (vp) {
-                        if (l) l.hidden = true;
-                        var vods = Array.isArray(vp.data) ? vp.data : [];
-                        if (!vods.length) { vodsFallback(); return; }
-                        $("vodsStatus").innerHTML = '<span class="status-dot"></span><span>' + vods.length + ' VODs loaded</span>';
-                        $("vodsContainer").innerHTML = vods.map(function (v) {
-                            var url = safe(v.url, ["twitch.tv"]) || "https://twitch.tv/" + CONFIG.twitch.username + "/videos";
-                            // Twitch VOD thumbnails have %{width}x%{height} placeholders
-                            var rawThumb = (v.thumbnail_url || "").replace("%{width}", "480").replace("%{height}", "270");
-                            var thumb = safe(rawThumb, ["jtvnw.net", "static-cdn.jtvnw.net"]);
-                            return '<a class="video-card" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">'
-                                + (thumb ? '<img class="video-thumb" src="' + esc(thumb) + '" alt="' + esc(v.title || "Twitch VOD") + '" loading="lazy" style="aspect-ratio:16/9">' : '<div class="video-thumb" style="aspect-ratio:16/9;background:#0c0816"></div>')
-                                + '<span class="video-copy"><strong>' + esc(v.title || "Twitch VOD") + '</strong><span>' + relTime(v.published_at || v.created_at) + (v.duration ? " · " + dur(v.duration) : "") + (v.view_count ? " · " + num(v.view_count) + " views" : "") + '</span></span></a>';
-                        }).join("");
-                    })
-                    .catch(function (e) { console.error("VODs error:", e.message); vodsFallback(); });
-            }
-
-            // --- Main Twitch fetch ---
+            // ── Twitch main fetch ─────────────────────────────────────────────
             function fetchTwitch() {
-                var cachedUserId = null;
-                json("/api/twitch-api/user?username=" + encodeURIComponent(CONFIG.twitch.username))
-                    .then(function (up) {
-                        if (!up.data || !up.data.length) throw new Error("User not found");
-                        var user = up.data[0];
-                        cachedUserId = user.id;
-                        var av = safe(user.profile_image_url, ["jtvnw.net"]);
-                        if (av) $("profileAvatar").src = av;
-                        // Pull total views from the user object (always available with app token)
-                        if (user.view_count != null) {
-                            $("twitchTotalViews").textContent = num(user.view_count);
+                json('/api/twitch-api/user?username=' + encodeURIComponent(CONFIG.twitch.username)).then(function (up) {
+                    if (!up.data || !up.data.length) throw new Error("User not found");
+                    var user = up.data[0];
+
+                    // Profile avatar from API — sync both hero and about section
+                    var av = safe(user.profile_image_url, ["jtvnw.net"]);
+                    if (av) {
+                        $("profileAvatar").src = av;
+                        var aboutImg = $("aboutAvatar"); if (aboutImg) aboutImg.src = av;
+                    }
+
+                    // Fetch stream, clips, followers, channel info, and VODs in parallel
+                    return Promise.all([
+                        json('/api/twitch-api/stream?user_id=' + encodeURIComponent(user.id)),
+                        json('/api/twitch-api/clips?broadcaster_id=' + encodeURIComponent(user.id) + '&first=5'),
+                        json('/api/twitch-api/followers?broadcaster_id=' + encodeURIComponent(user.id)),
+                        json('/api/twitch-api/channel?broadcaster_id=' + encodeURIComponent(user.id)),
+                        json('/api/twitch-api/videos?user_id=' + encodeURIComponent(user.id) + '&first=3&type=archive')
+                    ])
+                }).then(function (res) {
+                    var sp = res[0], cp = res[1], fp = res[2], ch = res[3], vp = res[4];
+                    var stream = sp.data && sp.data[0];
+                    var channel = ch.data && ch.data[0];
+                    var i = $("liveIndicator");
+
+                    // Follower count — sync hero stat, about badge, ticker and milestone
+                    var followerCount = fp.total != null ? fp.total : (fp.data && fp.data.length ? fp.data.length : null);
+                    if (followerCount != null) {
+                        var fc = num(followerCount);
+                        $("twitchFollowers").textContent = fc;
+                        var ab = $("aboutFollowers"); if (ab) ab.textContent = fc;
+                        // Ticker
+                        var tf = $("tickerFollowers"); if (tf) tf.textContent = fc + " followers";
+                        // Milestone — goal 500
+                        var goal = 500;
+                        var raw = Math.min(followerCount, goal);
+                        var pct = Math.round((raw / goal) * 100);
+                        var ms = $("mFollowerSub"); if (ms) ms.textContent = followerCount + " / " + goal + " followers";
+                        var mp = $("mFollowerPct"); if (mp) mp.textContent = pct + "%";
+                        var mb = $("mFollowerBar"); if (mb) mb.style.width = pct + "%";
+                    }
+
+                    var gameTag = $("liveGameTag");
+                    var gameArt = $("liveGameArt");
+                    var gameName = $("liveGameName");
+
+                    if (stream) {
+                        i.classList.add("is-live");
+                        i.innerHTML = '<span class="status-dot"></span><span>Live now</span>';
+                        $("twitchHeroStatus").textContent = "Live now";
+                        $("liveHeadline").textContent = stream.game_name || "Live on Twitch";
+                        $("liveDescription").textContent = num(stream.viewer_count) + " viewers watching right now.";
+
+                        // Viewer badge
+                        var vb = $("liveViewerBadge"); if (vb) vb.classList.add("visible");
+                        var vc = $("liveViewerCount"); if (vc) vc.textContent = num(stream.viewer_count);
+
+                        // Live card glow
+                        var lc = $("liveCard"); if (lc) lc.classList.add("is-live-active");
+
+                        // Stream title
+                        if (stream.title) {
+                            var stEl = $("liveStreamTitle"); if (stEl) stEl.classList.add("visible");
+                            var stTx = $("liveStreamTitleText"); if (stTx) stTx.textContent = stream.title;
                         }
-                        // Fetch stream, clips, channel info in parallel
-                        // Each wrapped in .catch so one failure doesn't abort the rest
-                        return Promise.all([
-                            json("/api/twitch-api/stream?user_id=" + encodeURIComponent(user.id)).catch(function () { return {}; }),
-                            json("/api/twitch-api/clips?broadcaster_id=" + encodeURIComponent(user.id) + "&first=10").catch(function () { return {}; }),
-                            json("/api/twitch-api/channel?broadcaster_id=" + encodeURIComponent(user.id)).catch(function () { return {}; }),
-                        ]);
-                    })
-                    .then(function (res) {
-                        var sp = res[0], cp = res[1], chp = res[2];
-                        var stream = sp.data && sp.data[0];
-                        var channel = chp.data && chp.data[0];
-                        var i = $("liveIndicator");
 
-                        // --- Channel sidebar ---
-                        if (channel) {
-                            var gameLabel = $("channelGameLabel");
-                            if (gameLabel) gameLabel.textContent = channel.game_name ? "Currently playing " + channel.game_name + "." : "Live on Twitch.";
-                            var descEl = $("channelDesc");
-                            if (descEl && channel.title) descEl.textContent = channel.title;
+                        // Embed game label
+                        var egl = $("embedGameLabel");
+                        if (egl && stream.game_name) egl.textContent = "· " + stream.game_name;
+
+                        // Game tag with box art
+                        if (stream.game_name) {
+                            gameName.textContent = stream.game_name;
+                            gameTag.classList.add("visible");
+                            if (stream.game_id) {
+                                json('/api/twitch-api/games?id=' + encodeURIComponent(stream.game_id)).then(function (gp) {
+                                    var g = gp.data && gp.data[0];
+                                    if (g && g.box_art_url) {
+                                        var art = g.box_art_url.replace('{width}', '44').replace('{height}', '58');
+                                        var safeArt = safe(art, ["jtvnw.net"]);
+                                        if (safeArt) gameArt.src = safeArt;
+                                    }
+                                }).catch(function () {})
+                            }
                         }
 
-                        // --- Live status ---
-                        if (stream) {
-                            i.classList.add("is-live");
-                            i.innerHTML = '<span class="status-dot"></span><span>Live now</span>';
-                            $("twitchHeroStatus").textContent = "Live now";
-                            $("liveHeadline").textContent = stream.title || stream.game_name || "Live on Twitch";
-                            $("liveDescription").textContent = num(stream.viewer_count) + " viewers · " + (stream.game_name || "Twitch");
-                            var parent = window.location.hostname || "localhost";
-                            var vs = "https://player.twitch.tv/?channel=" + encodeURIComponent(CONFIG.twitch.username) + "&parent=" + encodeURIComponent(parent) + "&muted=true";
-                            var cs = "https://www.twitch.tv/embed/" + encodeURIComponent(CONFIG.twitch.username) + "/chat?parent=" + encodeURIComponent(parent) + "&darkpopout";
-                            if ($("liveVideoFrame").src !== vs) $("liveVideoFrame").src = vs;
-                            if ($("liveChatFrame").src !== cs) $("liveChatFrame").src = cs;
-                            liveWatch(true);
-                        } else {
-                            i.classList.remove("is-live");
-                            i.innerHTML = '<span class="status-dot"></span><span>Offline</span>';
-                            $("twitchHeroStatus").textContent = "Offline";
-                            $("liveHeadline").textContent = "Offline — easy to catch up.";
-                            $("liveDescription").textContent = "Browse recent clips or follow on Twitch for the next live notification.";
-                            liveWatch(false);
+                        var parent = window.location.hostname || "localhost";
+                        var vs = 'https://player.twitch.tv/?channel=' + encodeURIComponent(CONFIG.twitch.username) + '&parent=' + encodeURIComponent(parent) + '&muted=true';
+                        var cs = 'https://www.twitch.tv/embed/' + encodeURIComponent(CONFIG.twitch.username) + '/chat?parent=' + encodeURIComponent(parent) + '&darkpopout';
+                        if ($("liveVideoFrame").src !== vs) $("liveVideoFrame").src = vs;
+                        if ($("liveChatFrame").src !== cs) $("liveChatFrame").src = cs;
+                        liveWatch(true)
+                    } else {
+                        i.classList.remove("is-live");
+                        i.innerHTML = '<span class="status-dot"></span><span>Offline</span>';
+                        $("twitchHeroStatus").textContent = "Offline";
+
+                        // Show last game played when offline
+                        if (channel && channel.game_name) {
+                            gameName.textContent = "Last played: " + channel.game_name;
+                            gameTag.classList.add("visible");
+                            if (channel.game_id) {
+                                json('/api/twitch-api/games?id=' + encodeURIComponent(channel.game_id)).then(function (gp) {
+                                    var g = gp.data && gp.data[0];
+                                    if (g && g.box_art_url) {
+                                        var art = g.box_art_url.replace('{width}', '44').replace('{height}', '58');
+                                        var safeArt = safe(art, ["jtvnw.net"]);
+                                        if (safeArt) gameArt.src = safeArt;
+                                    }
+                                }).catch(function () {})
+                            }
                         }
 
-                        // --- Clips list ---
-                        var clips = Array.isArray(cp.data) ? cp.data : [];
-                        $("twitchClips").innerHTML = clips.length
-                            ? clips.slice(0, 6).map(function (clip) {
-                                var url = safe(clip.url, ["twitch.tv"]);
-                                if (!url) return "";
-                                var thumb = safe(clip.thumbnail_url, ["jtvnw.net"]);
-                                return '<a class="clip-item" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">'
-                                    + (thumb ? '<img class="clip-icon" src="' + esc(thumb) + '" alt="" style="width:42px;height:42px;object-fit:cover;border-radius:6px">' : '<span class="clip-icon"><i class="fa-solid fa-play" aria-hidden="true"></i></span>')
-                                    + '<span class="clip-copy"><strong>' + esc(clip.title || "Twitch clip") + '</strong><span>' + (clip.game_name ? esc(clip.game_name) + " · " : "") + relTime(clip.created_at) + '</span></span>'
-                                    + '<span class="clip-views">' + num(clip.view_count) + ' views</span></a>';
-                            }).join("")
-                            : '<div class="empty-state" style="min-height:260px"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i></span><h3>No recent clips yet.</h3><p>Visit the channel for broadcasts and the next live session.</p></div></div>';
+                        // Show last stream title when offline
+                        if (channel && channel.title) {
+                            var stEl = $("liveStreamTitle"); if (stEl) stEl.classList.add("visible");
+                            var stTx = $("liveStreamTitleText"); if (stTx) stTx.textContent = channel.title;
+                        }
 
-                        featured(clips);
-                        // Always fetch VODs — cachedUserId is guaranteed at this point
-                        fetchVods(cachedUserId);
-                    })
-                    .catch(function (e) {
-                        console.error("Twitch API error:", e.message);
-                        twitchFallback();
-                        featured([]);
-                    });
+                        $("liveHeadline").textContent = "Offline — catch up with recent clips.";
+                        $("liveDescription").textContent = "Follow on Twitch to get notified the moment the stream goes live.";
+                        liveWatch(false)
+                    }
+
+                    // Clips — with thumbnail previews
+                    var clips = Array.isArray(cp.data) ? cp.data : [];
+                    // Clip milestone — goal 100 views
+                    var totalViews = clips.reduce(function(s,c){ return s + (c.view_count||0); }, 0);
+                    var cvGoal = 100, cvPct = Math.min(Math.round((totalViews/cvGoal)*100), 100);
+                    var mcs = $("mClipSub"); if (mcs) mcs.textContent = totalViews + " / " + cvGoal + " total clip views";
+                    var mcp = $("mClipPct"); if (mcp) mcp.textContent = cvPct + "%";
+                    var mcb = $("mClipBar"); if (mcb) mcb.style.width = cvPct + "%";
+                    $("twitchClips").innerHTML = clips.length ? clips.slice(0, 5).map(function (clip) {
+                        var url = safe(clip.url, ["twitch.tv"]);
+                        if (!url) return "";
+                        var thumb = safe(clip.thumbnail_url, ["jtvnw.net"]);
+                        var iconHtml = thumb
+                            ? '<span class="clip-icon"><img src="' + esc(thumb) + '" alt="" loading="lazy"></span>'
+                            : '<span class="clip-icon"><i class="fa-solid fa-play" aria-hidden="true"></i></span>';
+                        return '<a class="clip-item" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' +
+                            iconHtml +
+                            '<span class="clip-copy"><strong>' + esc(clip.title || "Twitch clip") + '</strong><span>' + esc(clip.game_name || "Watch on Twitch") + '</span></span>' +
+                            '<span class="clip-views">' + num(clip.view_count) + ' views</span></a>';
+                    }).join("") : '<div class="empty-state" style="min-height:200px"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i></span><h3>No recent clips yet.</h3><p>Visit the channel for the next live session.</p></div></div>';
+
+                    featured(clips);
+
+                    // VODs
+                    var vods = Array.isArray(vp.data) ? vp.data : [];
+                    renderVods(vods);
+
+                }).catch(function (e) { console.error("Twitch API error:", e.message); twitchFallback(); featured([]); renderVods([]) })
             }
 
-            // --- Intersection observer for reveal animations ---
+            // ── Intersection observer (reveal animations) ─────────────────────
             var ob = new IntersectionObserver(function (es) {
-                es.forEach(function (e) {
-                    if (e.isIntersecting) { e.target.classList.add("is-visible"); ob.unobserve(e.target); }
-                });
-            }, { threshold: 0.12 });
-            document.querySelectorAll(".reveal").forEach(function (el) { ob.observe(el); });
+                es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-visible"); ob.unobserve(e.target) } })
+            }, { threshold: .12 });
+            document.querySelectorAll(".reveal").forEach(function (el) { ob.observe(el) });
 
-            // --- Countdown ---
-            var DAYS = [3, 4, 5], HOUR = 21, WINDOW = 3; // Wed, Thu, Fri at 21:00 UTC
+            // ── Countdown ─────────────────────────────────────────────────────
+            // Active days: Wed=3, Thu=4, Fri=5 | Midday Malaysia = 12:00 GMT+8 = 04:00 UTC
+            var DAYS = [3, 4, 5], HOUR = 4, WINDOW = 6;
             function nextStream(now) {
                 for (var i = 0; i < 8; i++) {
                     var c = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + i, HOUR, 0, 0));
                     if (DAYS.indexOf(c.getUTCDay()) < 0) continue;
                     var end = new Date(c.getTime() + WINDOW * 36e5);
                     if (now >= c && now <= end) return { live: true, start: c };
-                    if (c > now) return { live: false, start: c };
-                }
-                return null;
+                    if (c > now) return { live: false, start: c }
+                } return null
             }
             function countdown() {
                 var n = nextStream(new Date());
-                if (!n) { $("countdownLabel").textContent = "Check Twitch for the latest"; return; }
-                if (n.live) {
-                    $("countdownLabel").textContent = "Scheduled window is live now";
-                    $("countdownDays").textContent = "00";
-                    $("countdownHours").textContent = "00";
-                    $("countdownMinutes").textContent = "00";
-                    return;
-                }
+                if (!n) { $("countdownLabel").textContent = "Check Twitch for the latest"; return }
+                if (n.live) { $("countdownLabel").textContent = "Scheduled window is live now"; $("countdownDays").textContent = "00"; $("countdownHours").textContent = "00"; $("countdownMinutes").textContent = "00"; return }
                 var m = Math.floor((n.start.getTime() - Date.now()) / 6e4);
                 $("countdownLabel").textContent = "Counting down to the next session";
                 $("countdownDays").textContent = String(Math.floor(m / 1440)).padStart(2, "0");
                 $("countdownHours").textContent = String(Math.floor(m % 1440 / 60)).padStart(2, "0");
-                $("countdownMinutes").textContent = String(m % 60).padStart(2, "0");
+                $("countdownMinutes").textContent = String(m % 60).padStart(2, "0")
             }
 
-            // --- Init ---
             $("currentYear").textContent = new Date().getFullYear();
             countdown();
+            fetchTikTok();
             fetchTwitch();
-            featured([]);
 
-            // Refresh live status every 5 min, countdown every 30 sec
+            // ── Games box art ─────────────────────────────────────────
+            var GAMES = [
+                { name: "Neverness to Everness", url: "https://twitch.tv/directory/game/Neverness%20to%20Everness" },
+                { name: "Wuthering Waves",        url: "https://twitch.tv/directory/game/Wuthering%20Waves" },
+                { name: "Genshin Impact",         url: "https://twitch.tv/directory/game/Genshin%20Impact" },
+                { name: "Zenless Zone Zero",      url: "https://twitch.tv/directory/game/Zenless%20Zone%20Zero" },
+                { name: "Roblox",                 url: "https://twitch.tv/directory/game/Roblox" }
+            ];
+            json('/api/twitch-api/games?name=' + GAMES.map(function(g){ return encodeURIComponent(g.name) }).join('&name=')).then(function(gp) {
+                var grid = $("gamesGrid"); if (!grid) return;
+                var items = Array.isArray(gp.data) ? gp.data : [];
+                if (!items.length) return;
+                var html = items.map(function(g) {
+                    var art = safe(g.box_art_url ? g.box_art_url.replace('{width}','240').replace('{height}','320') : '', ["jtvnw.net"]);
+                    var link = "https://twitch.tv/directory/game/" + encodeURIComponent(g.name);
+                    return '<a class="game-card" href="' + esc(link) + '" target="_blank" rel="noopener noreferrer">' +
+                        (art ? '<img src="' + esc(art) + '" alt="' + esc(g.name) + '" loading="lazy">' : '<div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div>') +
+                        '<div class="game-card-overlay"><span class="game-card-name">' + esc(g.name) + '</span></div></a>';
+                });
+                html.push('<a class="game-card" href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-plus"></i></div><div class="game-card-overlay"><span class="game-card-name">Many more!</span></div></a>');
+                grid.innerHTML = html.join("");
+            }).catch(function(){});
+
             setInterval(countdown, 3e4);
             setInterval(fetchTwitch, 3e5);
+            setInterval(fetchTikTok, 18e5);
         })();
     </script>
+    <!-- ── Music player ─────────────────────────────────────────────── -->
+    <button class="music-btn" id="musicToggle" aria-label="Toggle music player">
+        <i class="fa-solid fa-music" id="musicBtnIcon"></i>
+    </button>
+
+    <div class="music-player" id="musicPlayer" role="dialog" aria-label="Music player">
+        <div class="music-player-header">
+            <span class="music-player-label"><i class="fa-solid fa-headphones"></i> Now playing</span>
+            <button class="music-close" id="musicClose" aria-label="Close player"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="music-art" id="musicArt">
+            <div class="music-art-visual">
+                <div class="music-bar"></div>
+                <div class="music-bar"></div>
+                <div class="music-bar"></div>
+                <div class="music-bar"></div>
+                <div class="music-bar"></div>
+                <div class="music-bar"></div>
+                <div class="music-bar"></div>
+            </div>
+        </div>
+        <div class="music-info">
+            <div class="music-title" id="musicTitle">FaroNova Theme</div>
+            <div class="music-artist" id="musicArtist">Lo-fi · FaroNova</div>
+        </div>
+        <div class="music-progress">
+            <div class="music-bar-track" id="musicTrack">
+                <div class="music-bar-fill" id="musicFill"></div>
+            </div>
+            <div class="music-time">
+                <span id="musicCurrent">0:00</span>
+                <span id="musicDuration">0:00</span>
+            </div>
+        </div>
+        <div class="music-controls">
+            <button id="musicPrev" aria-label="Previous"><i class="fa-solid fa-backward-step"></i></button>
+            <button class="music-play-btn" id="musicPlay" aria-label="Play / Pause">
+                <i class="fa-solid fa-play" id="musicPlayIcon"></i>
+            </button>
+            <button id="musicNext" aria-label="Next"><i class="fa-solid fa-forward-step"></i></button>
+        </div>
+        <div class="music-vol">
+            <i class="fa-solid fa-volume-low"></i>
+            <input type="range" id="musicVol" min="0" max="1" step="0.01" value="0.7" aria-label="Volume" />
+            <i class="fa-solid fa-volume-high"></i>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var TRACKS = [
+                { title: "NOVA - LO-FI I", artist: "Background Music", src: "assets/audio/NovaLofi I.mp3" },
+                { title: "NOVA - LO-FI II", artist: "Background Music", src: "assets/audio/NovaLofi II.mp3" }
+            ];
+
+            var idx = 0;
+            var audio = new Audio();
+            audio.volume = 0.7;
+
+            var player   = document.getElementById("musicPlayer");
+            var toggleBtn= document.getElementById("musicToggle");
+            var closeBtn = document.getElementById("musicClose");
+            var playBtn  = document.getElementById("musicPlay");
+            var playIcon = document.getElementById("musicPlayIcon");
+            var btnIcon  = document.getElementById("musicBtnIcon");
+            var prevBtn  = document.getElementById("musicPrev");
+            var nextBtn  = document.getElementById("musicNext");
+            var fill     = document.getElementById("musicFill");
+            var track    = document.getElementById("musicTrack");
+            var curEl    = document.getElementById("musicCurrent");
+            var durEl    = document.getElementById("musicDuration");
+            var volEl    = document.getElementById("musicVol");
+            var titleEl  = document.getElementById("musicTitle");
+            var artistEl = document.getElementById("musicArtist");
+            var artEl    = document.getElementById("musicArt");
+
+            function fmt(s) {
+                var m = Math.floor(s / 60), sec = Math.floor(s % 60);
+                return m + ":" + (sec < 10 ? "0" : "") + sec;
+            }
+
+            function load(i, play) {
+                idx = (i + TRACKS.length) % TRACKS.length;
+                var t = TRACKS[idx];
+                audio.src = t.src;
+                titleEl.textContent = t.title;
+                artistEl.textContent = t.artist;
+                fill.style.width = "0%";
+                curEl.textContent = "0:00";
+                durEl.textContent = "0:00";
+                if (play) audio.play().catch(function(){});
+            }
+
+            function setPlaying(playing) {
+                playIcon.className = playing ? "fa-solid fa-pause" : "fa-solid fa-play";
+                btnIcon.className  = playing ? "fa-solid fa-pause" : "fa-solid fa-music";
+                artEl.classList.toggle("playing", playing);
+                toggleBtn.classList.toggle("is-playing", playing);
+            }
+
+            audio.addEventListener("timeupdate", function () {
+                if (!audio.duration) return;
+                var pct = (audio.currentTime / audio.duration) * 100;
+                fill.style.width = pct + "%";
+                curEl.textContent = fmt(audio.currentTime);
+            });
+
+            audio.addEventListener("loadedmetadata", function () {
+                durEl.textContent = fmt(audio.duration);
+            });
+
+            audio.addEventListener("ended", function () {
+                load(idx + 1, true);
+            });
+
+            audio.addEventListener("play",  function () { setPlaying(true) });
+            audio.addEventListener("pause", function () { setPlaying(false) });
+
+            playBtn.addEventListener("click", function () {
+                if (!audio.src || audio.src.endsWith("/")) { load(0, true); return; }
+                audio.paused ? audio.play().catch(function(){}) : audio.pause();
+            });
+
+            prevBtn.addEventListener("click", function () { load(idx - 1, !audio.paused) });
+            nextBtn.addEventListener("click", function () { load(idx + 1, !audio.paused) });
+
+            track.addEventListener("click", function (e) {
+                if (!audio.duration) return;
+                var rect = track.getBoundingClientRect();
+                audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+            });
+
+            volEl.addEventListener("input", function () { audio.volume = parseFloat(volEl.value) });
+
+            toggleBtn.addEventListener("click", function () {
+                var open = player.classList.toggle("is-open");
+                if (open && !audio.src) load(0, false);
+            });
+
+            closeBtn.addEventListener("click", function () { player.classList.remove("is-open") });
+
+            // Close on outside click
+            document.addEventListener("click", function (e) {
+                if (!player.contains(e.target) && e.target !== toggleBtn) {
+                    player.classList.remove("is-open");
+                }
+            });
+        })();
+    </script>
+
 </body>
 
 </html>
