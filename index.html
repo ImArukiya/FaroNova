@@ -2843,12 +2843,13 @@
                     }
 
                     // Fetch stream, clips, followers, channel info, and VODs in parallel
+                    // Each call is individually guarded — one failure won't kill the rest
                     return Promise.all([
-                        json('/api/twitch-api/stream?user_id=' + encodeURIComponent(user.id)),
-                        json('/api/twitch-api/clips?broadcaster_id=' + encodeURIComponent(user.id) + '&first=5'),
-                        json('/api/twitch-api/followers?broadcaster_id=' + encodeURIComponent(user.id)),
-                        json('/api/twitch-api/channel?broadcaster_id=' + encodeURIComponent(user.id)),
-                        json('/api/twitch-api/videos?user_id=' + encodeURIComponent(user.id) + '&first=3&type=archive')
+                        json('/api/twitch-api/stream?user_id='       + encodeURIComponent(user.id)).catch(function(){ return {} }),
+                        json('/api/twitch-api/clips?broadcaster_id=' + encodeURIComponent(user.id) + '&first=5').catch(function(){ return {} }),
+                        json('/api/twitch-api/followers?broadcaster_id=' + encodeURIComponent(user.id)).catch(function(){ return {} }),
+                        json('/api/twitch-api/channel?broadcaster_id='   + encodeURIComponent(user.id)).catch(function(){ return {} }),
+                        json('/api/twitch-api/videos?broadcaster_id='    + encodeURIComponent(user.id) + '&first=3&type=archive').catch(function(){ return {} })
                     ])
                 }).then(function (res) {
                     var sp = res[0], cp = res[1], fp = res[2], ch = res[3], vp = res[4];
