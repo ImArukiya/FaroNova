@@ -2569,7 +2569,7 @@
                         <div class="milestone-icon" style="background:rgba(192,132,252,.15);color:var(--blue)"><i class="fa-solid fa-fire"></i></div>
                         <span class="milestone-pct" id="mClipPct">—</span>
                     </div>
-                    <div class="milestone-label">100 clip views</div>
+                    <div class="milestone-label">1000 clip views</div>
                     <div class="milestone-sub" id="mClipSub">Counting clip views…</div>
                     <div class="milestone-bar-wrap"><div class="milestone-bar" id="mClipBar" style="width:0%"></div></div>
                 </div>
@@ -2868,7 +2868,7 @@
                         // Milestone — goal 500
                         var goal = 500;
                         var raw = Math.min(followerCount, goal);
-                        var pct = Math.round((raw / goal) * 100);
+                        var pct = Math.round((raw / goal) * 1000);
                         var ms = $("mFollowerSub"); if (ms) ms.textContent = followerCount + " / " + goal + " followers";
                         var mp = $("mFollowerPct"); if (mp) mp.textContent = pct + "%";
                         var mb = $("mFollowerBar"); if (mb) mb.style.width = pct + "%";
