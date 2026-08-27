@@ -2868,7 +2868,7 @@
                         // Milestone — goal 500
                         var goal = 500;
                         var raw = Math.min(followerCount, goal);
-                        var pct = Math.round((raw / goal) * 1000);
+                        var pct = Math.round((raw / goal) * 100);
                         var ms = $("mFollowerSub"); if (ms) ms.textContent = followerCount + " / " + goal + " followers";
                         var mp = $("mFollowerPct"); if (mp) mp.textContent = pct + "%";
                         var mb = $("mFollowerBar"); if (mb) mb.style.width = pct + "%";
@@ -2960,7 +2960,7 @@
                     var clips = Array.isArray(cp.data) ? cp.data : [];
                     // Clip milestone — goal 100 views
                     var totalViews = clips.reduce(function(s,c){ return s + (c.view_count||0); }, 0);
-                    var cvGoal = 100, cvPct = Math.min(Math.round((totalViews/cvGoal)*100), 100);
+                    var cvGoal = 1000, cvPct = Math.min(Math.round((totalViews/cvGoal)*100), 100);
                     var mcs = $("mClipSub"); if (mcs) mcs.textContent = totalViews + " / " + cvGoal + " total clip views";
                     var mcp = $("mClipPct"); if (mcp) mcp.textContent = cvPct + "%";
                     var mcb = $("mClipBar"); if (mcb) mcb.style.width = cvPct + "%";
