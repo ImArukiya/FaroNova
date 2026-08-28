@@ -2183,6 +2183,855 @@
             }
         }
 
+        /* ── Channel stats bar ── */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 12px
+        }
+
+        .stats-bar-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            padding: 22px 20px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface)
+        }
+
+        .stats-bar-icon {
+            display: grid;
+            width: 36px;
+            aspect-ratio: 1;
+            place-items: center;
+            border-radius: 6px;
+            background: var(--raised);
+            color: var(--accent);
+            font-size: .9rem;
+            margin-bottom: 4px
+        }
+
+        .stats-bar-card strong {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 800;
+            letter-spacing: -.04em;
+            line-height: 1;
+            color: var(--text)
+        }
+
+        .stats-bar-card span {
+            color: var(--subtle);
+            font-size: .74rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase
+        }
+
+        /* ── Top clips leaderboard ── */
+        .topclips-layout {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 18px;
+            align-items: start
+        }
+
+        .topclip-hero {
+            position: relative;
+            overflow: hidden;
+            min-height: 300px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--soft);
+            text-decoration: none;
+            display: flex;
+            align-items: flex-end
+        }
+
+        .topclip-hero-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform .4s var(--ease)
+        }
+
+        .topclip-hero:hover .topclip-hero-bg {
+            transform: scale(1.04)
+        }
+
+        .topclip-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,.88))
+        }
+
+        .topclip-hero-body {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            width: 100%
+        }
+
+        .topclip-rank {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: var(--accent);
+            color: var(--ink);
+            font-size: .7rem;
+            font-weight: 800;
+            letter-spacing: .06em;
+            margin-bottom: 10px
+        }
+
+        .topclip-hero-body strong {
+            display: block;
+            font-size: clamp(1rem, 2vw, 1.35rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 8px
+        }
+
+        .topclip-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: rgba(255,255,255,.72);
+            font-size: .76rem;
+            font-weight: 700
+        }
+
+        .topclips-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .topclip-row {
+            display: grid;
+            grid-template-columns: 28px 80px minmax(0,1fr) auto;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--soft);
+            text-decoration: none;
+            transition: border-color .18s ease, transform .18s ease
+        }
+
+        .topclip-row:hover {
+            border-color: var(--line2);
+            transform: translateX(2px)
+        }
+
+        .topclip-row-num {
+            color: var(--accent);
+            font-size: .8rem;
+            font-weight: 800;
+            text-align: center
+        }
+
+        .topclip-row-thumb {
+            width: 80px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 4px;
+            background: var(--raised)
+        }
+
+        .topclip-row-copy strong {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: .84rem;
+            font-weight: 800
+        }
+
+        .topclip-row-copy span {
+            color: var(--muted);
+            font-size: .72rem
+        }
+
+        .topclip-row-views {
+            color: var(--subtle);
+            font-size: .74rem;
+            font-weight: 700;
+            white-space: nowrap
+        }
+
+        /* ── Last stream info ── */
+        .laststream-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px
+        }
+
+        .laststream-card {
+            padding: 26px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface)
+        }
+
+        .laststream-card.highlight {
+            background: linear-gradient(135deg, rgba(217,102,255,.12), transparent 55%), var(--surface)
+        }
+
+        .laststream-label {
+            color: var(--accent);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 7px
+        }
+
+        .laststream-card h3 {
+            font-size: clamp(1.1rem, 2vw, 1.55rem);
+            letter-spacing: -.03em;
+            line-height: 1.15;
+            margin-bottom: 10px
+        }
+
+        .laststream-card p {
+            color: var(--muted);
+            font-size: .85rem;
+            line-height: 1.55
+        }
+
+        .laststream-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 14px
+        }
+
+        .laststream-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border: 1px solid var(--line2);
+            border-radius: 999px;
+            color: var(--muted);
+            font-size: .74rem;
+            font-weight: 700
+        }
+
+        /* ── Rules section ── */
+        /* ── Rules tabs ── */
+        .rules-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 18px
+        }
+
+        .rules-tab {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: var(--surface);
+            color: var(--muted);
+            font-size: .82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .18s ease
+        }
+
+        .rules-tab:hover {
+            border-color: var(--line2);
+            color: var(--text)
+        }
+
+        .rules-tab.is-active {
+            border-color: var(--accent);
+            background: rgba(217,102,255,.1);
+            color: var(--text)
+        }
+
+        .rules-tab.is-active i { color: var(--accent) }
+
+        .rules-panel {
+            animation: fadeIn .22s ease
+        }
+
+        @keyframes fadeIn { from { opacity:0; transform:translateY(6px) } to { opacity:1; transform:translateY(0) } }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0,1fr));
+            gap: 12px
+        }
+
+        .rule-card {
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface)
+        }
+
+        .rule-card--wide {
+            grid-column: span 2
+        }
+
+        .rule-num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -.05em;
+            line-height: 1;
+            margin-bottom: 10px
+        }
+
+        .rule-num--twitch { color: #9147ff }
+        .rule-num--discord { color: #5865f2 }
+
+        .rule-card h3 {
+            font-size: .95rem;
+            letter-spacing: -.01em;
+            margin-bottom: 8px
+        }
+
+        .rule-card p {
+            color: var(--muted);
+            font-size: .83rem;
+            line-height: 1.6
+        }
+
+        /* ── Stream recap / session log ── */
+        .recap-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0
+        }
+
+        .recap-item {
+            display: grid;
+            grid-template-columns: 120px minmax(0,1fr) auto;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface);
+            margin-bottom: 6px
+        }
+
+        .recap-item:last-child { margin-bottom: 0 }
+
+        .recap-date {
+            color: var(--accent);
+            font-size: .8rem;
+            font-weight: 800;
+            letter-spacing: .04em
+        }
+
+        .recap-item strong {
+            display: block;
+            font-size: .9rem;
+            font-weight: 800;
+            margin-bottom: 3px
+        }
+
+        .recap-item span {
+            color: var(--muted);
+            font-size: .78rem
+        }
+
+        .recap-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: var(--raised);
+            color: var(--subtle);
+            font-size: .72rem;
+            font-weight: 700;
+            white-space: nowrap
+        }
+
+        .recap-badge.live {
+            background: rgba(255,77,141,.12);
+            color: var(--red)
+        }
+
+        /* ── Channel rewards ── */
+        .rewards-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 22px
+        }
+
+        .rewards-streak {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 18px;
+            border: 1px solid rgba(217,102,255,.3);
+            border-radius: 999px;
+            background: rgba(217,102,255,.08);
+            color: var(--text);
+            font-size: .84rem;
+            font-weight: 700
+        }
+
+        .rewards-streak strong {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 800
+        }
+
+        .rewards-earned {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: var(--raised);
+            color: var(--accent);
+            font-size: .82rem;
+            font-weight: 800
+        }
+
+        .rewards-earned span {
+            color: var(--muted);
+            font-weight: 600
+        }
+
+        .rewards-new-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 7px;
+            border-radius: 999px;
+            background: var(--accent);
+            color: var(--ink);
+            font-size: .64rem;
+            font-weight: 800;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            margin-left: 4px;
+            vertical-align: middle
+        }
+
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 10px
+        }
+
+        .reward-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface);
+            transition: border-color .18s ease, transform .18s ease
+        }
+
+        .reward-card:hover {
+            border-color: var(--line2);
+            transform: translateY(-1px)
+        }
+
+        .reward-card.reward-new {
+            border-color: rgba(217,102,255,.35);
+            background: linear-gradient(135deg, rgba(217,102,255,.08), transparent 60%), var(--surface)
+        }
+
+        .reward-card.reward-legendary {
+            border-color: rgba(255,110,180,.3);
+            background: linear-gradient(135deg, rgba(255,110,180,.08), transparent 60%), var(--surface)
+        }
+
+        .reward-cost {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 56px;
+            padding: 8px 6px;
+            border-radius: 6px;
+            background: var(--raised);
+            text-align: center;
+            flex-shrink: 0
+        }
+
+        .reward-cost strong {
+            display: block;
+            font-size: .88rem;
+            font-weight: 800;
+            letter-spacing: -.02em;
+            color: var(--accent);
+            line-height: 1.1
+        }
+
+        .reward-cost span {
+            display: block;
+            font-size: .58rem;
+            font-weight: 800;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            color: var(--subtle);
+            margin-top: 2px
+        }
+
+        .reward-body {
+            min-width: 0
+        }
+
+        .reward-body strong {
+            display: block;
+            font-size: .88rem;
+            font-weight: 800;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+
+        .reward-body p {
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: .74rem;
+            line-height: 1.4
+        }
+
+        .rewards-note {
+            margin-top: 18px;
+            padding: 14px 18px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface);
+            color: var(--muted);
+            font-size: .82rem;
+            line-height: 1.55;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px
+        }
+
+        .rewards-note i {
+            color: var(--accent);
+            margin-top: 2px;
+            flex-shrink: 0
+        }
+
+        /* ── Responsive additions ── */
+        @media(max-width:980px) {
+            .stats-bar { grid-template-columns: repeat(2, 1fr) }
+            .topclips-layout { grid-template-columns: 1fr }
+            .laststream-grid { grid-template-columns: 1fr }
+            .rules-grid { grid-template-columns: 1fr }
+            .rule-card--wide { grid-column: auto }
+            .rewards-grid { grid-template-columns: repeat(2, 1fr) }
+        }
+
+        @media(max-width:720px) {
+            .stats-bar,
+            .rewards-grid { grid-template-columns: 1fr }
+            .topclip-row { grid-template-columns: 28px minmax(0,1fr) auto }
+            .topclip-row-thumb { display: none }
+            .recap-item { grid-template-columns: 1fr auto; gap: 8px }
+            .recap-date { grid-column: 1 / -1; font-size: .74rem }
+            .emotes-grid { grid-template-columns: repeat(4, 1fr) }
+            .badges-grid { grid-template-columns: repeat(2, 1fr) }
+            .overlay-grid { grid-template-columns: 1fr }
+        }
+
+        /* ── Emotes showcase ── */
+        .emotes-grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0,1fr));
+            gap: 10px
+        }
+
+        .emote-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px 14px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface);
+            text-align: center;
+            transition: border-color .18s ease, transform .18s ease
+        }
+
+        .emote-card:hover {
+            border-color: var(--line2);
+            transform: translateY(-2px)
+        }
+
+        .emote-emoji {
+            font-size: 2.2rem;
+            line-height: 1
+        }
+
+        .emote-name {
+            color: var(--accent);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .04em
+        }
+
+        .emote-desc {
+            color: var(--muted);
+            font-size: .72rem;
+            line-height: 1.4
+        }
+
+        .emote-tier {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 7px;
+            border-radius: 999px;
+            background: var(--raised);
+            color: var(--subtle);
+            font-size: .65rem;
+            font-weight: 800;
+            letter-spacing: .05em;
+            text-transform: uppercase
+        }
+
+        /* ── Badges ── */
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 12px
+        }
+
+        .badge-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 18px 20px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface)
+        }
+
+        .badge-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+            flex-shrink: 0
+        }
+
+        .badge-body h3 {
+            font-size: .9rem;
+            letter-spacing: -.01em;
+            margin-bottom: 5px
+        }
+
+        .badge-body p {
+            color: var(--muted);
+            font-size: .78rem;
+            line-height: 1.5
+        }
+
+        .badge-how {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 8px;
+            padding: 3px 8px;
+            border-radius: 999px;
+            border: 1px solid var(--line2);
+            color: var(--accent);
+            font-size: .7rem;
+            font-weight: 700
+        }
+
+        /* ── Overlay tour ── */
+        .overlay-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 18px;
+            align-items: start
+        }
+
+        .overlay-preview {
+            position: relative;
+            aspect-ratio: 16/9;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: #07040f;
+            overflow: hidden
+        }
+
+        .overlay-preview-inner {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, transparent 60%, rgba(0,0,0,.7)),
+                linear-gradient(135deg, rgba(217,102,255,.06), transparent 50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 12px
+        }
+
+        .overlay-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start
+        }
+
+        .overlay-cam {
+            width: 22%;
+            aspect-ratio: 4/3;
+            border: 1px solid rgba(217,102,255,.3);
+            border-radius: 4px;
+            background: rgba(217,102,255,.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(217,102,255,.4);
+            font-size: .8rem
+        }
+
+        .overlay-top-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px
+        }
+
+        .overlay-pill {
+            padding: 3px 8px;
+            border-radius: 999px;
+            background: rgba(0,0,0,.55);
+            border: 1px solid rgba(217,102,255,.25);
+            color: rgba(255,255,255,.7);
+            font-size: .6rem;
+            font-weight: 700
+        }
+
+        .overlay-pill.live-pill {
+            background: rgba(255,77,141,.18);
+            border-color: rgba(255,77,141,.4);
+            color: var(--red)
+        }
+
+        .overlay-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end
+        }
+
+        .overlay-alerts {
+            display: flex;
+            flex-direction: column;
+            gap: 4px
+        }
+
+        .overlay-alert-item {
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: rgba(217,102,255,.15);
+            border-left: 2px solid var(--accent);
+            color: var(--text);
+            font-size: .58rem;
+            font-weight: 700
+        }
+
+        .overlay-chat-preview {
+            width: 26%;
+            height: 80px;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 4px;
+            background: rgba(0,0,0,.5);
+            padding: 5px 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            justify-content: flex-end
+        }
+
+        .overlay-chat-line {
+            display: flex;
+            gap: 4px;
+            font-size: .52rem;
+            line-height: 1.3
+        }
+
+        .overlay-chat-name {
+            color: var(--accent);
+            font-weight: 700;
+            white-space: nowrap
+        }
+
+        .overlay-chat-msg {
+            color: rgba(255,255,255,.65)
+        }
+
+        .overlay-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .overlay-legend-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface)
+        }
+
+        .overlay-legend-num {
+            display: grid;
+            width: 26px;
+            height: 26px;
+            flex-shrink: 0;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--raised);
+            color: var(--accent);
+            font-size: .72rem;
+            font-weight: 800
+        }
+
+        .overlay-legend-body strong {
+            display: block;
+            font-size: .85rem;
+            font-weight: 800;
+            margin-bottom: 3px
+        }
+
+        .overlay-legend-body p {
+            color: var(--muted);
+            font-size: .77rem;
+            line-height: 1.5
+        }
+
+        @media(max-width:980px) {
+            .emotes-grid { grid-template-columns: repeat(4, 1fr) }
+            .badges-grid { grid-template-columns: repeat(2, 1fr) }
+            .overlay-grid { grid-template-columns: 1fr }
+        }
+
         @media(prefers-reduced-motion:reduce) {
 
             *,
@@ -2212,14 +3061,12 @@
                     target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"
                         aria-hidden="true"></i></a><a href="https://youtube.com/@faronova" target="_blank"
                     rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"
-                        aria-hidden="true"></i></a><a href="https://x.com/faronova_" target="_blank"
-                    rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"
                         aria-hidden="true"></i></a><a href="https://discord.gg/whRyvAPuVQ" target="_blank"
                     rel="noopener noreferrer" aria-label="Discord"><i class="fa-brands fa-discord"
                         aria-hidden="true"></i></a></div><a class="brand" href="#home" aria-label="FaroNova home"><img
                     style="height: 5rem;" src="/assets/img/FARNOVA_ICON.png" alt=""></a>
             <div class="nav-links"><a href="#about">About</a><a href="#games">Games</a><a href="#live">Live</a><a
-                    href="#schedule">Schedule</a><a href="#donate">Support</a><a href="#channels">Channels</a><a
+                    href="#donate">Support</a><a href="#channels">Channels</a><a
                     class="button button-primary button-compact nav-cta" href="https://twitch.tv/faronova"
                     target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-play"
                         aria-hidden="true"></i><span>Watch live</span></a></div>
@@ -2479,6 +3326,7 @@
 
         <div class="section-divider"></div>
 
+        <!-- SCHEDULE SECTION HIDDEN — uncomment to restore
         <section id="schedule" class="site-shell">
             <div class="section-heading reveal">
                 <div><span class="eyebrow">Schedule</span>
@@ -2515,6 +3363,7 @@
                 </div>
             </div>
         </section>
+        END SCHEDULE SECTION HIDDEN -->
 
         <div class="section-divider"></div>
 
@@ -2620,11 +3469,7 @@
                     href="https://youtube.com/@faronova" target="_blank" rel="noopener noreferrer"><span
                         class="channel-icon"><i class="fa-brands fa-youtube"
                             aria-hidden="true"></i></span><span><strong>YouTube</strong><span>@FaroNova - videos and
-                            shorts</span></span></a><a class="channel-card" data-platform="x"
-                    href="https://x.com/faronova_" target="_blank" rel="noopener noreferrer"><span
-                        class="channel-icon"><i class="fa-brands fa-x-twitter"
-                            aria-hidden="true"></i></span><span><strong>X</strong><span>@FaroNova -
-                            updates</span></span></a><a class="channel-card" data-platform="discord"
+                            shorts</span></span></a><a class="channel-card" data-platform="discord"
                     href="https://discord.gg/whRyvAPuVQ" target="_blank" rel="noopener noreferrer"><span
                         class="channel-icon"><i class="fa-brands fa-discord"
                             aria-hidden="true"></i></span><span><strong>Discord</strong><span>Community
@@ -2654,6 +3499,582 @@
                 <p>Full VODs from recent Twitch sessions, pulled live from the channel.</p>
             </div>
             <div class="featured-grid reveal" id="vodsContainer"></div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ── Channel stats bar ── -->
+        <section id="stats" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Channel stats</span>
+                    <h2>The numbers so far.</h2>
+                </div>
+                <p>Live figures pulled from Twitch every time the page loads.</p>
+            </div>
+            <div class="stats-bar reveal">
+                <div class="stats-bar-card">
+                    <div class="stats-bar-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></div>
+                    <strong id="statFollowers">—</strong>
+                    <span>Twitch followers</span>
+                </div>
+                <div class="stats-bar-card">
+                    <div class="stats-bar-icon"><i class="fa-regular fa-eye" aria-hidden="true"></i></div>
+                    <strong id="statViews">—</strong>
+                    <span>Total channel views</span>
+                </div>
+                <div class="stats-bar-card">
+                    <div class="stats-bar-icon"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i></div>
+                    <strong id="statClips">—</strong>
+                    <span>Clips created</span>
+                </div>
+                <div class="stats-bar-card">
+                    <div class="stats-bar-icon"><i class="fa-solid fa-gamepad" aria-hidden="true"></i></div>
+                    <strong id="statGame">—</strong>
+                    <span>Last game played</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ── Top clips leaderboard ── -->
+        <section id="topclips" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Top clips</span>
+                    <h2>Most-watched moments.</h2>
+                </div>
+                <p>The highest-viewed clips from the channel, ranked by Twitch.</p>
+            </div>
+            <div class="topclips-layout reveal" id="topclipsLayout">
+                <!-- filled by JS -->
+                <a class="topclip-hero" href="https://twitch.tv/faronova/clips" target="_blank" rel="noopener noreferrer" id="topclipHero">
+                    <div class="topclip-hero-bg" id="topclipHeroBg" style="background:linear-gradient(135deg,rgba(217,102,255,.22),rgba(22,15,31,.94))"></div>
+                    <div class="topclip-hero-body">
+                        <span class="topclip-rank"><i class="fa-solid fa-trophy" aria-hidden="true"></i> #1 most viewed</span>
+                        <strong id="topclipHeroTitle">Loading top clip…</strong>
+                        <div class="topclip-meta">
+                            <span id="topclipHeroViews"><i class="fa-regular fa-eye" aria-hidden="true"></i> —</span>
+                            <span id="topclipHeroGame"></span>
+                            <span id="topclipHeroDate"></span>
+                        </div>
+                    </div>
+                </a>
+                <div class="topclips-list" id="topclipsList">
+                    <!-- rows 2-6 filled by JS -->
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ── Last stream info ── -->
+        <section id="laststream" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Last stream</span>
+                    <h2>What happened most recently.</h2>
+                </div>
+                <p>Channel info and stream title pulled live from Twitch.</p>
+            </div>
+            <div class="laststream-grid reveal">
+                <div class="laststream-card highlight">
+                    <div class="laststream-label"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Last stream title</div>
+                    <h3 id="lastStreamTitle">Loading…</h3>
+                    <p id="lastStreamDesc">Channel info is pulling from Twitch right now.</p>
+                    <div class="laststream-tags">
+                        <span class="laststream-tag" id="lastStreamGame"><i class="fa-solid fa-gamepad" aria-hidden="true"></i> <span>Loading game…</span></span>
+                        <span class="laststream-tag"><i class="fa-solid fa-earth-asia" aria-hidden="true"></i> Malaysia · GMT+8</span>
+                        <span class="laststream-tag"><i class="fa-brands fa-twitch" aria-hidden="true"></i> faronova</span>
+                    </div>
+                </div>
+                <div class="laststream-card">
+                    <div class="laststream-label"><i class="fa-solid fa-chart-bar" aria-hidden="true"></i> Channel overview</div>
+                    <h3>FaroNova on Twitch</h3>
+                    <p>Variety streamer and gacha gamer from Malaysia. Building a chill community one stream at a time — follow to get notified the moment the stream goes live.</p>
+                    <div class="laststream-tags">
+                        <span class="laststream-tag"><i class="fa-solid fa-users" aria-hidden="true"></i> <span id="lastStreamFollowers">— followers</span></span>
+                        <span class="laststream-tag"><i class="fa-regular fa-eye" aria-hidden="true"></i> <span id="lastStreamViews">— views</span></span>
+                        <span class="laststream-tag" id="lastStreamStatus"><i class="fa-solid fa-circle" style="color:var(--subtle);font-size:.5rem" aria-hidden="true"></i> <span>Checking…</span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ── Stream rules ── -->
+        <section id="rules" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Community rules</span>
+                    <h2>How the community works.</h2>
+                </div>
+                <p>Rules for both the Twitch stream and the Discord server. Same goal either way — a space worth showing up to.</p>
+            </div>
+
+            <!-- Tab switcher -->
+            <div class="rules-tabs reveal" role="tablist" aria-label="Rules by platform">
+                <button class="rules-tab is-active" id="tab-twitch" role="tab" aria-selected="true" aria-controls="rules-twitch-panel" onclick="switchRulesTab('twitch')">
+                    <i class="fa-brands fa-twitch" aria-hidden="true"></i> Twitch chat
+                </button>
+                <button class="rules-tab" id="tab-discord" role="tab" aria-selected="false" aria-controls="rules-discord-panel" onclick="switchRulesTab('discord')">
+                    <i class="fa-brands fa-discord" aria-hidden="true"></i> Discord server
+                </button>
+            </div>
+
+            <!-- Twitch rules -->
+            <div class="rules-panel" id="rules-twitch-panel" role="tabpanel" aria-labelledby="tab-twitch">
+                <div class="rules-grid">
+                    <div class="rule-card">
+                        <div class="rule-num rule-num--twitch">01</div>
+                        <h3>No self-harm "jokes"</h3>
+                        <p>Do not tell people to k*ll themselves in any way, even as a joke. This applies to every message in chat, no exceptions.</p>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-num rule-num--twitch">02</div>
+                        <h3>No hateful comments</h3>
+                        <p>No hateful comments towards each other — about background, identity, opinions, or anything else. Keep it respectful.</p>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-num rule-num--twitch">03</div>
+                        <h3>Keep private things private</h3>
+                        <p>Keep "private" conversations among yourselves. Nobody in chat needs to know whatever fantasies any of you have about each other.</p>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-num rule-num--twitch">04</div>
+                        <h3>Be nice to each other&nbsp;:)</h3>
+                        <p>That's it. That's the rule. Treat everyone in chat the way you'd want to be treated. The space is only as good as the people in it.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discord rules -->
+            <div class="rules-panel" id="rules-discord-panel" role="tabpanel" aria-labelledby="tab-discord" hidden>
+                <div class="rules-grid">
+                    <div class="rule-card">
+                        <div class="rule-num rule-num--discord">01</div>
+                        <h3>Be respectful</h3>
+                        <p>Any form of hate or discrimination will result in a <strong style="color:var(--red)">BAN</strong>. No exceptions, no second chances for that kind of behaviour.</p>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-num rule-num--discord">02</div>
+                        <h3>No NSFW content</h3>
+                        <p>Keep all content SFW across every channel. NSFW material of any kind is not permitted anywhere in the server.</p>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-num rule-num--discord">03</div>
+                        <h3>Swearing is okay — with limits</h3>
+                        <p>Swearing is fine, but it must never be used in a hateful or targeted manner toward another person. Casual is okay. Aggressive is not.</p>
+                    </div>
+                    <div class="rule-card">
+                        <div class="rule-num rule-num--discord">04</div>
+                        <h3>No spamming</h3>
+                        <p>Don't flood channels with repeated messages, walls of text, or excessive emoji spam. Keep conversations readable for everyone.</p>
+                    </div>
+                    <div class="rule-card rule-card--wide">
+                        <div class="rule-num rule-num--discord">05</div>
+                        <h3>Zero tolerance for scams or upselling</h3>
+                        <p>Any attempt to scam or upsell products and services — through DMs or any text channel — will not be tolerated. If you receive suspicious DMs, report it to the mods immediately. If you genuinely want to promote something, ask FaroNova, an admin, or a mod first.</p>
+                    </div>
+                    <div class="rule-card rule-card--wide">
+                        <div class="rule-num rule-num--discord">06</div>
+                        <h3>Absolute zero — minors are off limits</h3>
+                        <p>Absolutely no sexual references will be made about or to a minor under any circumstances. This is completely unacceptable and will lead to an immediate and permanent ban.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ── Channel point rewards ── -->
+        <section id="rewards" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Channel rewards</span>
+                    <h2>FaroNova's Rewards.</h2>
+                </div>
+                <p>Earn channel points by watching, following, and participating in raids. Spend them on anything below while the stream is live.</p>
+            </div>
+            <div class="reveal">
+                <div class="rewards-grid">
+                    <div class="reward-card reward-new">
+                        <div class="reward-cost"><strong>10</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>bonk <span class="rewards-new-badge">New</span></strong>
+                            <p>Bonk FaroNova in chat. Classic.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>25</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>Text-to-Speech</strong>
+                            <p>Your message gets read aloud on stream.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>50</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>Hydrate</strong>
+                            <p>Remind Faro to take a sip. Very important.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>50</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>Tutturuuuu~</strong>
+                            <p>Trigger the Tuturu sound alert.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>100</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>Highlight My Message</strong>
+                            <p>Highlight your message so it stands out in chat.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>250</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>clash royale laughing</strong>
+                            <p>Play the iconic Clash Royale laugh sound.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>300</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>Get Out</strong>
+                            <p>Play the iconic GET OUT!!! sound.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>300</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>ayaya</strong>
+                            <p>Trigger the ayaya emote sound alert.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>320</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>fake nya dance</strong>
+                            <p>You know what this is. You know.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>350</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>Unlock a Random Sub Emote</strong>
+                            <p>Unlock a random subscriber emote for the channel.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>480</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>SYFM</strong>
+                            <p>Only the most daring chat members know what this does.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>500</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>Choose an Emote to Unlock</strong>
+                            <p>Pick a specific subscriber emote you want unlocked.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>1,250</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>Ichigo Hollow Scream</strong>
+                            <p>Unleash the Hollow scream.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>2,000</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>Miku Miku Beam</strong>
+                            <p>Fire the Miku Miku Beam on stream.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>2,000</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>2k Nova Credits to Discord EXP</strong>
+                            <p>Convert your 2,000 Nova Credits into Discord server EXP.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card">
+                        <div class="reward-cost"><strong>5,000</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>Do 10 Pushups</strong>
+                            <p>Make Faro do 10 pushups on stream. No skipping.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card reward-legendary">
+                        <div class="reward-cost"><strong>50K</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>Continue Streaming</strong>
+                            <p>Keep the stream running — redeem or it ends. No pressure.</p>
+                        </div>
+                    </div>
+                    <div class="reward-card reward-legendary">
+                        <div class="reward-cost" style="background:rgba(255,77,141,.12)"><strong style="color:var(--red)">1M</strong><span>pts</span></div>
+                        <div class="reward-body">
+                            <strong>END THE STREAM</strong>
+                            <p>The nuclear option. One million points. Do it if you dare.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="rewards-note">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                    <span>Channel points are earned by watching streams, following, participating in raids, and through watch streaks. Rewards are only redeemable while the stream is live on Twitch. Some rewards may be paused depending on what's happening on screen.</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ── Emotes showcase ── -->
+        <section id="emotes" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Channel emotes</span>
+                    <h2>The emote lineup.</h2>
+                </div>
+                <p>Subscriber and channel emotes available in chat. Sub to unlock all of them.</p>
+            </div>
+            <div class="emotes-grid reveal">
+                <div class="emote-card">
+                    <div class="emote-emoji"><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_0daf421afb764b3d9cffd95eabcb2c4b/default/light/3.0" alt=""></div>
+                    <div class="emote-name">farono2Shock</div>
+                    <div class="emote-desc">Shocked.</div>
+                    <span class="emote-tier">Follow</span>
+                </div>
+                <div class="emote-card">
+                    <div class="emote-emoji"><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_285b68cc5b4e436993ab5457aae10946/default/light/3.0" alt=""></div>
+                    <div class="emote-name">farono2HI</div>
+                    <div class="emote-desc">Hello Chat.</div>
+                    <span class="emote-tier">Sub Only</span>
+                </div>
+                <div class="emote-card">
+                    <div class="emote-emoji"><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_3bac941508e84606a47055f0fa4b637e/default/light/3.0" alt=""></div>
+                    <div class="emote-name">farono2Bigbrain</div>
+                    <div class="emote-desc">BIG Brain Move.</div>
+                    <span class="emote-tier">Sub Only</span>
+                </div>
+                <div class="emote-card">
+                    <div class="emote-emoji"><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_6fce1092b9cc48cb9fc0dec938e230d1/default/light/3.0" alt=""></div>
+                    <div class="emote-name">farono2Bigbrainparty</div>
+                    <div class="emote-desc">BIG Brain Move. PARTY!!!</div>
+                    <span class="emote-tier">Sub Only</span>
+                </div>
+                <div class="emote-card">
+                    <div class="emote-emoji"><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_742d6959c67c47389685a00d74032726/default/light/3.0" alt=""></div>
+                    <div class="emote-name">farono2Hutaodance</div>
+                    <div class="emote-desc">WE are feeling dancy.</div>
+                    <span class="emote-tier">Sub Only</span>
+                </div>
+                <div class="emote-card">
+                    <div class="emote-emoji"><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_8a8e3cb9ef3845bdad3a84f1c50ec18b/default/light/3.0" alt=""></div>
+                    <div class="emote-name">farono2Shock2</div>
+                    <div class="emote-desc">Shocked V2</div>
+                    <span class="emote-tier">Sub Only</span>
+                </div>
+                <div class="emote-card">
+                    <div class="emote-emoji"><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_965e059226474b6eb97cdb71b9ab8a2d/default/light/3.0" alt=""></div>
+                    <div class="emote-name">farono2Catsideeye2</div>
+                    <div class="emote-desc">Thats SUS...</div>
+                    <span class="emote-tier">Follow</span>
+                </div>
+                <div class="emote-card">
+                    <div class="emote-emoji"><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_b72e8672778a493ea5b44b1df9beb12f/default/light/3.0" alt=""></div>
+                    <div class="emote-name">farono2Ahhh</div>
+                    <div class="emote-desc">Legendary AHHH...</div>
+                    <span class="emote-tier">Sub Only</span>
+                </div>
+                <div class="emote-card">
+                    <div class="emote-emoji"><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_cf732d10cf1a4a5a9a3fdc4c17ff0806/default/light/3.0" alt=""></div>
+                    <div class="emote-name">farono2Shockshake</div>
+                    <div class="emote-desc">HOLYYYYY!!!</div>
+                    <span class="emote-tier">Sub Only</span>
+                </div>
+                <div class="emote-card">
+                    <div class="emote-emoji"><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_e782b43a5a0f49e7a2ea0649aa3e8d9a/default/light/3.0" alt=""></div>
+                    <div class="emote-name">farono2Thumbsup</div>
+                    <div class="emote-desc">This deserves a Thumbsup.</div>
+                    <span class="emote-tier">Follow</span>
+                </div>
+                <div class="emote-card">
+                    <div class="emote-emoji"><img src="https://static-cdn.jtvnw.net/emoticons/v2/emotesv2_ea4cbde498e24efabf1bcf258e9ffbfe/default/light/3.0" alt=""></div>
+                    <div class="emote-name">farono2Clap</div>
+                    <div class="emote-desc">Congratulations.</div>
+                    <span class="emote-tier">Sub Only</span>
+                </div>
+                <div class="emote-card" style="border-style:dashed;opacity:.6">
+                    <div class="emote-emoji"><img src="assets/img/Lock.png" alt=""></div>
+                    <div class="emote-name">Locked</div>
+                    <div class="emote-desc">More unlocked via channel point rewards.</div>
+                    <span class="emote-tier">Rewards</span>
+                </div>
+            </div>
+            <p style="margin-top:14px;color:var(--muted);font-size:.82rem"><i class="fa-solid fa-circle-info" style="color:var(--accent);margin-right:6px" aria-hidden="true"></i>Emote names are placeholders — the actual emotes live on the <a href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer" style="color:var(--accent)">Twitch channel</a>. Additional emotes can be unlocked via channel point rewards.</p>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ── Badges ── -->
+        <section id="badges" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Channel badges</span>
+                    <h2>Earn your place in chat.</h2>
+                </div>
+                <p>Badges show up next to your name in chat. The longer you stick around, the more you unlock.</p>
+            </div>
+            <div class="badges-grid reveal">
+                <div class="badge-card">
+                    <div class="badge-icon">👀</div>
+                    <div class="badge-body">
+                        <h3>Viewer</h3>
+                        <p>Default badge for everyone in chat. Welcome to the room.</p>
+                        <span class="badge-how"><i class="fa-solid fa-check" aria-hidden="true"></i> Just show up</span>
+                    </div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">💜</div>
+                    <div class="badge-body">
+                        <h3>Follower</h3>
+                        <p>You hit Follow. You're part of the community now.</p>
+                        <span class="badge-how"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Follow the channel</span>
+                    </div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">⭐</div>
+                    <div class="badge-body">
+                        <h3>Subscriber — Month 1</h3>
+                        <p>First month sub. Chat sees you differently now.</p>
+                        <span class="badge-how"><i class="fa-solid fa-star" aria-hidden="true"></i> Subscribe</span>
+                    </div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">🌟</div>
+                    <div class="badge-body">
+                        <h3>Subscriber — 3 Months</h3>
+                        <p>Three months in. You're not leaving any time soon.</p>
+                        <span class="badge-how"><i class="fa-solid fa-star" aria-hidden="true"></i> Keep subbing</span>
+                    </div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">🏆</div>
+                    <div class="badge-body">
+                        <h3>Subscriber — 6 Months</h3>
+                        <p>Half a year. Officially a regular. The chat knows your name.</p>
+                        <span class="badge-how"><i class="fa-solid fa-star" aria-hidden="true"></i> Keep subbing</span>
+                    </div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">👑</div>
+                    <div class="badge-body">
+                        <h3>Subscriber — 1 Year</h3>
+                        <p>A full year. Loyalty like this gets noticed.</p>
+                        <span class="badge-how"><i class="fa-solid fa-star" aria-hidden="true"></i> Keep subbing</span>
+                    </div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">🎁</div>
+                    <div class="badge-body">
+                        <h3>Sub Gifter</h3>
+                        <p>You've gifted subs to the community. Legends do this.</p>
+                        <span class="badge-how"><i class="fa-solid fa-gift" aria-hidden="true"></i> Gift a sub</span>
+                    </div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">⚡</div>
+                    <div class="badge-body">
+                        <h3>Hype Train Conductor</h3>
+                        <p>You helped power a hype train to the top. Unforgettable.</p>
+                        <span class="badge-how"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Top hype train contributor</span>
+                    </div>
+                </div>
+                <div class="badge-card">
+                    <div class="badge-icon">🔨</div>
+                    <div class="badge-body">
+                        <h3>Moderator</h3>
+                        <p>Trusted to keep the chat clean and the vibes right.</p>
+                        <span class="badge-how"><i class="fa-solid fa-shield" aria-hidden="true"></i> Appointed by FaroNova</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- ── Stream overlay tour ── -->
+        <section id="overlay" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Stream layout</span>
+                    <h2>What's on screen when live.</h2>
+                </div>
+                <p>A tour of the stream overlay — what each element does and where to find it.</p>
+            </div>
+            <div class="overlay-grid reveal">
+                <div class="overlay-preview" aria-hidden="true">
+                    <div class="overlay-preview-inner">
+                        <div class="overlay-top">
+                            <div class="overlay-cam"><i class="fa-solid fa-user" aria-hidden="true"></i></div>
+                            <div class="overlay-top-right">
+                                <span class="overlay-pill live-pill">⏺ LIVE</span>
+                                <span class="overlay-pill">👁 <span id="overlayViewers">—</span> viewers</span>
+                                <span class="overlay-pill">🎮 <span id="overlayGame">FaroNova</span></span>
+                            </div>
+                        </div>
+                        <div class="overlay-bottom">
+                            <div class="overlay-alerts">
+                                <div class="overlay-alert-item">🎉 Someone just followed!</div>
+                                <div class="overlay-alert-item">⭐ NewViewer just subscribed!</div>
+                                <div class="overlay-alert-item">💜 Raid from FriendChannel (42)</div>
+                            </div>
+                            <div class="overlay-chat-preview">
+                                <div class="overlay-chat-line"><span class="overlay-chat-name">Faro:</span><span class="overlay-chat-msg">let's goooo</span></div>
+                                <div class="overlay-chat-line"><span class="overlay-chat-name">Chat:</span><span class="overlay-chat-msg">POGGERS</span></div>
+                                <div class="overlay-chat-line"><span class="overlay-chat-name">Nova:</span><span class="overlay-chat-msg">tutturuuu~</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="overlay-legend">
+                    <div class="overlay-legend-item">
+                        <div class="overlay-legend-num">1</div>
+                        <div class="overlay-legend-body">
+                            <strong>Facecam</strong>
+                            <p>Top-left corner. Always on during streams — reactions are part of the content.</p>
+                        </div>
+                    </div>
+                    <div class="overlay-legend-item">
+                        <div class="overlay-legend-num">2</div>
+                        <div class="overlay-legend-body">
+                            <strong>Live status &amp; viewer count</strong>
+                            <p>Top-right corner. Shows the stream is live, current viewers, and the active game category.</p>
+                        </div>
+                    </div>
+                    <div class="overlay-legend-item">
+                        <div class="overlay-legend-num">3</div>
+                        <div class="overlay-legend-body">
+                            <strong>Alert overlay</strong>
+                            <p>Bottom-left. Follows, subs, raids, bits, and hype train events all show here with sound.</p>
+                        </div>
+                    </div>
+                    <div class="overlay-legend-item">
+                        <div class="overlay-legend-num">4</div>
+                        <div class="overlay-legend-body">
+                            <strong>Chat overlay</strong>
+                            <p>Bottom-right. Recent chat messages visible on screen — Faro reads and responds in real time.</p>
+                        </div>
+                    </div>
+                    <div class="overlay-legend-item">
+                        <div class="overlay-legend-num">5</div>
+                        <div class="overlay-legend-body">
+                            <strong>Channel point alerts</strong>
+                            <p>When a reward is redeemed (TTS, sound alerts, etc.) it pops up over the game. You'll know.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <div class="section-divider"></div>
@@ -2696,27 +4117,51 @@
             <div class="faq-list reveal">
                 <details>
                     <summary>What games does FaroNova play?</summary>
-                    <p>Mainly gacha games — Neverness to Everness, Wuthering Waves, Genshin Impact, and Zenless Zone Zero are regulars. Also plays Roblox and plenty of other games. Variety is the vibe.</p>
+                    <p>Mainly gacha games — Neverness to Everness, Wuthering Waves, Genshin Impact, and Zenless Zone Zero are regulars. Roblox and other variety games get played too. The current game is always shown live on the Twitch channel page.</p>
                 </details>
                 <details>
                     <summary>Where is FaroNova from?</summary>
-                    <p>Malaysia. Streams are in English and the community welcomes everyone regardless of where you're from.</p>
+                    <p>Malaysia. Streams run in English. The community is open to everyone regardless of country or timezone — just come in and say hi.</p>
                 </details>
                 <details>
                     <summary>What is StreamerZone.gg?</summary>
-                    <p>FaroNova is an official streamer for StreamerZone.gg — a network and community built to help creators grow. Think of it as a home for up-and-coming streamers.</p>
+                    <p>FaroNova is an official streamer for StreamerZone.gg — a network and community built to help growing creators get discovered and supported. Think of it as a proper home for up-and-coming streamers with real community backing.</p>
                 </details>
                 <details>
                     <summary>What's the stream vibe like?</summary>
-                    <p>Chill and welcoming. The goal is to create a safe space where you can hang out, talk about your day, and have fun. No pressure, no gatekeeping — just good company.</p>
+                    <p>Chill, welcoming, and genuinely fun. The goal is a safe space where you can hang out, talk about your day, and just feel at home. No gatekeeping, no pressure — good company is the whole point.</p>
                 </details>
                 <details>
-                    <summary>Where is the latest content?</summary>
-                    <p>TikTok gets the short-form clips and highlights. Twitch is where the live streams happen. YouTube has VODs and longer content. Follow all three to catch everything.</p>
+                    <summary>When does FaroNova stream?</summary>
+                    <p>Wednesday, Thursday, and Friday are the core stream days, usually afternoon or evening Malaysia time (GMT+8). Bonus sessions happen on other days too. Follow on Twitch and enable notifications so you never miss a live.</p>
+                </details>
+                <details>
+                    <summary>How do I get notified when a stream starts?</summary>
+                    <p>Hit Follow on Twitch and turn on notifications in the app or browser. Discord gets an announcement for every session — join the server to catch everything.</p>
+                </details>
+                <details>
+                    <summary>Are past streams saved anywhere?</summary>
+                    <p>Yes — VODs are saved on the Twitch channel after each broadcast. The VODs section on this page shows recent ones pulled live from Twitch. Highlights and clips are also available on the channel.</p>
+                </details>
+                <details>
+                    <summary>Can I clip during streams?</summary>
+                    <p>Absolutely — clipping is always open. If something funny or hype happens, clip it. The best ones sometimes get featured on stream or shared across socials. Don't be shy about sharing a clip in Discord too.</p>
+                </details>
+                <details>
+                    <summary>What can I do with channel points?</summary>
+                    <p>There are 18 rewards ranging from 10 to 1,000,000 points — things like Text-to-Speech (25pts), sound alerts like Tutturuuuu~ and Ichigo Hollow Scream, Highlight My Message (100pts), making Faro do 10 pushups (5,000pts), and the legendary END THE STREAM (1M pts). Check the Rewards section on this page for the full list.</p>
+                </details>
+                <details>
+                    <summary>Where is the latest short-form content?</summary>
+                    <p>TikTok and YouTube Shorts get clips, highlights, and quick reactions cut from streams. Both are updated regularly so you can catch standout moments even when you miss the live broadcast.</p>
                 </details>
                 <details>
                     <summary>How do I reach out for collaborations?</summary>
-                    <p>Use the email link in the community section for business inquiries, campaigns, and partnerships. For casual collabs, slide into the DMs on X or Discord.</p>
+                    <p>Use the business email in the community section for campaigns, partnerships, and creator work. For casual collabs and ideas, Discord is the best place to start a conversation — the community is friendly.</p>
+                </details>
+                <details>
+                    <summary>Is there a minimum age or content rating?</summary>
+                    <p>The stream targets a general audience — content is kept safe and welcoming for most age groups. Chat runs in English. Everyone is welcome as long as they follow the community rules and keep it respectful.</p>
                 </details>
             </div>
         </section>
@@ -2734,13 +4179,27 @@
                     aria-label="Open Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a><a
                     href="https://youtube.com/@faronova" target="_blank" rel="noopener noreferrer"
                     aria-label="Open YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a><a
-                    href="https://x.com/faronova_" target="_blank" rel="noopener noreferrer" aria-label="Open X"><i
-                        class="fa-brands fa-x-twitter" aria-hidden="true"></i></a><a
                     href="https://discord.gg/whRyvAPuVQ" target="_blank" rel="noopener noreferrer"
                     aria-label="Open Discord"><i class="fa-brands fa-discord" aria-hidden="true"></i></a></div>
         </div>
         <div class="footer-bottom"><span>© <span id="currentYear">2026</span> FaroNova</span><span>Official streamer for <a href="https://streamerzone.gg" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:none">StreamerZone.gg</a> · Gacha gamer from Malaysia</span></div>
     </footer>
+    <!-- Global helpers that must be accessible before IIFE runs -->
+    <script>
+        function switchRulesTab(tab) {
+            var panels = { twitch: "rules-twitch-panel", discord: "rules-discord-panel" };
+            var tabs   = { twitch: "tab-twitch",         discord: "tab-discord" };
+            Object.keys(panels).forEach(function(key) {
+                var panel = document.getElementById(panels[key]);
+                var btn   = document.getElementById(tabs[key]);
+                if (!panel || !btn) return;
+                var active = key === tab;
+                panel.hidden = !active;
+                btn.classList.toggle("is-active", active);
+                btn.setAttribute("aria-selected", active ? "true" : "false");
+            });
+        }
+    </script>
     <script>
         (function () {
             var CONFIG = { tiktok: { username: "faronova_" }, twitch: { username: "faronova" } };
@@ -2842,6 +4301,12 @@
                         var aboutImg = $("aboutAvatar"); if (aboutImg) aboutImg.src = av;
                     }
 
+                    // view_count lives on the user object — populate stats bar now
+                    if (user.view_count != null) {
+                        var svEl = $("statViews"); if (svEl) svEl.textContent = num(user.view_count);
+                        var lsvEl = $("lastStreamViews"); if (lsvEl) lsvEl.textContent = num(user.view_count) + " views";
+                    }
+
                     // Fetch stream, clips, followers, channel info, and VODs in parallel
                     // Each call is individually guarded — one failure won't kill the rest
                     return Promise.all([
@@ -2888,6 +4353,10 @@
                         // Viewer badge
                         var vb = $("liveViewerBadge"); if (vb) vb.classList.add("visible");
                         var vc = $("liveViewerCount"); if (vc) vc.textContent = num(stream.viewer_count);
+
+                        // Overlay preview — sync live viewer count + game
+                        var ov = $("overlayViewers"); if (ov) ov.textContent = num(stream.viewer_count);
+                        var og = $("overlayGame");    if (og && stream.game_name) og.textContent = stream.game_name;
 
                         // Live card glow
                         var lc = $("liveCard"); if (lc) lc.classList.add("is-live-active");
@@ -2979,6 +4448,66 @@
 
                     featured(clips);
 
+                    // ── Stats bar ──────────────────────────────────────────
+                    var sf = $("statFollowers"); if (sf) sf.textContent = followerCount != null ? num(followerCount) : "—";
+                    var sv = $("statViews");
+                    if (sv) {
+                        // view_count is on the user object — pull from channel as fallback
+                        var vc2 = (channel && channel.view_count != null) ? channel.view_count : null;
+                        sv.textContent = vc2 != null ? num(vc2) : "—";
+                    }
+                    var sc = $("statClips"); if (sc) sc.textContent = clips.length ? num(clips.length) + "+" : "—";
+                    var sg = $("statGame");
+                    if (sg) {
+                        var lastGame = (stream && stream.game_name) || (channel && channel.game_name) || "—";
+                        sg.textContent = lastGame;
+                    }
+
+                    // ── Top clips leaderboard ─────────────────────────────
+                    if (clips.length) {
+                        var sorted = clips.slice().sort(function(a,b){ return (b.view_count||0)-(a.view_count||0); });
+                        var top = sorted[0];
+                        var topUrl = safe(top.url, ["twitch.tv"]) || "https://twitch.tv/faronova/clips";
+                        var topThumb = safe(top.thumbnail_url, ["jtvnw.net"]);
+                        var heroEl = $("topclipHero"); if (heroEl) heroEl.href = topUrl;
+                        var heroBg = $("topclipHeroBg");
+                        if (heroBg && topThumb) heroBg.style.background = "linear-gradient(180deg,transparent 20%,rgba(0,0,0,.88)),url('" + esc(topThumb) + "') center/cover";
+                        var ht = $("topclipHeroTitle"); if (ht) ht.textContent = top.title || "Top clip";
+                        var hv = $("topclipHeroViews"); if (hv) hv.innerHTML = '<i class="fa-regular fa-eye" aria-hidden="true"></i> ' + num(top.view_count) + " views";
+                        var hg = $("topclipHeroGame"); if (hg && top.game_name) hg.innerHTML = '<i class="fa-solid fa-gamepad" aria-hidden="true"></i> ' + esc(top.game_name);
+                        var hd = $("topclipHeroDate"); if (hd && top.created_at) hd.innerHTML = '<i class="fa-regular fa-clock" aria-hidden="true"></i> ' + new Date(top.created_at).toLocaleDateString();
+                        var listEl = $("topclipsList");
+                        if (listEl) {
+                            listEl.innerHTML = sorted.slice(1, 6).map(function(clip, idx) {
+                                var cu = safe(clip.url, ["twitch.tv"]) || "https://twitch.tv/faronova/clips";
+                                var ct = safe(clip.thumbnail_url, ["jtvnw.net"]);
+                                return '<a class="topclip-row" href="' + esc(cu) + '" target="_blank" rel="noopener noreferrer">' +
+                                    '<span class="topclip-row-num">#' + (idx+2) + '</span>' +
+                                    (ct ? '<img class="topclip-row-thumb" src="' + esc(ct) + '" alt="" loading="lazy">' : '<div class="topclip-row-thumb"></div>') +
+                                    '<span class="topclip-row-copy"><strong>' + esc(clip.title||"Clip") + '</strong><span>' + esc(clip.game_name||"") + '</span></span>' +
+                                    '<span class="topclip-row-views">' + num(clip.view_count) + ' views</span>' +
+                                    '</a>';
+                            }).join("");
+                        }
+                    }
+
+                    // ── Last stream info ──────────────────────────────────
+                    var lst = $("lastStreamTitle");
+                    var lsd = $("lastStreamDesc");
+                    var lsg = $("lastStreamGame");
+                    var lsf = $("lastStreamFollowers");
+                    var lsv = $("lastStreamViews");
+                    var lss = $("lastStreamStatus");
+                    var titleText = (stream && stream.title) || (channel && channel.title) || "No recent title found";
+                    var gameText  = (stream && stream.game_name) || (channel && channel.game_name) || "Unknown game";
+                    if (lst) lst.textContent = titleText;
+                    if (lsd) lsd.textContent = stream ? "Currently live on Twitch right now." : "Last stream info from Twitch channel data.";
+                    if (lsg) lsg.innerHTML = '<i class="fa-solid fa-gamepad" aria-hidden="true"></i> ' + esc(gameText);
+                    if (lsf) lsf.textContent = followerCount != null ? num(followerCount) + " followers" : "— followers";
+                    if (lss) lss.innerHTML = stream
+                        ? '<i class="fa-solid fa-circle" style="color:var(--red);font-size:.5rem" aria-hidden="true"></i> <span>Live now</span>'
+                        : '<i class="fa-solid fa-circle" style="color:var(--subtle);font-size:.5rem" aria-hidden="true"></i> <span>Offline</span>';
+
                     // VODs
                     var vods = Array.isArray(vp.data) ? vp.data : [];
                     renderVods(vods);
@@ -3005,14 +4534,26 @@
                 } return null
             }
             function countdown() {
+                var labelEl = $("countdownLabel");
+                var daysEl  = $("countdownDays");
+                var hrsEl   = $("countdownHours");
+                var minEl   = $("countdownMinutes");
+                // Elements are hidden (schedule section commented out) — bail silently
+                if (!labelEl) return;
                 var n = nextStream(new Date());
-                if (!n) { $("countdownLabel").textContent = "Check Twitch for the latest"; return }
-                if (n.live) { $("countdownLabel").textContent = "Scheduled window is live now"; $("countdownDays").textContent = "00"; $("countdownHours").textContent = "00"; $("countdownMinutes").textContent = "00"; return }
+                if (!n) { labelEl.textContent = "Check Twitch for the latest"; return }
+                if (n.live) {
+                    labelEl.textContent = "Scheduled window is live now";
+                    if (daysEl) daysEl.textContent = "00";
+                    if (hrsEl)  hrsEl.textContent  = "00";
+                    if (minEl)  minEl.textContent  = "00";
+                    return;
+                }
                 var m = Math.floor((n.start.getTime() - Date.now()) / 6e4);
-                $("countdownLabel").textContent = "Counting down to the next session";
-                $("countdownDays").textContent = String(Math.floor(m / 1440)).padStart(2, "0");
-                $("countdownHours").textContent = String(Math.floor(m % 1440 / 60)).padStart(2, "0");
-                $("countdownMinutes").textContent = String(m % 60).padStart(2, "0")
+                labelEl.textContent = "Counting down to the next session";
+                if (daysEl) daysEl.textContent = String(Math.floor(m / 1440)).padStart(2, "0");
+                if (hrsEl)  hrsEl.textContent  = String(Math.floor(m % 1440 / 60)).padStart(2, "0");
+                if (minEl)  minEl.textContent  = String(m % 60).padStart(2, "0");
             }
 
             $("currentYear").textContent = new Date().getFullYear();
