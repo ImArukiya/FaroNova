@@ -3319,6 +3319,201 @@
 
         .btn-socials:hover { color: var(--text); border-color: rgba(255,255,255,.22) }
 
+        /* ── Touch / active states — makes everything feel reactive on mobile ── */
+
+        /* Buttons */
+        .button:active,
+        .button-primary:active {
+            transform: translateY(0) scale(.97);
+            opacity: .88
+        }
+
+        /* Nav icons */
+        .nav-socials a:active {
+            transform: scale(.92);
+            opacity: .75
+        }
+
+        /* Social footer links */
+        .social-links a:active {
+            transform: translateY(0) scale(.93);
+            border-color: var(--accent)
+        }
+
+        /* Cards — all interactive cards get a sink on tap */
+        .video-card:active,
+        .clip-item:active,
+        .topclip-row:active,
+        .topclip-hero:active,
+        .channel-card:active,
+        .community-card:active,
+        .game-card:active,
+        .featured-clip:active {
+            transform: scale(.98);
+            border-color: var(--line2)
+        }
+
+        /* Socials overlay links */
+        .socials-link:active {
+            transform: scale(.98);
+            background: var(--raised);
+            border-color: var(--accent)
+        }
+
+        .socials-close:active,
+        .socials-share-btn:active {
+            transform: scale(.95);
+            opacity: .8
+        }
+
+        /* Rules tabs */
+        .rules-tab:active {
+            transform: scale(.95)
+        }
+
+        /* Summary accordion */
+        summary:active {
+            opacity: .8
+        }
+
+        /* Reward cards */
+        .reward-card:active,
+        .emote-card:active,
+        .badge-card:active {
+            transform: scale(.98);
+            border-color: var(--line2)
+        }
+
+        /* Music controls */
+        .music-controls button:active,
+        .music-btn:active,
+        .music-play-btn:active {
+            transform: scale(.9)
+        }
+
+        /* Ensure transitions are fast enough to feel instant on tap */
+        .button,
+        .socials-link,
+        .clip-item,
+        .video-card,
+        .topclip-row,
+        .channel-card,
+        .game-card,
+        .featured-clip,
+        .nav-socials a,
+        .social-links a,
+        .rules-tab,
+        .emote-card,
+        .reward-card,
+        .badge-card {
+            transition-duration: .12s
+        }
+
+        /* Better scroll momentum on touch */
+        .socials-view,
+        main {
+            -webkit-overflow-scrolling: touch
+        }
+
+        /* Slightly larger tap targets on mobile */
+        @media (max-width: 720px) {
+            .nav-socials a { width: 38px; min-height: 38px }
+            .rules-tab { padding: 10px 16px; font-size: .8rem }
+            summary { min-height: 60px }
+        }
+
+        /* Hover:none devices — disable hover states that conflict with tap */
+        @media (hover: none) {
+            .button:hover,
+            .socials-link:hover,
+            .clip-item:hover,
+            .video-card:hover,
+            .topclip-row:hover,
+            .channel-card:hover,
+            .community-card:hover,
+            .game-card:hover,
+            .featured-clip:hover,
+            .social-links a:hover,
+            .nav-socials a:hover {
+                transform: none;
+                border-color: var(--line)
+            }
+        }
+
+        /* Enhanced socials view */
+        .socials-view {
+            background: radial-gradient(ellipse at 50% 0%, rgba(217,102,255,.10), transparent 60%), var(--bg)
+        }
+
+        .socials-link {
+            position: relative;
+            overflow: hidden
+        }
+
+        .socials-link::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(217,102,255,.06), transparent);
+            transform: translateX(-100%);
+            transition: transform .4s ease
+        }
+
+        .socials-link:hover::before {
+            transform: translateX(100%)
+        }
+
+        .socials-avatar {
+            transition: transform .3s var(--ease), box-shadow .3s ease
+        }
+
+        .socials-avatar:hover {
+            transform: scale(1.04);
+            box-shadow: 0 0 0 4px rgba(217,102,255,.3)
+        }
+
+        .socials-inner {
+            animation: slideUp .35s var(--ease) both
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(22px) }
+            to   { opacity: 1; transform: translateY(0) }
+        }
+
+        .socials-link {
+            animation: fadeSlide .3s var(--ease) both
+        }
+
+        .socials-links .socials-link:nth-child(1) { animation-delay: .04s }
+        .socials-links .socials-link:nth-child(2) { animation-delay: .08s }
+        .socials-links .socials-link:nth-child(3) { animation-delay: .12s }
+        .socials-links .socials-link:nth-child(4) { animation-delay: .16s }
+        .socials-links .socials-link:nth-child(5) { animation-delay: .20s }
+        .socials-links .socials-link:nth-child(6) { animation-delay: .24s }
+        .socials-links .socials-link:nth-child(7) { animation-delay: .28s }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(12px) }
+            to   { opacity: 1; transform: translateY(0) }
+        }
+
+        /* Only animate when the view is actually open */
+        .socials-view:not(.is-open) .socials-inner,
+        .socials-view:not(.is-open) .socials-link {
+            animation: none
+        }
+
+        /* Socials live badge pulse border */
+        .socials-live-ring.is-live {
+            animation: liveRing 2s ease infinite
+        }
+
+        @keyframes liveRing {
+            0%,100% { box-shadow: 0 0 0 3px rgba(255,77,141,.18) }
+            50%      { box-shadow: 0 0 0 6px rgba(255,77,141,.06) }
+        }
+
         @media(prefers-reduced-motion:reduce) {
 
             *,
@@ -3761,6 +3956,26 @@
             </div>
         </section>
         END SCHEDULE SECTION HIDDEN -->
+
+        <div class="section-divider"></div>
+
+        <!-- ── Games played ── -->
+        <section id="games" class="site-shell">
+            <div class="section-heading reveal">
+                <div><span class="eyebrow">Games played</span>
+                    <h2>What's on the screen.</h2>
+                </div>
+                <p>The regulars — box art pulled live from Twitch when available.</p>
+            </div>
+            <div class="games-grid reveal" id="gamesGrid">
+                <a class="game-card" href="https://twitch.tv/directory/game/Neverness%20to%20Everness" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Neverness to Everness</span></div></a>
+                <a class="game-card" href="https://twitch.tv/directory/game/Wuthering%20Waves" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Wuthering Waves</span></div></a>
+                <a class="game-card" href="https://twitch.tv/directory/game/Genshin%20Impact" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Genshin Impact</span></div></a>
+                <a class="game-card" href="https://twitch.tv/directory/game/Zenless%20Zone%20Zero" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Zenless Zone Zero</span></div></a>
+                <a class="game-card" href="https://twitch.tv/directory/game/Roblox" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Roblox</span></div></a>
+                <a class="game-card" href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-plus"></i></div><div class="game-card-overlay"><span class="game-card-name">Many more!</span></div></a>
+            </div>
+        </section>
 
         <div class="section-divider"></div>
 
@@ -4295,92 +4510,6 @@
 
         <div class="section-divider"></div>
 
-        <!-- ── Badges ── -->
-        <section id="badges" class="site-shell">
-            <div class="section-heading reveal">
-                <div><span class="eyebrow">Channel badges</span>
-                    <h2>Earn your place in chat.</h2>
-                </div>
-                <p>Badges show up next to your name in chat. The longer you stick around, the more you unlock.</p>
-            </div>
-            <div class="badges-grid reveal">
-                <div class="badge-card">
-                    <div class="badge-icon">👀</div>
-                    <div class="badge-body">
-                        <h3>Viewer</h3>
-                        <p>Default badge for everyone in chat. Welcome to the room.</p>
-                        <span class="badge-how"><i class="fa-solid fa-check" aria-hidden="true"></i> Just show up</span>
-                    </div>
-                </div>
-                <div class="badge-card">
-                    <div class="badge-icon">💜</div>
-                    <div class="badge-body">
-                        <h3>Follower</h3>
-                        <p>You hit Follow. You're part of the community now.</p>
-                        <span class="badge-how"><i class="fa-brands fa-twitch" aria-hidden="true"></i> Follow the channel</span>
-                    </div>
-                </div>
-                <div class="badge-card">
-                    <div class="badge-icon">⭐</div>
-                    <div class="badge-body">
-                        <h3>Subscriber — Month 1</h3>
-                        <p>First month sub. Chat sees you differently now.</p>
-                        <span class="badge-how"><i class="fa-solid fa-star" aria-hidden="true"></i> Subscribe</span>
-                    </div>
-                </div>
-                <div class="badge-card">
-                    <div class="badge-icon">🌟</div>
-                    <div class="badge-body">
-                        <h3>Subscriber — 3 Months</h3>
-                        <p>Three months in. You're not leaving any time soon.</p>
-                        <span class="badge-how"><i class="fa-solid fa-star" aria-hidden="true"></i> Keep subbing</span>
-                    </div>
-                </div>
-                <div class="badge-card">
-                    <div class="badge-icon">🏆</div>
-                    <div class="badge-body">
-                        <h3>Subscriber — 6 Months</h3>
-                        <p>Half a year. Officially a regular. The chat knows your name.</p>
-                        <span class="badge-how"><i class="fa-solid fa-star" aria-hidden="true"></i> Keep subbing</span>
-                    </div>
-                </div>
-                <div class="badge-card">
-                    <div class="badge-icon">👑</div>
-                    <div class="badge-body">
-                        <h3>Subscriber — 1 Year</h3>
-                        <p>A full year. Loyalty like this gets noticed.</p>
-                        <span class="badge-how"><i class="fa-solid fa-star" aria-hidden="true"></i> Keep subbing</span>
-                    </div>
-                </div>
-                <div class="badge-card">
-                    <div class="badge-icon">🎁</div>
-                    <div class="badge-body">
-                        <h3>Sub Gifter</h3>
-                        <p>You've gifted subs to the community. Legends do this.</p>
-                        <span class="badge-how"><i class="fa-solid fa-gift" aria-hidden="true"></i> Gift a sub</span>
-                    </div>
-                </div>
-                <div class="badge-card">
-                    <div class="badge-icon">⚡</div>
-                    <div class="badge-body">
-                        <h3>Hype Train Conductor</h3>
-                        <p>You helped power a hype train to the top. Unforgettable.</p>
-                        <span class="badge-how"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Top hype train contributor</span>
-                    </div>
-                </div>
-                <div class="badge-card">
-                    <div class="badge-icon">🔨</div>
-                    <div class="badge-body">
-                        <h3>Moderator</h3>
-                        <p>Trusted to keep the chat clean and the vibes right.</p>
-                        <span class="badge-how"><i class="fa-solid fa-shield" aria-hidden="true"></i> Appointed by FaroNova</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
         <section id="community" class="site-shell">
             <div class="section-heading reveal">
                 <div><span class="eyebrow">Community</span>
@@ -4507,19 +4636,33 @@
         function openSocials() {
             var v = document.getElementById("socialsView");
             if (!v) return;
+            // Reset animations by forcing a reflow
+            var inner = v.querySelector(".socials-inner");
+            if (inner) { inner.style.animation = "none"; inner.offsetHeight; inner.style.animation = ""; }
+            v.querySelectorAll(".socials-link").forEach(function(el) {
+                el.style.animation = "none"; el.offsetHeight; el.style.animation = "";
+            });
             v.classList.add("is-open");
             document.body.style.overflow = "hidden";
-            // Update URL without reload
             history.pushState({ socials: true }, "", "?socials");
-            // Sync year
+            // Set year
             var yr = document.getElementById("socialsCopyYear");
             if (yr) yr.textContent = new Date().getFullYear();
-            // Copy link on share button
+            // Dynamic hostname in footer link
+            var copyLink = document.getElementById("socialsCopyLink");
+            if (copyLink) {
+                var url = window.location.origin + window.location.pathname + "?socials";
+                copyLink.href = url;
+                copyLink.textContent = url.replace(/^https?:\/\//, "");
+            }
+            // Share button
             var shareBtn = document.getElementById("socialsShareBtn");
             if (shareBtn) {
                 shareBtn.onclick = function() {
                     var url = window.location.origin + window.location.pathname + "?socials";
-                    if (navigator.clipboard) {
+                    if (navigator.share) {
+                        navigator.share({ title: "FaroNova", url: url }).catch(function(){});
+                    } else if (navigator.clipboard) {
                         navigator.clipboard.writeText(url).then(function() {
                             shareBtn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i> Copied!';
                             setTimeout(function() {
@@ -4660,7 +4803,8 @@
                 $("liveDescription").textContent = "Live status could not connect, but the channel link is ready.";
                 liveWatch(false);
                 var mcs = $("mClipSub"); if (mcs) mcs.textContent = "—";
-                $("twitchClips").innerHTML = '<div class="empty-state" style="min-height:200px"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-brands fa-twitch" aria-hidden="true"></i></span><h3>Twitch data is reconnecting.</h3><p>Open the channel directly for live video, chat, and clips.</p><a class="button button-primary button-compact" href="https://twitch.tv/' + CONFIG.twitch.username + '" target="_blank" rel="noopener noreferrer">Open Twitch</a></div></div>'
+                $("twitchClips").innerHTML = '<div class="empty-state" style="min-height:200px"><div class="empty-state-inner"><span class="empty-icon"><i class="fa-brands fa-twitch" aria-hidden="true"></i></span><h3>Twitch data is reconnecting.</h3><p>Open the channel directly for live video, chat, and clips.</p><a class="button button-primary button-compact" href="https://twitch.tv/' + CONFIG.twitch.username + '" target="_blank" rel="noopener noreferrer">Open Twitch</a></div></div>';
+                if (typeof syncSocialsData === "function") syncSocialsData({ avatar: "", followers: "—", views: "—", isLive: false });
             }
 
             // ── Twitch main fetch ─────────────────────────────────────────────
@@ -4828,12 +4972,7 @@
 
                     // ── Stats bar ──────────────────────────────────────────
                     var sf = $("statFollowers"); if (sf) sf.textContent = followerCount != null ? num(followerCount) : "—";
-                    var sv = $("statViews");
-                    if (sv) {
-                        // view_count is on the user object — pull from channel as fallback
-                        var vc2 = (channel && channel.view_count != null) ? channel.view_count : null;
-                        sv.textContent = vc2 != null ? num(vc2) : "—";
-                    }
+                    // statViews already set early from user.view_count — don't overwrite
                     var sc = $("statClips"); if (sc) sc.textContent = clips.length ? num(clips.length) + "+" : "—";
                     var sg = $("statGame");
                     if (sg) {
