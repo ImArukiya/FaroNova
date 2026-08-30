@@ -3035,6 +3035,290 @@
             .overlay-grid { grid-template-columns: 1fr }
         }
 
+        /* ── Linktree / socials overlay ── */
+        .socials-view {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            overflow-y: auto;
+            background: var(--bg);
+            padding: 0 20px 60px
+        }
+
+        .socials-view.is-open {
+            display: block
+        }
+
+        .socials-topbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            background: var(--bg);
+            border-bottom: 1px solid var(--line)
+        }
+
+        .socials-close {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border: 1px solid var(--line2);
+            border-radius: 999px;
+            background: var(--soft);
+            color: var(--muted);
+            font-size: .82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: color .18s ease, border-color .18s ease
+        }
+
+        .socials-close:hover {
+            color: var(--text);
+            border-color: rgba(255,255,255,.25)
+        }
+
+        .socials-share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 14px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: transparent;
+            color: var(--muted);
+            font-size: .8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: color .18s ease, border-color .18s ease
+        }
+
+        .socials-share-btn:hover { color: var(--text); border-color: var(--line2) }
+
+        .socials-inner {
+            max-width: 480px;
+            margin: 0 auto;
+            padding-top: 40px
+        }
+
+        .socials-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 32px
+        }
+
+        .socials-avatar-wrap {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            margin-bottom: 16px
+        }
+
+        .socials-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--line2);
+            background: var(--raised)
+        }
+
+        .socials-live-ring {
+            display: none;
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid var(--red);
+            box-shadow: 0 0 0 3px rgba(255,77,141,.18)
+        }
+
+        .socials-live-ring.is-live { display: block }
+
+        .socials-name {
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -.03em;
+            color: var(--text);
+            margin-bottom: 6px
+        }
+
+        .socials-bio {
+            color: var(--muted);
+            font-size: .88rem;
+            line-height: 1.5;
+            max-width: 340px;
+            margin-bottom: 14px
+        }
+
+        .socials-meta-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap
+        }
+
+        .socials-meta-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px
+        }
+
+        .socials-meta-item strong {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: -.03em;
+            color: var(--text)
+        }
+
+        .socials-meta-item span {
+            color: var(--subtle);
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase
+        }
+
+        .socials-meta-sep {
+            width: 1px;
+            height: 28px;
+            background: var(--line2)
+        }
+
+        .socials-live-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: rgba(255,77,141,.12);
+            border: 1px solid rgba(255,77,141,.3);
+            color: var(--red);
+            font-size: .78rem;
+            font-weight: 800;
+            text-decoration: none;
+            margin-bottom: 12px
+        }
+
+        .socials-live-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--red);
+            animation: pulse 1.4s ease infinite
+        }
+
+        @keyframes pulse {
+            0%,100% { opacity: 1 }
+            50%      { opacity: .4 }
+        }
+
+        .socials-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%
+        }
+
+        .socials-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 15px 18px;
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            background: var(--surface);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .95rem;
+            transition: border-color .18s ease, transform .18s ease, background .18s ease
+        }
+
+        .socials-link:hover {
+            border-color: var(--line2);
+            background: var(--soft);
+            transform: translateY(-2px)
+        }
+
+        .socials-link-icon {
+            display: grid;
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+            place-items: center;
+            border-radius: 8px;
+            font-size: 1rem
+        }
+
+        .socials-link-body {
+            flex: 1;
+            min-width: 0
+        }
+
+        .socials-link-title {
+            display: block;
+            font-size: .9rem;
+            font-weight: 800
+        }
+
+        .socials-link-sub {
+            display: block;
+            color: var(--muted);
+            font-size: .76rem;
+            font-weight: 600;
+            margin-top: 1px
+        }
+
+        .socials-link-arrow {
+            color: var(--subtle);
+            font-size: .8rem;
+            flex-shrink: 0
+        }
+
+        .socials-link[data-platform="twitch"] .socials-link-icon { background: rgba(145,71,255,.2); color: #9147ff }
+        .socials-link[data-platform="discord"] .socials-link-icon { background: rgba(88,101,242,.2); color: #5865f2 }
+        .socials-link[data-platform="tiktok"]  .socials-link-icon { background: rgba(255,255,255,.06); color: var(--text) }
+        .socials-link[data-platform="youtube"] .socials-link-icon { background: rgba(255,59,48,.2); color: #ff3b30 }
+        .socials-link[data-platform="instagram"] .socials-link-icon { background: rgba(238,42,123,.2); color: #ee2a7b }
+        .socials-link[data-platform="streamzone"] .socials-link-icon { background: rgba(217,102,255,.15); color: var(--accent) }
+        .socials-link[data-platform="email"] .socials-link-icon { background: rgba(207,196,232,.1); color: var(--muted) }
+
+        .socials-footer {
+            margin-top: 28px;
+            text-align: center;
+            color: var(--subtle);
+            font-size: .76rem
+        }
+
+        .socials-footer a { color: var(--accent); text-decoration: none }
+
+        /* Socials button in navbar */
+        .btn-socials {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            min-height: 38px;
+            padding: 0 13px;
+            border: 1px solid var(--line2);
+            border-radius: 6px;
+            background: var(--soft);
+            color: var(--muted);
+            font-size: .82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: color .18s ease, border-color .18s ease
+        }
+
+        .btn-socials:hover { color: var(--text); border-color: rgba(255,255,255,.22) }
+
         @media(prefers-reduced-motion:reduce) {
 
             *,
@@ -3055,6 +3339,115 @@
 </head>
 
 <body>
+    <!-- ══ Linktree / socials overlay ══════════════════════════════════════ -->
+    <div class="socials-view" id="socialsView" role="dialog" aria-modal="true" aria-label="FaroNova socials">
+        <div class="socials-topbar site-shell">
+            <button class="socials-close" onclick="closeSocials()" aria-label="Close socials view">
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to site
+            </button>
+            <button class="socials-share-btn" id="socialsShareBtn" aria-label="Copy link">
+                <i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Share
+            </button>
+        </div>
+        <div class="socials-inner">
+            <div class="socials-profile">
+                <div class="socials-avatar-wrap">
+                    <img class="socials-avatar" id="socialsAvatar" src="assets/img/FARNOVA.png" alt="FaroNova" />
+                    <div class="socials-live-ring" id="socialsLiveRing"></div>
+                </div>
+
+                <!-- shown only when live -->
+                <a class="socials-live-tag" id="socialsLiveTag" href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer" hidden>
+                    <span class="socials-live-dot"></span> Live on Twitch now
+                </a>
+
+                <div class="socials-name">FaroNova</div>
+                <p class="socials-bio">Gacha gamer &amp; variety streamer from Malaysia 🇲🇾 · Building a chill space where everyone's welcome · Official streamer for StreamerZone.gg</p>
+
+                <div class="socials-meta-row">
+                    <div class="socials-meta-item">
+                        <strong id="socialsTwitchFollowers">—</strong>
+                        <span>Followers</span>
+                    </div>
+                    <div class="socials-meta-sep"></div>
+                    <div class="socials-meta-item">
+                        <strong id="socialsTotalViews">—</strong>
+                        <span>Views</span>
+                    </div>
+                    <div class="socials-meta-sep"></div>
+                    <div class="socials-meta-item">
+                        <strong id="socialsStatus">Offline</strong>
+                        <span>Twitch</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="socials-links">
+                <a class="socials-link" data-platform="twitch" href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer">
+                    <span class="socials-link-icon"><i class="fa-brands fa-twitch" aria-hidden="true"></i></span>
+                    <span class="socials-link-body">
+                        <span class="socials-link-title">Twitch</span>
+                        <span class="socials-link-sub">Watch live streams · twitch.tv/faronova</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square socials-link-arrow" aria-hidden="true"></i>
+                </a>
+                <a class="socials-link" data-platform="discord" href="https://discord.gg/whRyvAPuVQ" target="_blank" rel="noopener noreferrer">
+                    <span class="socials-link-icon"><i class="fa-brands fa-discord" aria-hidden="true"></i></span>
+                    <span class="socials-link-body">
+                        <span class="socials-link-title">Discord</span>
+                        <span class="socials-link-sub">Community server · hang out between streams</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square socials-link-arrow" aria-hidden="true"></i>
+                </a>
+                <a class="socials-link" data-platform="tiktok" href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer">
+                    <span class="socials-link-icon"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></span>
+                    <span class="socials-link-body">
+                        <span class="socials-link-title">TikTok</span>
+                        <span class="socials-link-sub">Short clips &amp; highlights · @faronova_</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square socials-link-arrow" aria-hidden="true"></i>
+                </a>
+                <a class="socials-link" data-platform="youtube" href="https://youtube.com/@faronova" target="_blank" rel="noopener noreferrer">
+                    <span class="socials-link-icon"><i class="fa-brands fa-youtube" aria-hidden="true"></i></span>
+                    <span class="socials-link-body">
+                        <span class="socials-link-title">YouTube</span>
+                        <span class="socials-link-sub">VODs, highlights &amp; shorts · @faronova</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square socials-link-arrow" aria-hidden="true"></i>
+                </a>
+                <a class="socials-link" data-platform="instagram" href="https://instagram.com/faronova_" target="_blank" rel="noopener noreferrer">
+                    <span class="socials-link-icon"><i class="fa-brands fa-instagram" aria-hidden="true"></i></span>
+                    <span class="socials-link-body">
+                        <span class="socials-link-title">Instagram</span>
+                        <span class="socials-link-sub">Posts &amp; stories · @faronova_</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square socials-link-arrow" aria-hidden="true"></i>
+                </a>
+                <a class="socials-link" data-platform="streamzone" href="https://streamerzone.gg" target="_blank" rel="noopener noreferrer">
+                    <span class="socials-link-icon"><i class="fa-solid fa-star" aria-hidden="true"></i></span>
+                    <span class="socials-link-body">
+                        <span class="socials-link-title">StreamerZone.gg</span>
+                        <span class="socials-link-sub">Official streamer partner network</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square socials-link-arrow" aria-hidden="true"></i>
+                </a>
+                <a class="socials-link" data-platform="email" href="mailto:fransmediabusiness@gmail.com">
+                    <span class="socials-link-icon"><i class="fa-regular fa-envelope" aria-hidden="true"></i></span>
+                    <span class="socials-link-body">
+                        <span class="socials-link-title">Business email</span>
+                        <span class="socials-link-sub">Collabs, campaigns &amp; partnerships</span>
+                    </span>
+                    <i class="fa-solid fa-arrow-up-right-from-square socials-link-arrow" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <div class="socials-footer">
+                <p>© <span id="socialsCopyYear"></span> FaroNova · <a href="/">faronova.pages.dev</a></p>
+                <p style="margin-top:6px;opacity:.6">Shareable link: <a href="/?socials" id="socialsCopyLink">faronova.pages.dev/?socials</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- ══════════════════════════════════════════════════════════════════ -->
     <header class="site-header">
         <nav class="navbar" aria-label="Primary navigation">
             <div class="nav-socials"><a href="https://tiktok.com/@faronova_" target="_blank" rel="noopener noreferrer"
@@ -3069,7 +3462,8 @@
                         aria-hidden="true"></i></a></div><a class="brand" href="#home" aria-label="FaroNova home"><img
                     style="height: 5rem;" src="/assets/img/FARNOVA_ICON.png" alt=""></a>
             <div class="nav-links"><a href="#about">About</a><a href="#games">Games</a><a href="#live">Live</a><a
-                    href="#donate">Support</a><a href="#channels">Channels</a><a
+                    href="#donate">Support</a><a href="#channels">Channels</a>
+                    <button class="btn-socials" onclick="openSocials()" aria-label="Open socials view"><i class="fa-solid fa-link" aria-hidden="true"></i> Socials</button><a
                     class="button button-primary button-compact nav-cta" href="https://twitch.tv/faronova"
                     target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-play"
                         aria-hidden="true"></i><span>Watch live</span></a></div>
@@ -3188,8 +3582,8 @@
                 </div>
                 <div class="expect-card">
                     <div class="expect-icon" style="background:rgba(255,110,180,.15);color:var(--warm)"><i class="fa-solid fa-comments"></i></div>
-                    <h3>Chat-first energy</h3>
-                    <p>The community isn't background noise. Faro actively reads chat, answers questions, and makes conversation the centre of every session.</p>
+                    <h3>Chill chat energy</h3>
+                    <p>Chat is part of the stream — not background noise. Messages get seen, moments get shared, and the community shapes what happens in the room.</p>
                 </div>
                 <div class="expect-card">
                     <div class="expect-icon" style="background:rgba(192,132,252,.15);color:var(--blue)"><i class="fa-solid fa-heart"></i></div>
@@ -3367,26 +3761,6 @@
             </div>
         </section>
         END SCHEDULE SECTION HIDDEN -->
-
-        <div class="section-divider"></div>
-
-        <section id="games" class="site-shell">
-            <div class="section-heading reveal">
-                <div><span class="eyebrow">Games played</span>
-                    <h2>What's on the screen.</h2>
-                </div>
-                <p>The regulars — from gacha pulls to open worlds. Box art pulled live from Twitch.</p>
-            </div>
-            <div class="games-grid reveal" id="gamesGrid">
-                <!-- filled by JS or static fallback below -->
-                <a class="game-card" href="https://twitch.tv/directory/game/Neverness%20to%20Everness" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Neverness to Everness</span></div></a>
-                <a class="game-card" href="https://twitch.tv/directory/game/Wuthering%20Waves" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Wuthering Waves</span></div></a>
-                <a class="game-card" href="https://twitch.tv/directory/game/Genshin%20Impact" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Genshin Impact</span></div></a>
-                <a class="game-card" href="https://twitch.tv/directory/game/Zenless%20Zone%20Zero" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Zenless Zone Zero</span></div></a>
-                <a class="game-card" href="https://twitch.tv/directory/game/Roblox" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-gamepad"></i></div><div class="game-card-overlay"><span class="game-card-name">Roblox</span></div></a>
-                <a class="game-card" href="https://twitch.tv/faronova" target="_blank" rel="noopener noreferrer"><div class="game-card-placeholder"><i class="fa-solid fa-plus"></i></div><div class="game-card-overlay"><span class="game-card-name">Many more!</span></div></a>
-            </div>
-        </section>
 
         <div class="section-divider"></div>
 
@@ -4007,81 +4381,6 @@
 
         <div class="section-divider"></div>
 
-        <!-- ── Stream overlay tour ── -->
-        <section id="overlay" class="site-shell">
-            <div class="section-heading reveal">
-                <div><span class="eyebrow">Stream layout</span>
-                    <h2>What's on screen when live.</h2>
-                </div>
-                <p>A tour of the stream overlay — what each element does and where to find it.</p>
-            </div>
-            <div class="overlay-grid reveal">
-                <div class="overlay-preview" aria-hidden="true">
-                    <div class="overlay-preview-inner">
-                        <div class="overlay-top">
-                            <div class="overlay-cam"><i class="fa-solid fa-user" aria-hidden="true"></i></div>
-                            <div class="overlay-top-right">
-                                <span class="overlay-pill live-pill">⏺ LIVE</span>
-                                <span class="overlay-pill">👁 <span id="overlayViewers">—</span> viewers</span>
-                                <span class="overlay-pill">🎮 <span id="overlayGame">FaroNova</span></span>
-                            </div>
-                        </div>
-                        <div class="overlay-bottom">
-                            <div class="overlay-alerts">
-                                <div class="overlay-alert-item">🎉 Someone just followed!</div>
-                                <div class="overlay-alert-item">⭐ NewViewer just subscribed!</div>
-                                <div class="overlay-alert-item">💜 Raid from FriendChannel (42)</div>
-                            </div>
-                            <div class="overlay-chat-preview">
-                                <div class="overlay-chat-line"><span class="overlay-chat-name">Faro:</span><span class="overlay-chat-msg">let's goooo</span></div>
-                                <div class="overlay-chat-line"><span class="overlay-chat-name">Chat:</span><span class="overlay-chat-msg">POGGERS</span></div>
-                                <div class="overlay-chat-line"><span class="overlay-chat-name">Nova:</span><span class="overlay-chat-msg">tutturuuu~</span></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="overlay-legend">
-                    <div class="overlay-legend-item">
-                        <div class="overlay-legend-num">1</div>
-                        <div class="overlay-legend-body">
-                            <strong>Facecam</strong>
-                            <p>Top-left corner. Always on during streams — reactions are part of the content.</p>
-                        </div>
-                    </div>
-                    <div class="overlay-legend-item">
-                        <div class="overlay-legend-num">2</div>
-                        <div class="overlay-legend-body">
-                            <strong>Live status &amp; viewer count</strong>
-                            <p>Top-right corner. Shows the stream is live, current viewers, and the active game category.</p>
-                        </div>
-                    </div>
-                    <div class="overlay-legend-item">
-                        <div class="overlay-legend-num">3</div>
-                        <div class="overlay-legend-body">
-                            <strong>Alert overlay</strong>
-                            <p>Bottom-left. Follows, subs, raids, bits, and hype train events all show here with sound.</p>
-                        </div>
-                    </div>
-                    <div class="overlay-legend-item">
-                        <div class="overlay-legend-num">4</div>
-                        <div class="overlay-legend-body">
-                            <strong>Chat overlay</strong>
-                            <p>Bottom-right. Recent chat messages visible on screen — Faro reads and responds in real time.</p>
-                        </div>
-                    </div>
-                    <div class="overlay-legend-item">
-                        <div class="overlay-legend-num">5</div>
-                        <div class="overlay-legend-body">
-                            <strong>Channel point alerts</strong>
-                            <p>When a reward is redeemed (TTS, sound alerts, etc.) it pops up over the game. You'll know.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="section-divider"></div>
-
         <section id="community" class="site-shell">
             <div class="section-heading reveal">
                 <div><span class="eyebrow">Community</span>
@@ -4189,6 +4488,7 @@
     </footer>
     <!-- Global helpers that must be accessible before IIFE runs -->
     <script>
+        // ── Rules tab switcher ──────────────────────────────────────────────
         function switchRulesTab(tab) {
             var panels = { twitch: "rules-twitch-panel", discord: "rules-discord-panel" };
             var tabs   = { twitch: "tab-twitch",         discord: "tab-discord" };
@@ -4201,6 +4501,78 @@
                 btn.classList.toggle("is-active", active);
                 btn.setAttribute("aria-selected", active ? "true" : "false");
             });
+        }
+
+        // ── Socials / linktree overlay ──────────────────────────────────────
+        function openSocials() {
+            var v = document.getElementById("socialsView");
+            if (!v) return;
+            v.classList.add("is-open");
+            document.body.style.overflow = "hidden";
+            // Update URL without reload
+            history.pushState({ socials: true }, "", "?socials");
+            // Sync year
+            var yr = document.getElementById("socialsCopyYear");
+            if (yr) yr.textContent = new Date().getFullYear();
+            // Copy link on share button
+            var shareBtn = document.getElementById("socialsShareBtn");
+            if (shareBtn) {
+                shareBtn.onclick = function() {
+                    var url = window.location.origin + window.location.pathname + "?socials";
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(url).then(function() {
+                            shareBtn.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i> Copied!';
+                            setTimeout(function() {
+                                shareBtn.innerHTML = '<i class="fa-solid fa-share-nodes" aria-hidden="true"></i> Share';
+                            }, 2000);
+                        }).catch(function() {});
+                    }
+                };
+            }
+        }
+
+        function closeSocials() {
+            var v = document.getElementById("socialsView");
+            if (!v) return;
+            v.classList.remove("is-open");
+            document.body.style.overflow = "";
+            history.pushState({}, "", window.location.pathname);
+        }
+
+        // Close on browser back button
+        window.addEventListener("popstate", function(e) {
+            var v = document.getElementById("socialsView");
+            if (!v) return;
+            if (!window.location.search.includes("socials")) {
+                v.classList.remove("is-open");
+                document.body.style.overflow = "";
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") closeSocials();
+        });
+
+        // Auto-open if URL contains ?socials
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.location.search.includes("socials")) openSocials();
+        });
+
+        // Called from Twitch API callback to sync data into socials view
+        function syncSocialsData(data) {
+            var sf = document.getElementById("socialsTwitchFollowers");
+            var sv = document.getElementById("socialsTotalViews");
+            var ss = document.getElementById("socialsStatus");
+            var sa = document.getElementById("socialsAvatar");
+            var ring = document.getElementById("socialsLiveRing");
+            var liveTag = document.getElementById("socialsLiveTag");
+            if (data.avatar && sa) sa.src = data.avatar;
+            if (sf && data.followers != null) sf.textContent = data.followers;
+            if (sv && data.views != null) sv.textContent = data.views;
+            if (ss) ss.textContent = data.isLive ? "Live now" : "Offline";
+            if (ring) ring.classList.toggle("is-live", !!data.isLive);
+            if (liveTag) liveTag.hidden = !data.isLive;
         }
     </script>
     <script>
@@ -4303,6 +4675,9 @@
                         $("profileAvatar").src = av;
                         var aboutImg = $("aboutAvatar"); if (aboutImg) aboutImg.src = av;
                     }
+
+                    // Stash user data for socials overlay sync after parallel calls resolve
+                    var _socialsUser = user;
 
                     // view_count lives on the user object — populate stats bar now
                     if (user.view_count != null) {
@@ -4514,6 +4889,16 @@
                     // VODs
                     var vods = Array.isArray(vp.data) ? vp.data : [];
                     renderVods(vods);
+
+                    // ── Sync socials overlay ──────────────────────────────
+                    if (typeof syncSocialsData === "function") {
+                        syncSocialsData({
+                            avatar:    av || "",
+                            followers: followerCount != null ? num(followerCount) : "—",
+                            views:     (_socialsUser && _socialsUser.view_count != null) ? num(_socialsUser.view_count) : "—",
+                            isLive:    !!stream
+                        });
+                    }
 
                 }).catch(function (e) { console.error("Twitch API error:", e.message); twitchFallback(); featured([]); renderVods([]) })
             }
